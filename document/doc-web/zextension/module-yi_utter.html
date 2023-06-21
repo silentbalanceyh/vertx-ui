@@ -1,0 +1,3624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>yi/utter - Zero Extension框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-extension,vert.x" />
+        <meta name="keyword" content="zero,zero-extension,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/zero.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://www.vertx-cloud.cn/document/doc-web/index.html" target="_blank" class="menu-item" id="website_link" >Zero云平台白皮书</a></h2><h2><a href="http://www.vertxai.cn/document/doc-web/index.html" target="_blank" class="menu-item" id="website_link" >Zero AI 工具箱</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/zui/index.html" target="_blank" class="menu-item" id="website_link" >Zero UI 标准包API</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/zextension/index.html" target="_blank" class="menu-item" id="website_link" >Zero UI 扩展包API</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI 官方站点</a></h2><h2><a href="http://www.vertxai.cn" target="_blank" class="menu-item" id="website_link" >Zero AI 官方站点</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Framework 官方站点</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >我的KB小站</a></h2><h3>Classes</h3><ul><li><a href="I.html">I</a><ul class='methods'><li data-type='method'><a href="I.html#.action">action</a></li><li data-type='method'><a href="I.html#.apis">apis</a></li><li data-type='method'><a href="I.html#.app">app</a></li><li data-type='method'><a href="I.html#.application">application</a></li><li data-type='method'><a href="I.html#.attributes">attributes</a></li><li data-type='method'><a href="I.html#.authorize">authorize</a></li><li data-type='method'><a href="I.html#.category">category</a></li><li data-type='method'><a href="I.html#.company">company</a></li><li data-type='method'><a href="I.html#.control">control</a></li><li data-type='method'><a href="I.html#.forest">forest</a></li><li data-type='method'><a href="I.html#.form">form</a></li><li data-type='method'><a href="I.html#.forms">forms</a></li><li data-type='method'><a href="I.html#.inited">inited</a></li><li data-type='method'><a href="I.html#.jobResume">jobResume</a></li><li data-type='method'><a href="I.html#.jobStart">jobStart</a></li><li data-type='method'><a href="I.html#.jobStop">jobStop</a></li><li data-type='method'><a href="I.html#.jobs">jobs</a></li><li data-type='method'><a href="I.html#.lists">lists</a></li><li data-type='method'><a href="I.html#.login">login</a></li><li data-type='method'><a href="I.html#.logout">logout</a></li><li data-type='method'><a href="I.html#.menus">menus</a></li><li data-type='method'><a href="I.html#.mission">mission</a></li><li data-type='method'><a href="I.html#.module">module</a></li><li data-type='method'><a href="I.html#.ops">ops</a></li><li data-type='method'><a href="I.html#.page">page</a></li><li data-type='method'><a href="I.html#.password">password</a></li><li data-type='method'><a href="I.html#.profile">profile</a></li><li data-type='method'><a href="I.html#.relation">relation</a></li><li data-type='method'><a href="I.html#.relationDelete">relationDelete</a></li><li data-type='method'><a href="I.html#.relationSave">relationSave</a></li><li data-type='method'><a href="I.html#.tabular">tabular</a></li><li data-type='method'><a href="I.html#.todo">todo</a></li><li data-type='method'><a href="I.html#.token">token</a></li><li data-type='method'><a href="I.html#.uri">uri</a></li><li data-type='method'><a href="I.html#.user">user</a></li><li data-type='method'><a href="I.html#.visitor">visitor</a></li></ul></li><li><a href="X6.html">X6</a></li><li><a href="utter.Refuse.html">Refuse</a></li></ul><h3>Modules</h3><ul><li><a href="module-config_utter.html">config/utter</a><ul class='methods'><li data-type='method'><a href="module-config_utter.html#.configClick">configClick</a></li><li data-type='method'><a href="module-config_utter.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-config_utter.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-config_utter.html#.configGrid">configGrid</a></li><li data-type='method'><a href="module-config_utter.html#.configRelation">configRelation</a></li></ul></li><li><a href="module-constant_utter.html">constant/utter</a><ul class='members'><li data-type='member'><a href="module-constant_utter.html#.Flow">Flow</a></li><li data-type='member'><a href="module-constant_utter.html#.K">K</a></li><li data-type='member'><a href="module-constant_utter.html#.Mode">Mode</a></li><li data-type='member'><a href="module-constant_utter.html#.Opt">Opt</a></li><li data-type='member'><a href="module-constant_utter.html#.Order">Order</a></li><li data-type='member'><a href="module-constant_utter.html#.PLUGIN">PLUGIN</a></li><li data-type='member'><a href="module-constant_utter.html#.V">V</a></li></ul></li><li><a href="module-driven_upper.html">driven/upper</a><ul class='methods'><li data-type='method'><a href="module-driven_upper.html#.acCriteria">acCriteria</a></li><li data-type='method'><a href="module-driven_upper.html#.etParallel">etParallel</a></li><li data-type='method'><a href="module-driven_upper.html#.etPure">etPure</a></li><li data-type='method'><a href="module-driven_upper.html#.etSequence">etSequence</a></li><li data-type='method'><a href="module-driven_upper.html#.etUniform">etUniform</a></li><li data-type='method'><a href="module-driven_upper.html#.rxChannel">rxChannel</a></li></ul></li><li><a href="module-fixed_upper.html">fixed/upper</a><ul class='members'><li data-type='member'><a href="module-fixed_upper.html#.Jsx">Jsx</a></li><li data-type='member'><a href="module-fixed_upper.html#.Op">Op</a></li></ul></li><li><a href="module-hoc_upper.html">hoc/upper</a><ul class='methods'><li data-type='method'><a href="module-hoc_upper.html#.designer">designer</a></li><li data-type='method'><a href="module-hoc_upper.html#.dialog">dialog</a></li><li data-type='method'><a href="module-hoc_upper.html#.form">form</a></li><li data-type='method'><a href="module-hoc_upper.html#.init">init</a></li></ul></li><li><a href="module-in_utter.html">in/utter</a><ul class='methods'><li data-type='method'><a href="module-in_utter.html#.inApi">inApi</a></li><li data-type='method'><a href="module-in_utter.html#.inJob">inJob</a></li><li data-type='method'><a href="module-in_utter.html#.inSettlement">inSettlement</a></li></ul></li><li><a href="module-kin_unfold.html">kin/unfold</a><ul class='methods'><li data-type='method'><a href="module-kin_unfold.html#.kinComponent">kinComponent</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinDoSearch">kinDoSearch</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinForm">kinForm</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinTChange">kinTChange</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinTRow">kinTRow</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinUp">kinUp</a></li></ul></li><li><a href="module-map_utter.html">map/utter</a><ul class='methods'><li data-type='method'><a href="module-map_utter.html#.mapAsyncDatum">mapAsyncDatum</a></li><li data-type='method'><a href="module-map_utter.html#.mapMeta">mapMeta</a></li><li data-type='method'><a href="module-map_utter.html#.mapUri">mapUri</a></li></ul></li><li><a href="module-on_upper.html">on/upper</a><ul class='methods'><li data-type='method'><a href="module-on_upper.html#.onOp">onOp</a></li></ul></li><li><a href="module-on_utter.html">on/utter</a><ul class='methods'><li data-type='method'><a href="module-on_utter.html#.onApp">onApp</a></li><li data-type='method'><a href="module-on_utter.html#.onRelation">onRelation</a></li><li data-type='method'><a href="module-on_utter.html#.onRelationIdentifiers">onRelationIdentifiers</a></li><li data-type='method'><a href="module-on_utter.html#.onRelationType">onRelationType</a></li><li data-type='method'><a href="module-on_utter.html#.onTree">onTree</a></li></ul></li><li><a href="module-parser_utter.html">parser/utter</a><ul class='methods'><li data-type='method'><a href="module-parser_utter.html#.parserOfButton">parserOfButton</a></li><li data-type='method'><a href="module-parser_utter.html#.parserOfColor">parserOfColor</a></li><li data-type='method'><a href="module-parser_utter.html#.parserOfEvent">parserOfEvent</a></li></ul></li><li><a href="module-pu_unfold.html">pu/unfold</a><ul class='methods'><li data-type='method'><a href="module-pu_unfold.html#.puControl">puControl</a></li></ul></li><li><a href="module-qr_utter.html">qr/utter</a><ul class='methods'><li data-type='method'><a href="module-qr_utter.html#.irViewAt">irViewAt</a></li><li data-type='method'><a href="module-qr_utter.html#.irViewQ">irViewQ</a></li><li data-type='method'><a href="module-qr_utter.html#.irViewV">irViewV</a></li></ul></li><li><a href="module-rs_utter.html">rs/utter</a><ul class='methods'><li data-type='method'><a href="module-rs_utter.html#.rsOpened">rsOpened</a></li></ul></li><li><a href="module-rx_utter.html">rx/utter</a><ul class='methods'><li data-type='method'><a href="module-rx_utter.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-rx_utter.html#.rxBatchDelete">rxBatchDelete</a></li><li data-type='method'><a href="module-rx_utter.html#.rxBatchEdit">rxBatchEdit</a></li><li data-type='method'><a href="module-rx_utter.html#.rxClose">rxClose</a></li><li data-type='method'><a href="module-rx_utter.html#.rxColumn">rxColumn</a></li><li data-type='method'><a href="module-rx_utter.html#.rxColumnMy">rxColumnMy</a></li><li data-type='method'><a href="module-rx_utter.html#.rxDelete">rxDelete</a></li><li data-type='method'><a href="module-rx_utter.html#.rxExport">rxExport</a></li><li data-type='method'><a href="module-rx_utter.html#.rxImport">rxImport</a></li><li data-type='method'><a href="module-rx_utter.html#.rxMyViewQ">rxMyViewQ</a></li><li data-type='method'><a href="module-rx_utter.html#.rxMyViewV">rxMyViewV</a></li><li data-type='method'><a href="module-rx_utter.html#.rxPostClose">rxPostClose</a></li><li data-type='method'><a href="module-rx_utter.html#.rxPostOpen">rxPostOpen</a></li><li data-type='method'><a href="module-rx_utter.html#.rxQr">rxQr</a></li><li data-type='method'><a href="module-rx_utter.html#.rxQrClean">rxQrClean</a></li><li data-type='method'><a href="module-rx_utter.html#.rxQrQBE">rxQrQBE</a></li><li data-type='method'><a href="module-rx_utter.html#.rxRowOpen">rxRowOpen</a></li><li data-type='method'><a href="module-rx_utter.html#.rxSearch">rxSearch</a></li><li data-type='method'><a href="module-rx_utter.html#.rxSelected">rxSelected</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabAdd">rxTabAdd</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabClose">rxTabClose</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabEdit">rxTabEdit</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabOpen">rxTabOpen</a></li><li data-type='method'><a href="module-rx_utter.html#.rxView">rxView</a></li><li data-type='method'><a href="module-rx_utter.html#.rxViewQ">rxViewQ</a></li><li data-type='method'><a href="module-rx_utter.html#.rxViewV">rxViewV</a></li></ul></li><li><a href="module-secure_upper.html">secure/upper</a><ul class='members'><li data-type='member'><a href="module-secure_upper.html#.aclE">aclE</a></li></ul><ul class='methods'><li data-type='method'><a href="module-secure_upper.html#.aclChildUp">aclChildUp</a></li><li data-type='method'><a href="module-secure_upper.html#.aclIn">aclIn</a></li><li data-type='method'><a href="module-secure_upper.html#.aclOut">aclOut</a></li><li data-type='method'><a href="module-secure_upper.html#.aclRegionInit">aclRegionInit</a></li><li data-type='method'><a href="module-secure_upper.html#.aclRoute">aclRoute</a></li></ul></li><li><a href="module-sex_utter.html">sex/utter</a><ul class='methods'><li data-type='method'><a href="module-sex_utter.html#.sexExAction">sexExAction</a></li><li data-type='method'><a href="module-sex_utter.html#.sexExPlugin">sexExPlugin</a></li></ul></li><li><a href="module-to_utter.html">to/utter</a><ul class='methods'><li data-type='method'><a href="module-to_utter.html#.toDialog">toDialog</a></li><li data-type='method'><a href="module-to_utter.html#.toFontSize">toFontSize</a></li><li data-type='method'><a href="module-to_utter.html#.toIdentifier">toIdentifier</a></li><li data-type='method'><a href="module-to_utter.html#.toModelId">toModelId</a></li><li data-type='method'><a href="module-to_utter.html#.toNamespace">toNamespace</a></li></ul></li><li><a href="module-uca_extension.html">uca/extension</a><ul class='methods'><li data-type='method'><a href="module-uca_extension.html#.*DxSider">*DxSider</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExAction">*ExAction</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExButton">*ExButton</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExDialog">*ExDialog</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorBatch">*ExEditorBatch</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorColumn">*ExEditorColumn</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorExport">*ExEditorExport</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorImport">*ExEditorImport</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExNavigation">*ExNavigation</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExSearch">*ExSearch</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExSider">*ExSider</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxChannel">*IxChannel</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxDatabase">*IxDatabase</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxDict">*IxDict</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxIntegration">*IxIntegration</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxMapping">*IxMapping</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxRule">*IxRule</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxService">*IxService</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAccount">ExAccount</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAdmin">ExAdmin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAdmin">ExAdmin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAdmin">ExAdmin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExApps">ExApps</a></li><li data-type='method'><a href="module-uca_extension.html#.ExArbor">ExArbor</a></li><li data-type='method'><a href="module-uca_extension.html#.ExCategory">ExCategory</a></li><li data-type='method'><a href="module-uca_extension.html#.ExDeploy">ExDeploy</a></li><li data-type='method'><a href="module-uca_extension.html#.ExEntry">ExEntry</a></li><li data-type='method'><a href="module-uca_extension.html#.ExForm">ExForm</a></li><li data-type='method'><a href="module-uca_extension.html#.ExGraphicEditor">ExGraphicEditor</a></li><li data-type='method'><a href="module-uca_extension.html#.ExGraphicViewer">ExGraphicViewer</a></li><li data-type='method'><a href="module-uca_extension.html#.ExHistory">ExHistory</a></li><li data-type='method'><a href="module-uca_extension.html#.ExListComplex">ExListComplex</a></li><li data-type='method'><a href="module-uca_extension.html#.ExListOpen">ExListOpen</a></li><li data-type='method'><a href="module-uca_extension.html#.ExLogged">ExLogged</a></li><li data-type='method'><a href="module-uca_extension.html#.ExLogged">ExLogged</a></li><li data-type='method'><a href="module-uca_extension.html#.ExLogin">ExLogin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExRecord">ExRecord</a></li><li data-type='method'><a href="module-uca_extension.html#.ExRegiment">ExRegiment</a></li><li data-type='method'><a href="module-uca_extension.html#.ExRelation">ExRelation</a></li><li data-type='method'><a href="module-uca_extension.html#.ExService">ExService</a></li><li data-type='method'><a href="module-uca_extension.html#.ExSubmit">ExSubmit</a></li><li data-type='method'><a href="module-uca_extension.html#.ExTab">ExTab</a></li><li data-type='method'><a href="module-uca_extension.html#.ExTabular">ExTabular</a></li><li data-type='method'><a href="module-uca_extension.html#.ExTrackField">ExTrackField</a></li><li data-type='method'><a href="module-uca_extension.html#.ExWizard">ExWizard</a></li><li data-type='method'><a href="module-uca_extension.html#.OxAnchor">OxAnchor</a></li><li data-type='method'><a href="module-uca_extension.html#.OxCard">OxCard</a></li><li data-type='method'><a href="module-uca_extension.html#.OxCategory">OxCategory</a></li><li data-type='method'><a href="module-uca_extension.html#.OxCi">OxCi</a></li><li data-type='method'><a href="module-uca_extension.html#.OxForm">OxForm</a></li><li data-type='method'><a href="module-uca_extension.html#.OxHistory">OxHistory</a></li><li data-type='method'><a href="module-uca_extension.html#.OxList">OxList</a></li><li data-type='method'><a href="module-uca_extension.html#.OxModule">OxModule</a></li><li data-type='method'><a href="module-uca_extension.html#.OxRelation">OxRelation</a></li><li data-type='method'><a href="module-uca_extension.html#.OxTab">OxTab</a></li><li data-type='method'><a href="module-uca_extension.html#.OxTopology">OxTopology</a></li></ul></li><li><a href="module-ui_upper.html">ui/upper</a><ul class='methods'><li data-type='method'><a href="module-ui_upper.html#.uiDialog">uiDialog</a></li><li data-type='method'><a href="module-ui_upper.html#.uiTab">uiTab</a></li></ul></li><li><a href="module-up_utter.html">up/utter</a><ul class='methods'><li data-type='method'><a href="module-up_utter.html#.upCondition">upCondition</a></li><li data-type='method'><a href="module-up_utter.html#.upList">upList</a></li><li data-type='method'><a href="module-up_utter.html#.upLoading">upLoading</a></li><li data-type='method'><a href="module-up_utter.html#.upQuery">upQuery</a></li><li data-type='method'><a href="module-up_utter.html#.upValue">upValue</a></li></ul></li><li><a href="module-ux_utter.html">ux/utter</a><ul class='methods'><li data-type='method'><a href="module-ux_utter.html#.mapFun">mapFun</a></li><li data-type='method'><a href="module-ux_utter.html#.toArray">toArray</a></li><li data-type='method'><a href="module-ux_utter.html#.toColor">toColor</a></li><li data-type='method'><a href="module-ux_utter.html#.toUri">toUri</a></li></ul></li><li><a href="module-v4_utter.html">v4/utter</a><ul class='methods'><li data-type='method'><a href="module-v4_utter.html#.a4MenuAt">a4MenuAt</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuDash">a4MenuDash</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuData">a4MenuData</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuPick">a4MenuPick</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuWeb">a4MenuWeb</a></li></ul></li><li><a href="module-web_upper.html">web/upper</a><ul class='methods'><li data-type='method'><a href="module-web_upper.html#.webAction">webAction</a></li><li data-type='method'><a href="module-web_upper.html#.webAnchor">webAnchor</a></li><li data-type='method'><a href="module-web_upper.html#.webTag">webTag</a></li></ul></li><li><a href="module-xui_utter.html">xui/utter</a><ul class='methods'><li data-type='method'><a href="module-xui_utter.html#.xuiContainer">xuiContainer</a></li><li data-type='method'><a href="module-xui_utter.html#.xuiDecorator">xuiDecorator</a></li><li data-type='method'><a href="module-xui_utter.html#.xuiGrid">xuiGrid</a></li></ul></li><li><a href="module-yi_unfold.html">yi/unfold</a><ul class='methods'><li data-type='method'><a href="module-yi_unfold.html#.yiProSetting">yiProSetting</a></li></ul></li><li><a href="module-yi_upper.html">yi/upper</a><ul class='methods'><li data-type='method'><a href="module-yi_upper.html#.yiCompany">yiCompany</a></li></ul></li><li><a href="module-yi_utter.html">yi/utter</a><ul class='methods'><li data-type='method'><a href="module-yi_utter.html#.yiAssist">yiAssist</a></li><li data-type='method'><a href="module-yi_utter.html#.yiColumn">yiColumn</a></li><li data-type='method'><a href="module-yi_utter.html#.yiCombine">yiCombine</a></li><li data-type='method'><a href="module-yi_utter.html#.yiContainer">yiContainer</a></li><li data-type='method'><a href="module-yi_utter.html#.yiControl">yiControl</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListLazy">yiListLazy</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListOp">yiListOp</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListOptions">yiListOptions</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListPlugin">yiListPlugin</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListQuery">yiListQuery</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListSynonym">yiListSynonym</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListTab">yiListTab</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListTable">yiListTable</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListView">yiListView</a></li><li data-type='method'><a href="module-yi_utter.html#.yiModule">yiModule</a></li><li data-type='method'><a href="module-yi_utter.html#.yiPartForm">yiPartForm</a></li><li data-type='method'><a href="module-yi_utter.html#.yiStandard">yiStandard</a></li></ul></li><li><a href="module-yl_upper.html">yl/upper</a><ul class='methods'><li data-type='method'><a href="module-yl_upper.html#.ylCard">ylCard</a></li><li data-type='method'><a href="module-yl_upper.html#.ylDynamic">ylDynamic</a></li><li data-type='method'><a href="module-yl_upper.html#.ylTabExtra">ylTabExtra</a></li></ul></li><li><a href="module-yo_unfold.html">yo/unfold</a><ul class='methods'><li data-type='method'><a href="module-yo_unfold.html#.yoProChildren">yoProChildren</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProLayout">yoProLayout</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProPageHeader">yoProPageHeader</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProSettingDrawer">yoProSettingDrawer</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProWater">yoProWater</a></li></ul></li><li><a href="module-yo_upper.html">yo/upper</a><ul class='methods'><li data-type='method'><a href="module-yo_upper.html#.outApi">outApi</a></li><li data-type='method'><a href="module-yo_upper.html#.outJob">outJob</a></li><li data-type='method'><a href="module-yo_upper.html#.yoDebt">yoDebt</a></li></ul></li><li></li><li><a href="module-yo_utter.html">yo/utter</a><ul class='methods'><li data-type='method'><a href="module-yo_utter.html#.yoAction">yoAction</a></li><li data-type='method'><a href="module-yo_utter.html#.yoAmbient">yoAmbient</a></li><li data-type='method'><a href="module-yo_utter.html#.yoAtomComponent">yoAtomComponent</a></li><li data-type='method'><a href="module-yo_utter.html#.yoAtomContainer">yoAtomContainer</a></li><li data-type='method'><a href="module-yo_utter.html#.yoComponent">yoComponent</a></li><li data-type='method'><a href="module-yo_utter.html#.yoContainer">yoContainer</a></li><li data-type='method'><a href="module-yo_utter.html#.yoControl">yoControl</a></li><li data-type='method'><a href="module-yo_utter.html#.yoDialog">yoDialog</a></li><li data-type='method'><a href="module-yo_utter.html#.yoDynamic">yoDynamic</a></li><li data-type='method'><a href="module-yo_utter.html#.yoExtension">yoExtension</a></li><li data-type='method'><a href="module-yo_utter.html#.yoFilter">yoFilter</a></li><li data-type='method'><a href="module-yo_utter.html#.yoForm">yoForm</a></li><li data-type='method'><a href="module-yo_utter.html#.yoFormAdd">yoFormAdd</a></li><li data-type='method'><a href="module-yo_utter.html#.yoFormEdit">yoFormEdit</a></li><li data-type='method'><a href="module-yo_utter.html#.yoGrid">yoGrid</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListBatch">yoListBatch</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListExtra">yoListExtra</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListGrid">yoListGrid</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListOpen">yoListOpen</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListSearch">yoListSearch</a></li><li data-type='method'><a href="module-yo_utter.html#.yoPolymorphism">yoPolymorphism</a></li><li data-type='method'><a href="module-yo_utter.html#.yoQrCond">yoQrCond</a></li><li data-type='method'><a href="module-yo_utter.html#.yoQrQBE">yoQrQBE</a></li><li data-type='method'><a href="module-yo_utter.html#.yoQrTag">yoQrTag</a></li><li data-type='method'><a href="module-yo_utter.html#.yoRender">yoRender</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTabPage">yoTabPage</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplAccount">yoTplAccount</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplHeader">yoTplHeader</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplNavigation">yoTplNavigation</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplSider">yoTplSider</a></li></ul></li><li><a href="module-yu_utter.html">yu/utter</a><ul class='methods'><li data-type='method'><a href="module-yu_utter.html#.yuContainer">yuContainer</a></li><li data-type='method'><a href="module-yu_utter.html#.yuRouter">yuRouter</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@ox">@ox</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">yi/utter</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+            
+                <div class="description usertext"><h1>通道：初始化</h1>
+<hr/></div>
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiAssist"><span class="type-signature">(static) </span>yiAssist<span class="signature">(reference, state)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiAssist</code></h2>
+<h3>1. 输入来源</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">来源</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>cab/&lt;LANG&gt;</code></td>
+<td style="text-align:left">资源目录<code>cab/&lt;LANG&gt;/</code>中绑定的资源文件的_assist节点，使用<code>@zero</code>绑定。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td style="text-align:left">直接从props中读取配置，消费assist节点，这种通常是配置型。</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 辅助数据种类</h3>
+<p>示例中的数据结构直接从<code>_assist</code>开始，或<code>config.assist</code>开始，它包含了多个键值配置，每个配置如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">节点</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">uri</td>
+<td style="text-align:left">Ajax远程方法的Uri地址。</td>
+</tr>
+<tr>
+<td style="text-align:left">method</td>
+<td style="text-align:left">默认<code>GET</code>，可修改成其他方法来读取。</td>
+</tr>
+<tr>
+<td style="text-align:left">magic</td>
+<td style="text-align:left">新版查询模式，非查询引擎，直接将magic节点佐为查询条件。</td>
+</tr>
+<tr>
+<td style="text-align:left">params.criteria</td>
+<td style="text-align:left">这种通常是<code>qr=true</code>，设置查询引擎。</td>
+</tr>
+<tr>
+<td style="text-align:left">qr</td>
+<td style="text-align:left">（Boolean）是否强制性使用查询引擎，强制使用则会触发后端查询引擎。</td>
+</tr>
+<tr>
+<td style="text-align:left">response</td>
+<td style="text-align:left">配置响应数据的特殊属性，主要用来配置记录主键。</td>
+</tr>
+<tr>
+<td style="text-align:left">group</td>
+<td style="text-align:left">这个配置目前仅用于<code>X_TABULAR</code>读取，根据某个字段进行分组，然后使用值构造变量。</td>
+</tr>
+</tbody>
+</table>
+<h4>2.1. 非<code>X_TABULAR</code>类型</h4>
+<blockquote>
+<p>这种类型比较自由，读取任意接口或任意表都可以。</p>
+</blockquote>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;model.information&quot;: {
+         &quot;uri&quot;: &quot;/api/model/full/read&quot;,
+         &quot;response&quot;: {
+             &quot;key&quot;: &quot;id&quot;
+         }
+     },
+     &quot;model.resource&quot;:{
+         &quot;uri&quot;: /api/model/resource&quot;
+     }
+}
+</code></pre>
+<p>上边的配置信息会在state中生成两个变量，这种模式的变量名直接根据配置中的Object属性字段来定义。</p>
+<ul>
+<li><code>$a_model_information</code></li>
+<li><code>$a_model_resource</code></li>
+</ul>
+<h4>2.2. <code>X_TABULAR</code>类型</h4>
+<blockquote>
+<p>这种类型只读取<code>X_TABULAR</code>的数据类型，而且会提供<code>group</code>方法执行分组，通常是<code>TYPE</code>字段。</p>
+</blockquote>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;tabular&quot;: {
+         &quot;uri&quot;: &quot;/api/types/tabulars&quot;,
+         &quot;method&quot;: &quot;POST&quot;,
+         &quot;magic&quot;: {
+             &quot;$body&quot;: [
+                 &quot;zero.authority&quot;,
+                 &quot;member.card&quot;
+             ]
+         },
+         &quot;group&quot;: &quot;type&quot;
+     }
+}
+</code></pre>
+<p>上边配置生成的变量为：</p>
+<ul>
+<li><code>$t_zero.authority</code></li>
+<li><code>$t_member_card</code></li>
+</ul>
+<h3>3. Js脚本</h3>
+<h4>3.1. 调用代码</h4>
+<p>框架内部的调用代码如下：</p>
+<pre class="prettyprint source lang-js"><code>import Ex from 'ex';
+
+const state = {};
+Ex.yiAssist(reference, state).then(response => {
+    // response 变量中会包含执行 assist 辅助数据流程后的变量
+    // 假设使用了 2.1 和 2.2 的综合配置
+    // 则会生成下边四个属性
+    // - $a_model_information，数据类型是 DataArray
+    // - $a_model_resource，数据类型是 DataArray
+    // - $t_permission_type，数据类型是 DataArray
+    // - $t_member_card，数据类型是 DataArray
+})
+</code></pre>
+<h4>3.2. 提取数据代码</h4>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+
+// 直接传入原始key，会直接做转换
+// member.card，系统会检索读取上述列表中的 $t_member_card 变量的值
+// 返回值为 Array 类型。
+const memberCard = Ux.onDatum(reference, &quot;member.card&quot;);
+</code></pre>
+<h4>3.3. Datum函数</h4>
+<p>除开直接读取的<code>onDatum</code>以外，还可以使用一些带有<code>Datum</code>关键字的函数，例如：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Datum函数</th>
+<th style="text-align:left">纯函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">elementFindDatum</td>
+<td style="text-align:left">elementFind</td>
+</tr>
+<tr>
+<td style="text-align:left">elementUniqueDatum</td>
+<td style="text-align:left">elementUnique</td>
+</tr>
+<tr>
+<td style="text-align:left">elementGroupDatum</td>
+<td style="text-align:left">elementGroup</td>
+</tr>
+</tbody>
+</table>
+<p>带<code>Datum</code>的函数会比纯函数多两个参数，前两个参数就是<code>onDatum</code>的两个参数，简单说是<code>Datum</code>遵循如下代码执行流程：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">步骤</th>
+<th style="text-align:left">执行代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">输入<code>reference</code>和<code>sourceKey</code>（上述调用代码第二参）。</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">调用onDatum抽取函数，生成数据（Array类型）。</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">执行主方法，纯函数中的方法，以Array数据为基础。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">State</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>输入状态，计算之前的</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>执行更新过后的状态，计算之后的</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiColumn"><span class="type-signature">(static) </span>yiColumn<span class="signature">(reference, initState, $data)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd class="yes-def tag-deprecated"><ul class="dummy"><li>Yes</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiColumn</code></h2>
+<p>同 yiListLazy</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>initState</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$data</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiCombine"><span class="type-signature">(static) </span>yiCombine<span class="signature">(reference, extension)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiCombine</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>extension</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiContainer"><span class="type-signature">(static) </span>yiContainer<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiContainer</code></h2>
+<h3>1. 基本介绍</h3>
+<h4>模板处理种类</h4>
+<ol>
+<li>静态模板</li>
+<li>动态模板</li>
+</ol>
+<h4>动态模板判断</h4>
+<p>判断<code>$dynamic</code>的依据和条件：</p>
+<ol>
+<li>$router 中的 path 路径以：/ui/ 开头</li>
+<li>$router 中的参数同时包含：module / page</li>
+</ol>
+<p>最终返回</p>
+<pre class="prettyprint source lang-json"><code>{
+    app: &quot;应用名&quot;,
+    module: &quot;模块名&quot;,
+    page: &quot;页面名&quot;
+}
+</code></pre>
+<ul>
+<li>$container：容器配置</li>
+<li>$component：内部组件配置</li>
+</ul>
+<h4>渲染计算</h4>
+<p>$dynamic：</p>
+<ul>
+<li>= true：动态渲染，Ox Engine</li>
+<li>= false：静态渲染，Zero UI</li>
+</ul>
+<h3>2. 动态执行逻辑</h3>
+<p>这是Extension扩展中动态渲染模板的基础，最终都是为了改变当前组件中的state结构。</p>
+<h4>2.1. 路由解析</h4>
+<p>调用<code>_seekRoute</code>解析<code>react-router</code>相关信息，构造完成后状态如下：</p>
+<pre class="prettyprint source lang-js"><code>{
+    $input: {
+        app,
+        module,
+        page
+    },
+    $dynamic: &quot;（Boolean）是否执行动态渲染&quot;,
+    $secure: &quot;（Boolean）是否安全页面（鉴权）&quot;
+}
+</code></pre>
+<p>如果是动态页面，参数<code>$input</code>直接来自于路由和环境变量的计算：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">来源</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td style="text-align:left">环境变量<code>Z_ROUTE</code></td>
+<td style="text-align:left">当前应用的专用路由（标识应用程序）。</td>
+</tr>
+<tr>
+<td>module</td>
+<td style="text-align:left">$router变量</td>
+<td style="text-align:left">当前页面所属模块。</td>
+</tr>
+<tr>
+<td>page</td>
+<td style="text-align:left">$router变量</td>
+<td style="text-align:left">当前页面名称。</td>
+</tr>
+</tbody>
+</table>
+<h4>2.2. 异步初始化</h4>
+<p>调用<code>startAsync</code>函数，初始化状态信息，完成后结构如下：</p>
+<pre class="prettyprint source lang-js"><code>{
+    $tpl: {},
+    $container: {},
+    $grid: {},
+    $assist: {},
+    $controls: {}
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$tpl</td>
+<td style="text-align:left">模板详细数据信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$container</td>
+<td style="text-align:left">容器配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$grid</td>
+<td style="text-align:left">生成的网格布局基础配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">$assist</td>
+<td style="text-align:left">需使用的辅助数据定义。</td>
+</tr>
+<tr>
+<td style="text-align:left">$controls</td>
+<td style="text-align:left">所有当前页面需要的控件配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$secure</td>
+<td style="text-align:left">后期追加，页面是否执行鉴权。</td>
+</tr>
+</tbody>
+</table>
+<h4>2.2. 模块配置</h4>
+<p>调用<code>yiModule</code>函数执行模块初始化（略）。</p>
+<h4>2.3. 页面配置</h4>
+<p>使用模块中存在的<code>data.$input</code>作为入参，读取页面配置信息，页面配置包括容器/组件双配置。</p>
+<h4>2.4. 页面规范化</h4>
+<p>调用<code>_seekPage</code>函数执行页面配置初始化，从<code>$output</code>对象中抽取数据信息：</p>
+<ol>
+<li>根据<code>$output.layout</code>重写状态中的<code>state.$tpl</code>模板信息。</li>
+<li>若包含<code>$output.containerName</code>则重写状态中<code>state.$container</code>容器信息。</li>
+<li>页面组件解析：
+<ol>
+<li>解析<code>$output.secure</code>属性，追加<code>state.$secure</code>属性。</li>
+<li>读取<code>$output.grid</code>网格布局属性，重写<code>state.$grid</code>属性。</li>
+<li>读取<code>$output.assist</code>辅助数据定义，重写<code>state.$assist</code>属性。</li>
+<li>读取<code>$output.controls</code>配置数据，重写<code>state.$controls</code>属性。</li>
+</ol>
+</li>
+</ol>
+<h3>3. 最终状态</h3>
+<p>执行完上述方法后的最终状态如（示例模板）：</p>
+<pre class="prettyprint source lang-js"><code>{
+    $input:{
+        app: &quot;所属应用&quot;,
+        module: &quot;所属模块&quot;,
+        page: &quot;所属页面&quot;
+    },
+    $output: &quot;（输出）远程读取配置的基础数据&quot;,
+    $dynamic: &quot;（Boolean）是否动态渲染&quot;,
+    $secure: &quot;（Boolean）是否安全页面&quot;,
+    $tpl: &quot;使用模板的详细配置&quot;,
+    $container: &quot;容器相关配置&quot;,
+    $grid: &quot;网格布局基础信息&quot;,
+    $assist: &quot;辅助数据定义信息&quot;,
+    $controls: &quot;当前控件的所有配置信息&quot;
+}
+</code></pre>
+<blockquote>
+<p>状态中的数据存储是定义好的元数据信息，包括配置数据，其目的是为了让真正执行过程中的方法可根据这些数据对页面渲染进行计算。</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>执行更新过后的状态</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiControl"><span class="type-signature">(static) </span>yiControl<span class="signature">(arguments<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiControl</code></h2>
+<h3>1. 基本介绍</h3>
+<p>控件专用处理，从后端读取配置：UI_CONTROL / UI_FORM / UI_LIST</p>
+<ol>
+<li>单参，直接提取控件配置，调用<code>yoControl</code>执行容器和组件的配置规范化（container/component）。</li>
+<li>双参，根据<code>control</code>和类型<code>type</code>执行控件配置提取（包括Form和List）
+<ol>
+<li>根据控件ID（<code>control</code>）和类型（<code>type</code>）读取基本配置和操作配置。</li>
+<li>在响应信息中为操作注入ACL安全配置信息<code>__acl</code>。</li>
+<li>再执行<code>parseControl</code>方法执行控件配置规范化（主要针对操作）</li>
+</ol>
+</li>
+</ol>
+<h3>2. 使用场景</h3>
+<blockquote>
+<p>该函数仅位于控件配置预初始化专用流程。</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>arguments</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">arguments</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>可选参数，变参</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终的 Promise。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListLazy"><span class="type-signature">(static) </span>yiListLazy<span class="signature">(reference, initState, $data)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListLazy</code></h2>
+<h3>1. 基本介绍</h3>
+<p>列渲染专用处理函数，用于处理<code>USER</code>特殊类型的<code>$render</code>执行数据预处理</p>
+<ol>
+<li>提取所有<code>USER</code>列相关信息。</li>
+<li>根据传入数据执行<code>$lazy</code>的计算（预处理Ajax，系统中唯一调用<code>Ux.ajaxEager</code>的位置。</li>
+</ol>
+<p>这种类型的代码流程如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">步骤</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:left">扫描表格配置<code>table</code>中的<code>columns</code>节点。</td>
+</tr>
+<tr>
+<td style="text-align:right">2</td>
+<td style="text-align:left">从<code>columns</code>节点中抽取<code>$render = USER</code>的列类型。</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:left">收集所有这种类型，执行单独的参数合并，数据条目的读取和辅助数据读取请求不对等，可能10条数据由于某个字段值一样只读取四次。</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:left">构造state中的<code>$lazy</code>变量：一个Object类型。</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 关于<code>$lazy</code>的结构</h3>
+<h4>2.1. 数据</h4>
+<pre class="prettyprint source lang-json"><code>[
+     { &quot;type&quot;: &quot;type1&quot;, &quot;name&quot;: &quot;记录1&quot; },
+     { &quot;type&quot;: &quot;type1&quot;, &quot;name&quot;: &quot;记录2&quot; },
+     { &quot;type&quot;: &quot;type1&quot;, &quot;name&quot;: &quot;记录3&quot; },
+     { &quot;type&quot;: &quot;type2&quot;, &quot;name&quot;: &quot;记录4&quot; },
+     { &quot;type&quot;: &quot;type2&quot;, &quot;name&quot;: &quot;记录5&quot; },
+     { &quot;type&quot;: &quot;type2&quot;, &quot;name&quot;: &quot;记录6&quot; }
+]
+</code></pre>
+<h4>2.2. 辅助数据</h4>
+<pre class="prettyprint source lang-json"><code>[
+     { &quot;key&quot;: &quot;type1&quot;, &quot;name&quot;: &quot;类型1&quot; },
+     { &quot;key&quot;: &quot;type2&quot;, &quot;name&quot;: &quot;类型2&quot; }
+]
+</code></pre>
+<h4>2.3. 最终生成的变量</h4>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;type&quot;:{
+         &quot;type1&quot;: &quot;类型1&quot;,
+         &quot;type2&quot;: &quot;类型2&quot;
+    }
+}
+</code></pre>
+<ul>
+<li>上述结构中<code>type</code>是数据记录中的属性。</li>
+<li>而<code>Object</code>中的数据就是<code>type</code>对应的：<code>值 = 显示文字</code>的Map字典。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>initState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">State</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>返回当前组件状态</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>$data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>搜索的最终结果，$data.list 中包含数据</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>执行更新过后的状态</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListOp"><span class="type-signature">(static) </span>yiListOp<span class="signature">(reference, config, state)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListOp</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListOptions"><span class="type-signature">(static) </span>yiListOptions<span class="signature">(reference, config)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListOptions</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListPlugin"><span class="type-signature">(static) </span>yiListPlugin<span class="signature">(reference, config)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListPlugin</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListQuery"><span class="type-signature">(static) </span>yiListQuery<span class="signature">(reference, query)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListQuery</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>query</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListSynonym"><span class="type-signature">(static) </span>yiListSynonym<span class="signature">(reference, config, state)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListSynonym</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListTab"><span class="type-signature">(static) </span>yiListTab<span class="signature">(reference, config)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListTab</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListTable"><span class="type-signature">(static) </span>yiListTable<span class="signature">(reference, config, state)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListTable</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiListView"><span class="type-signature">(static) </span>yiListView<span class="signature">(reference, config, state)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiListView</code></h2>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiModule"><span class="type-signature">(static) </span>yiModule<span class="signature">(reference, state, standard)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiModule</code></h2>
+<h3>1. 基本介绍</h3>
+<p>一个 module 的配置信息来源于三部分：</p>
+<ol>
+<li><code>UI.json</code>：静态配置，会在 reference 中生成 $hoc 变量</li>
+<li>远程的 UI_MODULE中的 metadata 字段
+<ul>
+<li>（默认值）最初的 metadata 字段为 FILE 模式（即文件路径）</li>
+<li>（动态管理）如果管理过程中执行了更新，那么直接就是 metadata 的内容</li>
+</ul>
+</li>
+<li>如果 standard = false 那么不考虑 $hoc 的生成，而是直接使用 hoc 变量
+<ul>
+<li>这种情况不引入 HocI18r 同样不引入 HocI18n 两个数据结构</li>
+</ul>
+</li>
+<li>如果 <code>standard = true</code> 那么有两种可能
+<ul>
+<li>已经绑定过 UI.json，则使用混合模式（远程优先）</li>
+<li>未绑定过 UI.json，则直接使用远程模式</li>
+</ul>
+</li>
+</ol>
+<h3>2. 模块读取</h3>
+<p>根据路径直接读取，路径中包含三部分，如：</p>
+<pre class="prettyprint source lang-shell"><code>/ox/ci/search
+{
+    app: &quot;ox&quot;,
+    module: &quot;ci&quot;,
+    page: &quot;search&quot;
+}
+</code></pre>
+<p><code>src/components/ci/search</code>代码目录中。</p>
+<p>Zero Ui中定义的应用维度主要分三层</p>
+<ol>
+<li>app：应用层，依靠<code>Z_ROUTE</code>的环境变量规划不同的应用，多应用区分。</li>
+<li>module：模块，<code>src/components</code>目录下的第一层目录，上述的<code>ci</code>目录。</li>
+<li>page：页面，<code>src/components</code>目录下的第二层目录，上述的<code>search</code>目录。</li>
+</ol>
+<h3>3. 配置对象</h3>
+<p>Zero Ui中的配置对象有两种类型：<code>HocI18n</code>和<code>HocI18r</code>两种，这两种数据对象的函数是一样的，但类型不同，也就是说
+这两个对象在调用配置读取的API如<code>Ux.fromHoc</code>和<code>Ux.fromPath</code>时会维持一致。</p>
+<p>当前函数会读取<code>X_MODULE</code>的配置数据信息，如果存在，则和<code>Cab.json</code>的资源文件中的配置进行合并，生成最终的配置对象。</p>
+<ul>
+<li>远程数据存储于<code>HocI18r</code>。</li>
+<li>本地资源配置存储于<code>HocI18n</code>。</li>
+<li>本地和远程同时执行时候，直接读取metadata构造附加的<code>hoc</code>配置数据。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">State</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>返回当前组件状态</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>standard</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>是否执行标准化</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>执行更新过后的状态</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiPartForm"><span class="type-signature">(static) </span>yiPartForm<span class="signature">(ref, config, inherit)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiPartForm</code></h2>
+<h3>1. 基本介绍</h3>
+<p>初始化表单配置的专用方法，等价于<code>yiForm</code>，旧版本有一个<code>yiForm</code>方法，为了兼容原始方法，所以独立了
+另外一个方法<code>yiPartForm</code>来实现表单初始化。</p>
+<p>该方法执行流程如下：</p>
+<ol>
+<li>先从绑定的资源文件<code>cab/&lt;LANG&gt;/</code>中读取<code>_form</code>节点中的配置信息。</li>
+<li><code>inherit</code>用于判断React引用是使用传入引用，还是传入引用的父引用。</li>
+</ol>
+<h3>2. 标准化配置</h3>
+<p>调用<code>Ux.configForm</code>对表单数据进行配置（同步流程），这个步骤需要完成以下几点：</p>
+<ul>
+<li>从配置中读取<code>renders</code>对象用于配置<code>key = Jsx</code>的表单字段（开发用来渲染表单字段专用）</li>
+<li>构造状态<code>state</code>中的<code>$onChange</code>函数</li>
+<li>将<code>config</code>中的变量<code>state</code>作为附加值合并到reference的状态中</li>
+</ul>
+<h3>3. <code>config</code>参数</h3>
+<p>config参数中的核心结构如下：</p>
+<pre class="prettyprint source lang-js"><code>{
+    renders: {},
+    onChange: {}
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">renders</td>
+<td>Object</td>
+<td style="text-align:left"><code>field = Jsx</code>结构，渲染表单时对应的字段渲染函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">onChange</td>
+<td>Object</td>
+<td style="text-align:left"><code>field = Function</code>结构，对象中的每个函数可以注入到字段的<code>onChange</code>外置函数中。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ref</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>React组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>和表单相关的基本配置</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>inherit</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>true</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>将要继承到表单中的属性信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".yiStandard"><span class="type-signature">(static) </span>yiStandard<span class="signature">(reference, inputState)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiStandard</code></h2>
+<h3>1. 基本介绍</h3>
+<p>标准核心模块专用方法，内部调用函数</p>
+<ol>
+<li>yiModule</li>
+<li>yiAssist</li>
+<li>yiParameters</li>
+</ol>
+<h3>2. yiParameters</h3>
+<p><code>yiModule</code>和<code>yiAssist</code>可直接参考文档中的做法，yiParameters用于处理路由中的参数，
+构造<code>reference.state</code>中特定的<code>$query</code>变量。</p>
+<ol>
+<li>从<code>$router</code>中读取核心参数<code>type</code>和<code>status</code>。</li>
+<li>如果构造的条件超过1个，使用<code>AND</code>连接符。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td style="text-align:left">广义的类型参数。</td>
+</tr>
+<tr>
+<td>status</td>
+<td style="text-align:left">广义的状态参数。</td>
+</tr>
+</tbody>
+</table>
+<p>上述读取参数可位于路径中，也可位于查询字符串中，如<code>/uri/xxx/:p1?p2=v2</code>，<code>p1</code>和<code>p2</code>都是合法参数。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>inputState</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">State</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>返回当前组件状态</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>执行更新过后的状态</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Fri Jun 16 2023 17:06:03 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+#main h1 {
+    font-size: 28px !important;
+    font-weight: bold !important;
+}
+
+#main h2 {
+    font-size: 24px !important;
+    font-weight: bold !important;
+    background: white;
+    margin-left: 32px !important;
+    z-index: 101;
+}
+
+#main h2:before {
+    margin-top: 10px;
+    position: absolute;
+    left: 300px;
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    z-index: 100;
+    content: "";
+    background-color: #c70a02;
+}
+
+#main .summary h2 {
+    font-size: 22px !important;
+    font-weight: normal !important;
+}
+
+#main h2 code {
+    color: #1783c2;
+    font-size: 18px !important;
+}
+
+#main h3 code {
+    color: #1783c2;
+    font-size: 16px !important;
+}
+
+#main h3 {
+    color: #4051b6;
+    font-size: 18px !important;
+    font-weight: bold !important;
+}
+
+#main h4 {
+    font-size: 16px !important;
+    font-weight: bold;
+    line-height: 2.7em;
+}
+
+#main h4.name {
+    background: #4051b6;
+}
+
+#main .subsection-title {
+    color: #c70a02;
+    font-family: Consolas, monospace;
+    font-size: 25px !important;
+}
+
+#main {
+    font-family: Consolas, monospace;
+    font-size: 14px !important;
+}
+
+#main blockquote {
+    color: #1464b4;
+}
+
+table td {
+    line-height: 1.8em;
+}

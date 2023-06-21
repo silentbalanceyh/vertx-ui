@@ -1,0 +1,6703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>uca/extension - Zero Extension框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-extension,vert.x" />
+        <meta name="keyword" content="zero,zero-extension,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/zero.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://www.vertx-cloud.cn/document/doc-web/index.html" target="_blank" class="menu-item" id="website_link" >Zero云平台白皮书</a></h2><h2><a href="http://www.vertxai.cn/document/doc-web/index.html" target="_blank" class="menu-item" id="website_link" >Zero AI 工具箱</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/zui/index.html" target="_blank" class="menu-item" id="website_link" >Zero UI 标准包API</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/zextension/index.html" target="_blank" class="menu-item" id="website_link" >Zero UI 扩展包API</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI 官方站点</a></h2><h2><a href="http://www.vertxai.cn" target="_blank" class="menu-item" id="website_link" >Zero AI 官方站点</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Framework 官方站点</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >我的KB小站</a></h2><h3>Classes</h3><ul><li><a href="I.html">I</a><ul class='methods'><li data-type='method'><a href="I.html#.action">action</a></li><li data-type='method'><a href="I.html#.apis">apis</a></li><li data-type='method'><a href="I.html#.app">app</a></li><li data-type='method'><a href="I.html#.application">application</a></li><li data-type='method'><a href="I.html#.attributes">attributes</a></li><li data-type='method'><a href="I.html#.authorize">authorize</a></li><li data-type='method'><a href="I.html#.category">category</a></li><li data-type='method'><a href="I.html#.company">company</a></li><li data-type='method'><a href="I.html#.control">control</a></li><li data-type='method'><a href="I.html#.forest">forest</a></li><li data-type='method'><a href="I.html#.form">form</a></li><li data-type='method'><a href="I.html#.forms">forms</a></li><li data-type='method'><a href="I.html#.inited">inited</a></li><li data-type='method'><a href="I.html#.jobResume">jobResume</a></li><li data-type='method'><a href="I.html#.jobStart">jobStart</a></li><li data-type='method'><a href="I.html#.jobStop">jobStop</a></li><li data-type='method'><a href="I.html#.jobs">jobs</a></li><li data-type='method'><a href="I.html#.lists">lists</a></li><li data-type='method'><a href="I.html#.login">login</a></li><li data-type='method'><a href="I.html#.logout">logout</a></li><li data-type='method'><a href="I.html#.menus">menus</a></li><li data-type='method'><a href="I.html#.mission">mission</a></li><li data-type='method'><a href="I.html#.module">module</a></li><li data-type='method'><a href="I.html#.ops">ops</a></li><li data-type='method'><a href="I.html#.page">page</a></li><li data-type='method'><a href="I.html#.password">password</a></li><li data-type='method'><a href="I.html#.profile">profile</a></li><li data-type='method'><a href="I.html#.relation">relation</a></li><li data-type='method'><a href="I.html#.relationDelete">relationDelete</a></li><li data-type='method'><a href="I.html#.relationSave">relationSave</a></li><li data-type='method'><a href="I.html#.tabular">tabular</a></li><li data-type='method'><a href="I.html#.todo">todo</a></li><li data-type='method'><a href="I.html#.token">token</a></li><li data-type='method'><a href="I.html#.uri">uri</a></li><li data-type='method'><a href="I.html#.user">user</a></li><li data-type='method'><a href="I.html#.visitor">visitor</a></li></ul></li><li><a href="X6.html">X6</a></li><li><a href="utter.Refuse.html">Refuse</a></li></ul><h3>Modules</h3><ul><li><a href="module-config_utter.html">config/utter</a><ul class='methods'><li data-type='method'><a href="module-config_utter.html#.configClick">configClick</a></li><li data-type='method'><a href="module-config_utter.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-config_utter.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-config_utter.html#.configGrid">configGrid</a></li><li data-type='method'><a href="module-config_utter.html#.configRelation">configRelation</a></li></ul></li><li><a href="module-constant_utter.html">constant/utter</a><ul class='members'><li data-type='member'><a href="module-constant_utter.html#.Flow">Flow</a></li><li data-type='member'><a href="module-constant_utter.html#.K">K</a></li><li data-type='member'><a href="module-constant_utter.html#.Mode">Mode</a></li><li data-type='member'><a href="module-constant_utter.html#.Opt">Opt</a></li><li data-type='member'><a href="module-constant_utter.html#.Order">Order</a></li><li data-type='member'><a href="module-constant_utter.html#.PLUGIN">PLUGIN</a></li><li data-type='member'><a href="module-constant_utter.html#.V">V</a></li></ul></li><li><a href="module-driven_upper.html">driven/upper</a><ul class='methods'><li data-type='method'><a href="module-driven_upper.html#.acCriteria">acCriteria</a></li><li data-type='method'><a href="module-driven_upper.html#.etParallel">etParallel</a></li><li data-type='method'><a href="module-driven_upper.html#.etPure">etPure</a></li><li data-type='method'><a href="module-driven_upper.html#.etSequence">etSequence</a></li><li data-type='method'><a href="module-driven_upper.html#.etUniform">etUniform</a></li><li data-type='method'><a href="module-driven_upper.html#.rxChannel">rxChannel</a></li></ul></li><li><a href="module-fixed_upper.html">fixed/upper</a><ul class='members'><li data-type='member'><a href="module-fixed_upper.html#.Jsx">Jsx</a></li><li data-type='member'><a href="module-fixed_upper.html#.Op">Op</a></li></ul></li><li><a href="module-hoc_upper.html">hoc/upper</a><ul class='methods'><li data-type='method'><a href="module-hoc_upper.html#.designer">designer</a></li><li data-type='method'><a href="module-hoc_upper.html#.dialog">dialog</a></li><li data-type='method'><a href="module-hoc_upper.html#.form">form</a></li><li data-type='method'><a href="module-hoc_upper.html#.init">init</a></li></ul></li><li><a href="module-in_utter.html">in/utter</a><ul class='methods'><li data-type='method'><a href="module-in_utter.html#.inApi">inApi</a></li><li data-type='method'><a href="module-in_utter.html#.inJob">inJob</a></li><li data-type='method'><a href="module-in_utter.html#.inSettlement">inSettlement</a></li></ul></li><li><a href="module-kin_unfold.html">kin/unfold</a><ul class='methods'><li data-type='method'><a href="module-kin_unfold.html#.kinComponent">kinComponent</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinDoSearch">kinDoSearch</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinForm">kinForm</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinTChange">kinTChange</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinTRow">kinTRow</a></li><li data-type='method'><a href="module-kin_unfold.html#.kinUp">kinUp</a></li></ul></li><li><a href="module-map_utter.html">map/utter</a><ul class='methods'><li data-type='method'><a href="module-map_utter.html#.mapAsyncDatum">mapAsyncDatum</a></li><li data-type='method'><a href="module-map_utter.html#.mapMeta">mapMeta</a></li><li data-type='method'><a href="module-map_utter.html#.mapUri">mapUri</a></li></ul></li><li><a href="module-on_upper.html">on/upper</a><ul class='methods'><li data-type='method'><a href="module-on_upper.html#.onOp">onOp</a></li></ul></li><li><a href="module-on_utter.html">on/utter</a><ul class='methods'><li data-type='method'><a href="module-on_utter.html#.onApp">onApp</a></li><li data-type='method'><a href="module-on_utter.html#.onRelation">onRelation</a></li><li data-type='method'><a href="module-on_utter.html#.onRelationIdentifiers">onRelationIdentifiers</a></li><li data-type='method'><a href="module-on_utter.html#.onRelationType">onRelationType</a></li><li data-type='method'><a href="module-on_utter.html#.onTree">onTree</a></li></ul></li><li><a href="module-parser_utter.html">parser/utter</a><ul class='methods'><li data-type='method'><a href="module-parser_utter.html#.parserOfButton">parserOfButton</a></li><li data-type='method'><a href="module-parser_utter.html#.parserOfColor">parserOfColor</a></li><li data-type='method'><a href="module-parser_utter.html#.parserOfEvent">parserOfEvent</a></li></ul></li><li><a href="module-pu_unfold.html">pu/unfold</a><ul class='methods'><li data-type='method'><a href="module-pu_unfold.html#.puControl">puControl</a></li></ul></li><li><a href="module-qr_utter.html">qr/utter</a><ul class='methods'><li data-type='method'><a href="module-qr_utter.html#.irViewAt">irViewAt</a></li><li data-type='method'><a href="module-qr_utter.html#.irViewQ">irViewQ</a></li><li data-type='method'><a href="module-qr_utter.html#.irViewV">irViewV</a></li></ul></li><li><a href="module-rs_utter.html">rs/utter</a><ul class='methods'><li data-type='method'><a href="module-rs_utter.html#.rsOpened">rsOpened</a></li></ul></li><li><a href="module-rx_utter.html">rx/utter</a><ul class='methods'><li data-type='method'><a href="module-rx_utter.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-rx_utter.html#.rxBatchDelete">rxBatchDelete</a></li><li data-type='method'><a href="module-rx_utter.html#.rxBatchEdit">rxBatchEdit</a></li><li data-type='method'><a href="module-rx_utter.html#.rxClose">rxClose</a></li><li data-type='method'><a href="module-rx_utter.html#.rxColumn">rxColumn</a></li><li data-type='method'><a href="module-rx_utter.html#.rxColumnMy">rxColumnMy</a></li><li data-type='method'><a href="module-rx_utter.html#.rxDelete">rxDelete</a></li><li data-type='method'><a href="module-rx_utter.html#.rxExport">rxExport</a></li><li data-type='method'><a href="module-rx_utter.html#.rxImport">rxImport</a></li><li data-type='method'><a href="module-rx_utter.html#.rxMyViewQ">rxMyViewQ</a></li><li data-type='method'><a href="module-rx_utter.html#.rxMyViewV">rxMyViewV</a></li><li data-type='method'><a href="module-rx_utter.html#.rxPostClose">rxPostClose</a></li><li data-type='method'><a href="module-rx_utter.html#.rxPostOpen">rxPostOpen</a></li><li data-type='method'><a href="module-rx_utter.html#.rxQr">rxQr</a></li><li data-type='method'><a href="module-rx_utter.html#.rxQrClean">rxQrClean</a></li><li data-type='method'><a href="module-rx_utter.html#.rxQrQBE">rxQrQBE</a></li><li data-type='method'><a href="module-rx_utter.html#.rxRowOpen">rxRowOpen</a></li><li data-type='method'><a href="module-rx_utter.html#.rxSearch">rxSearch</a></li><li data-type='method'><a href="module-rx_utter.html#.rxSelected">rxSelected</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabAdd">rxTabAdd</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabClose">rxTabClose</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabEdit">rxTabEdit</a></li><li data-type='method'><a href="module-rx_utter.html#.rxTabOpen">rxTabOpen</a></li><li data-type='method'><a href="module-rx_utter.html#.rxView">rxView</a></li><li data-type='method'><a href="module-rx_utter.html#.rxViewQ">rxViewQ</a></li><li data-type='method'><a href="module-rx_utter.html#.rxViewV">rxViewV</a></li></ul></li><li><a href="module-secure_upper.html">secure/upper</a><ul class='members'><li data-type='member'><a href="module-secure_upper.html#.aclE">aclE</a></li></ul><ul class='methods'><li data-type='method'><a href="module-secure_upper.html#.aclChildUp">aclChildUp</a></li><li data-type='method'><a href="module-secure_upper.html#.aclIn">aclIn</a></li><li data-type='method'><a href="module-secure_upper.html#.aclOut">aclOut</a></li><li data-type='method'><a href="module-secure_upper.html#.aclRegionInit">aclRegionInit</a></li><li data-type='method'><a href="module-secure_upper.html#.aclRoute">aclRoute</a></li></ul></li><li><a href="module-sex_utter.html">sex/utter</a><ul class='methods'><li data-type='method'><a href="module-sex_utter.html#.sexExAction">sexExAction</a></li><li data-type='method'><a href="module-sex_utter.html#.sexExPlugin">sexExPlugin</a></li></ul></li><li><a href="module-to_utter.html">to/utter</a><ul class='methods'><li data-type='method'><a href="module-to_utter.html#.toDialog">toDialog</a></li><li data-type='method'><a href="module-to_utter.html#.toFontSize">toFontSize</a></li><li data-type='method'><a href="module-to_utter.html#.toIdentifier">toIdentifier</a></li><li data-type='method'><a href="module-to_utter.html#.toModelId">toModelId</a></li><li data-type='method'><a href="module-to_utter.html#.toNamespace">toNamespace</a></li></ul></li><li><a href="module-uca_extension.html">uca/extension</a><ul class='methods'><li data-type='method'><a href="module-uca_extension.html#.*DxSider">*DxSider</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExAction">*ExAction</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExButton">*ExButton</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExDialog">*ExDialog</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorBatch">*ExEditorBatch</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorColumn">*ExEditorColumn</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorExport">*ExEditorExport</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExEditorImport">*ExEditorImport</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExNavigation">*ExNavigation</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExSearch">*ExSearch</a></li><li data-type='method'><a href="module-uca_extension.html#.*ExSider">*ExSider</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxChannel">*IxChannel</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxDatabase">*IxDatabase</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxDict">*IxDict</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxIntegration">*IxIntegration</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxMapping">*IxMapping</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxRule">*IxRule</a></li><li data-type='method'><a href="module-uca_extension.html#.*IxService">*IxService</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAccount">ExAccount</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAdmin">ExAdmin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAdmin">ExAdmin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExAdmin">ExAdmin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExApps">ExApps</a></li><li data-type='method'><a href="module-uca_extension.html#.ExArbor">ExArbor</a></li><li data-type='method'><a href="module-uca_extension.html#.ExCategory">ExCategory</a></li><li data-type='method'><a href="module-uca_extension.html#.ExDeploy">ExDeploy</a></li><li data-type='method'><a href="module-uca_extension.html#.ExEntry">ExEntry</a></li><li data-type='method'><a href="module-uca_extension.html#.ExForm">ExForm</a></li><li data-type='method'><a href="module-uca_extension.html#.ExGraphicEditor">ExGraphicEditor</a></li><li data-type='method'><a href="module-uca_extension.html#.ExGraphicViewer">ExGraphicViewer</a></li><li data-type='method'><a href="module-uca_extension.html#.ExHistory">ExHistory</a></li><li data-type='method'><a href="module-uca_extension.html#.ExListComplex">ExListComplex</a></li><li data-type='method'><a href="module-uca_extension.html#.ExListOpen">ExListOpen</a></li><li data-type='method'><a href="module-uca_extension.html#.ExLogged">ExLogged</a></li><li data-type='method'><a href="module-uca_extension.html#.ExLogged">ExLogged</a></li><li data-type='method'><a href="module-uca_extension.html#.ExLogin">ExLogin</a></li><li data-type='method'><a href="module-uca_extension.html#.ExRecord">ExRecord</a></li><li data-type='method'><a href="module-uca_extension.html#.ExRegiment">ExRegiment</a></li><li data-type='method'><a href="module-uca_extension.html#.ExRelation">ExRelation</a></li><li data-type='method'><a href="module-uca_extension.html#.ExService">ExService</a></li><li data-type='method'><a href="module-uca_extension.html#.ExSubmit">ExSubmit</a></li><li data-type='method'><a href="module-uca_extension.html#.ExTab">ExTab</a></li><li data-type='method'><a href="module-uca_extension.html#.ExTabular">ExTabular</a></li><li data-type='method'><a href="module-uca_extension.html#.ExTrackField">ExTrackField</a></li><li data-type='method'><a href="module-uca_extension.html#.ExWizard">ExWizard</a></li><li data-type='method'><a href="module-uca_extension.html#.OxAnchor">OxAnchor</a></li><li data-type='method'><a href="module-uca_extension.html#.OxCard">OxCard</a></li><li data-type='method'><a href="module-uca_extension.html#.OxCategory">OxCategory</a></li><li data-type='method'><a href="module-uca_extension.html#.OxCi">OxCi</a></li><li data-type='method'><a href="module-uca_extension.html#.OxForm">OxForm</a></li><li data-type='method'><a href="module-uca_extension.html#.OxHistory">OxHistory</a></li><li data-type='method'><a href="module-uca_extension.html#.OxList">OxList</a></li><li data-type='method'><a href="module-uca_extension.html#.OxModule">OxModule</a></li><li data-type='method'><a href="module-uca_extension.html#.OxRelation">OxRelation</a></li><li data-type='method'><a href="module-uca_extension.html#.OxTab">OxTab</a></li><li data-type='method'><a href="module-uca_extension.html#.OxTopology">OxTopology</a></li></ul></li><li><a href="module-ui_upper.html">ui/upper</a><ul class='methods'><li data-type='method'><a href="module-ui_upper.html#.uiDialog">uiDialog</a></li><li data-type='method'><a href="module-ui_upper.html#.uiTab">uiTab</a></li></ul></li><li><a href="module-up_utter.html">up/utter</a><ul class='methods'><li data-type='method'><a href="module-up_utter.html#.upCondition">upCondition</a></li><li data-type='method'><a href="module-up_utter.html#.upList">upList</a></li><li data-type='method'><a href="module-up_utter.html#.upLoading">upLoading</a></li><li data-type='method'><a href="module-up_utter.html#.upQuery">upQuery</a></li><li data-type='method'><a href="module-up_utter.html#.upValue">upValue</a></li></ul></li><li><a href="module-ux_utter.html">ux/utter</a><ul class='methods'><li data-type='method'><a href="module-ux_utter.html#.mapFun">mapFun</a></li><li data-type='method'><a href="module-ux_utter.html#.toArray">toArray</a></li><li data-type='method'><a href="module-ux_utter.html#.toColor">toColor</a></li><li data-type='method'><a href="module-ux_utter.html#.toUri">toUri</a></li></ul></li><li><a href="module-v4_utter.html">v4/utter</a><ul class='methods'><li data-type='method'><a href="module-v4_utter.html#.a4MenuAt">a4MenuAt</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuDash">a4MenuDash</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuData">a4MenuData</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuPick">a4MenuPick</a></li><li data-type='method'><a href="module-v4_utter.html#.a4MenuWeb">a4MenuWeb</a></li></ul></li><li><a href="module-web_upper.html">web/upper</a><ul class='methods'><li data-type='method'><a href="module-web_upper.html#.webAction">webAction</a></li><li data-type='method'><a href="module-web_upper.html#.webAnchor">webAnchor</a></li><li data-type='method'><a href="module-web_upper.html#.webTag">webTag</a></li></ul></li><li><a href="module-xui_utter.html">xui/utter</a><ul class='methods'><li data-type='method'><a href="module-xui_utter.html#.xuiContainer">xuiContainer</a></li><li data-type='method'><a href="module-xui_utter.html#.xuiDecorator">xuiDecorator</a></li><li data-type='method'><a href="module-xui_utter.html#.xuiGrid">xuiGrid</a></li></ul></li><li><a href="module-yi_unfold.html">yi/unfold</a><ul class='methods'><li data-type='method'><a href="module-yi_unfold.html#.yiProSetting">yiProSetting</a></li></ul></li><li><a href="module-yi_upper.html">yi/upper</a><ul class='methods'><li data-type='method'><a href="module-yi_upper.html#.yiCompany">yiCompany</a></li></ul></li><li><a href="module-yi_utter.html">yi/utter</a><ul class='methods'><li data-type='method'><a href="module-yi_utter.html#.yiAssist">yiAssist</a></li><li data-type='method'><a href="module-yi_utter.html#.yiColumn">yiColumn</a></li><li data-type='method'><a href="module-yi_utter.html#.yiCombine">yiCombine</a></li><li data-type='method'><a href="module-yi_utter.html#.yiContainer">yiContainer</a></li><li data-type='method'><a href="module-yi_utter.html#.yiControl">yiControl</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListLazy">yiListLazy</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListOp">yiListOp</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListOptions">yiListOptions</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListPlugin">yiListPlugin</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListQuery">yiListQuery</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListSynonym">yiListSynonym</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListTab">yiListTab</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListTable">yiListTable</a></li><li data-type='method'><a href="module-yi_utter.html#.yiListView">yiListView</a></li><li data-type='method'><a href="module-yi_utter.html#.yiModule">yiModule</a></li><li data-type='method'><a href="module-yi_utter.html#.yiPartForm">yiPartForm</a></li><li data-type='method'><a href="module-yi_utter.html#.yiStandard">yiStandard</a></li></ul></li><li><a href="module-yl_upper.html">yl/upper</a><ul class='methods'><li data-type='method'><a href="module-yl_upper.html#.ylCard">ylCard</a></li><li data-type='method'><a href="module-yl_upper.html#.ylDynamic">ylDynamic</a></li><li data-type='method'><a href="module-yl_upper.html#.ylTabExtra">ylTabExtra</a></li></ul></li><li><a href="module-yo_unfold.html">yo/unfold</a><ul class='methods'><li data-type='method'><a href="module-yo_unfold.html#.yoProChildren">yoProChildren</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProLayout">yoProLayout</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProPageHeader">yoProPageHeader</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProSettingDrawer">yoProSettingDrawer</a></li><li data-type='method'><a href="module-yo_unfold.html#.yoProWater">yoProWater</a></li></ul></li><li><a href="module-yo_upper.html">yo/upper</a><ul class='methods'><li data-type='method'><a href="module-yo_upper.html#.outApi">outApi</a></li><li data-type='method'><a href="module-yo_upper.html#.outJob">outJob</a></li><li data-type='method'><a href="module-yo_upper.html#.yoDebt">yoDebt</a></li></ul></li><li></li><li><a href="module-yo_utter.html">yo/utter</a><ul class='methods'><li data-type='method'><a href="module-yo_utter.html#.yoAction">yoAction</a></li><li data-type='method'><a href="module-yo_utter.html#.yoAmbient">yoAmbient</a></li><li data-type='method'><a href="module-yo_utter.html#.yoAtomComponent">yoAtomComponent</a></li><li data-type='method'><a href="module-yo_utter.html#.yoAtomContainer">yoAtomContainer</a></li><li data-type='method'><a href="module-yo_utter.html#.yoComponent">yoComponent</a></li><li data-type='method'><a href="module-yo_utter.html#.yoContainer">yoContainer</a></li><li data-type='method'><a href="module-yo_utter.html#.yoControl">yoControl</a></li><li data-type='method'><a href="module-yo_utter.html#.yoDialog">yoDialog</a></li><li data-type='method'><a href="module-yo_utter.html#.yoDynamic">yoDynamic</a></li><li data-type='method'><a href="module-yo_utter.html#.yoExtension">yoExtension</a></li><li data-type='method'><a href="module-yo_utter.html#.yoFilter">yoFilter</a></li><li data-type='method'><a href="module-yo_utter.html#.yoForm">yoForm</a></li><li data-type='method'><a href="module-yo_utter.html#.yoFormAdd">yoFormAdd</a></li><li data-type='method'><a href="module-yo_utter.html#.yoFormEdit">yoFormEdit</a></li><li data-type='method'><a href="module-yo_utter.html#.yoGrid">yoGrid</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListBatch">yoListBatch</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListExtra">yoListExtra</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListGrid">yoListGrid</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListOpen">yoListOpen</a></li><li data-type='method'><a href="module-yo_utter.html#.yoListSearch">yoListSearch</a></li><li data-type='method'><a href="module-yo_utter.html#.yoPolymorphism">yoPolymorphism</a></li><li data-type='method'><a href="module-yo_utter.html#.yoQrCond">yoQrCond</a></li><li data-type='method'><a href="module-yo_utter.html#.yoQrQBE">yoQrQBE</a></li><li data-type='method'><a href="module-yo_utter.html#.yoQrTag">yoQrTag</a></li><li data-type='method'><a href="module-yo_utter.html#.yoRender">yoRender</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTabPage">yoTabPage</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplAccount">yoTplAccount</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplHeader">yoTplHeader</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplNavigation">yoTplNavigation</a></li><li data-type='method'><a href="module-yo_utter.html#.yoTplSider">yoTplSider</a></li></ul></li><li><a href="module-yu_utter.html">yu/utter</a><ul class='methods'><li data-type='method'><a href="module-yu_utter.html#.yuContainer">yuContainer</a></li><li data-type='method'><a href="module-yu_utter.html#.yuRouter">yuRouter</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@ox">@ox</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">uca/extension</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+            
+                <div class="description usertext"><h1>扩展组件<code>Ex/Ix/Ox</code></h1>
+<h2>1.组件分组</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">组件前缀</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Ix</td>
+<td style="text-align:left">内置专用组件，Internal Extension X。</td>
+</tr>
+<tr>
+<td style="text-align:left">Ex</td>
+<td style="text-align:left">扩展组件，Extension Component X。</td>
+</tr>
+<tr>
+<td style="text-align:left">Ox</td>
+<td style="text-align:left">配置组件，Origin Extension X。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>名字中带有<code>*</code>号的是私有属性，不可直接从<code>ei</code>中导入。</p>
+</blockquote>
+<h3>1.Ex组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">组件名</th>
+<th>生命周期</th>
+<th>私有</th>
+<th>表单组件</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">* ExAction</td>
+<td>x x x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">「外层」按钮和链接专用封装组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExButton</td>
+<td>x x x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">「内层」按钮和连接专用封装组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExDialog</td>
+<td>x o x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">弹出框专用组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExEditorBatch</td>
+<td>x o x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">批量编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExEditorColumn</td>
+<td>x o x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">模型列选择器。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExEditorExport</td>
+<td>x o x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">导出数据编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExEditorImport</td>
+<td>x o x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">导入数据编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExNavigation</td>
+<td>x x x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">导航栏专用扩展组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExSearch</td>
+<td>x o x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">搜索栏专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">* ExSider</td>
+<td>x o x</td>
+<td>v</td>
+<td>否</td>
+<td style="text-align:left">侧边栏专用菜单组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExAccount</td>
+<td>o o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">显示用户账号信息专用数据呈现组件，目前用于用户的Profile页面。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExAdmin</td>
+<td>x o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">渲染模板专用（整个站点的模板页，动态模板）。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExApps</td>
+<td>x o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">渲染Dashboard专用的界面，主页的图标链接看板。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExArbor</td>
+<td>x x x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">渲染左边选择树，带<code>Collapse</code>折叠板，折叠根面板。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExCategory</td>
+<td>x o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">使用<code>X_CATEGORY</code>构造标准的树形菜单。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExDeploy</td>
+<td>o o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">PPT引导专用，Ox专用展示流程模板，G6实现。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExEntry</td>
+<td>o x x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">「登录」登录框组件（上下排版）。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExForm</td>
+<td>x o o</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">标准表单。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExGraphicEditor</td>
+<td>o o o</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">基于X6的拓扑图编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExGraphicViewer</td>
+<td>o o o</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">基于X6的拓扑图查看器。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExHistory</td>
+<td>o o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">历史记录专用查看组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExListComplex</td>
+<td>x o o</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">「高频」复杂列表组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExListOpen</td>
+<td>x o o</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">「高频」动态行操作列表组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExLogged</td>
+<td>x x x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">已经登录的用户状态组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExLogin</td>
+<td>x x x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">「登录」登录框组件（标准版）。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExRecord</td>
+<td>x o o</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">记录呈现专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExRegiment</td>
+<td>o o o</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">专用配置项选择器，搜索、选择、多选、反选。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExRelation</td>
+<td>o o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">关系呈现专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExService</td>
+<td>o o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">服务页编辑器，<code>I_API/I_JOB</code>专用编辑控件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExSubmit</td>
+<td>o o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">「登录」登录框组件（带有记忆功能）。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExTab</td>
+<td>x o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">页签容器专用扩展组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExTabular</td>
+<td>x o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">使用<code>X_TABULAR</code>构造标准的树形菜单。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExTrackField</td>
+<td>o o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">字段对比专用呈现组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">ExWizard</td>
+<td>x o x</td>
+<td>否</td>
+<td>否</td>
+<td style="text-align:left">双表单依赖搜索专用组件。</td>
+</tr>
+</tbody>
+</table>
+<h3>2.Ox组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">组件名</th>
+<th>生命周期</th>
+<th>表单组件</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">OxAnchor</td>
+<td>o o x</td>
+<td>否</td>
+<td style="text-align:left">链接专用锚点，带Dialog模式的按钮或链接，窗口打开是配置项详情。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxCard</td>
+<td>x o x</td>
+<td>否</td>
+<td style="text-align:left">PageCard专用的封装型组件，为了可直接在系统中配置界面。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxCategory</td>
+<td>o x x</td>
+<td>否</td>
+<td style="text-align:left">带<code>Collapse</code>面板的配置项，等价于<code>ExArbor</code>，但是配置型，所以使用了高阶注解。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxCi</td>
+<td>o o o</td>
+<td>否</td>
+<td style="text-align:left">显示配置项信息专用表单，弹出框或者其他容器都可呈现。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxForm</td>
+<td>x o x</td>
+<td>否</td>
+<td style="text-align:left">配置型表单，等价于<code>ExForm</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxHistory</td>
+<td>o o x</td>
+<td>否</td>
+<td style="text-align:left">配置型历史记录，等价于<code>ExHistory</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxModule</td>
+<td>x o o</td>
+<td>否</td>
+<td style="text-align:left">配置型模块容器，无等价组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxRelation</td>
+<td>x o x</td>
+<td>否</td>
+<td style="text-align:left">配置型关系信息，等价于<code>ExRelation</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxTab</td>
+<td>x o x</td>
+<td>否</td>
+<td style="text-align:left">配置型页签容器，等价于<code>ExTab</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">OxTopology</td>
+<td>o o o</td>
+<td>否</td>
+<td style="text-align:left">配置型拓扑图，呈现CMDB关系拓扑图。</td>
+</tr>
+</tbody>
+</table>
+<h3>3.Ix组件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">组件名</th>
+<th>生命周期</th>
+<th>私有</th>
+<th>表单组件</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">* IxChannel</td>
+<td>x x x</td>
+<td>v</td>
+<td>是</td>
+<td style="text-align:left">通道配置自定义组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* IxDatabase</td>
+<td>o o x</td>
+<td>v</td>
+<td>是</td>
+<td style="text-align:left">数据库配置自定义组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* IxDict</td>
+<td>x x x</td>
+<td>v</td>
+<td>是</td>
+<td style="text-align:left">字典配置自定义组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* IxIntegration</td>
+<td>o o x</td>
+<td>v</td>
+<td>是</td>
+<td style="text-align:left">集成配置自定义组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* IxMapping</td>
+<td>o o x</td>
+<td>v</td>
+<td>是</td>
+<td style="text-align:left">映射配置自定义组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">* IxRule</td>
+<td>o o x</td>
+<td>v</td>
+<td>是</td>
+<td style="text-align:left">标识规则编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">* IxService</td>
+<td>x x x</td>
+<td>v</td>
+<td>是</td>
+<td style="text-align:left">服务组件编辑器。</td>
+</tr>
+</tbody>
+</table></div>
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*DxSider"><span class="type-signature">(static) </span>*DxSider<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>DxSider</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props:</p>
+<ol>
+<li>全局：$router, $menus, $app, $user</li>
+<li>统一：config, data</li>
+<li>函数：fnApp, fnOut</li>
+<li>风格：css</li>
+</ol>
+<p>css =</p>
+<pre class="prettyprint source lang-json"><code>{
+     clsSider: &quot;&quot;,
+     clsSiderExpand: &quot;&quot;
+}
+</code></pre>
+<p>config =</p>
+<pre class="prettyprint source lang-js"><code>{
+     $collapsed,
+     $theme
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExAction"><span class="type-signature">(static) </span>*ExAction<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExAction</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心点</h3>
+<h4>2.1. 按钮分流操作</h4>
+<p>Action分流，包含几种：</p>
+<ol>
+<li>普通的Button
+<ol>
+<li>带有tooltip的专用按钮。</li>
+<li>不带tooltip的专用按钮。</li>
+</ol>
+</li>
+<li>带有窗口的Button
+<ol>
+<li>带有Modal弹出窗口按钮。</li>
+<li>带有Drawer抽屉窗口按钮。</li>
+<li>带有Popover浮游窗口按钮。</li>
+</ol>
+</li>
+</ol>
+<h4>2.2. 配置数据</h4>
+<p>$category默认为BUTTON类型，渲染<code>&lt;Button/&gt;</code>，如果为<code>LINK</code>则直接渲染链接，如果是BUTTON类型，系统根据长度计算是否包含<code>&lt;Button.Group/&gt;</code>。</p>
+<h4>2.3. 内置渲染</h4>
+<ul>
+<li><code>ExButton</code></li>
+<li><code>ExDialog</code>：根据类型计算，type值不为<code>NONE</code></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExButton"><span class="type-signature">(static) </span>*ExButton<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExButton</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>该按钮有两种形态</p>
+<ol>
+<li>按钮形态：<code>&lt;Button/&gt;</code>。</li>
+<li>链接形态：<code>&lt;Link/&gt;</code>。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExDialog"><span class="type-signature">(static) </span>*ExDialog<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExDialog</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 基础信息</h3>
+<p>React中的props属性</p>
+<pre class="prettyprint source lang-js"><code>{
+     $app: DataObject - X_APP 应用程序数据,
+     $router: DataRouter - （react-router）构造对象,
+     $user: DataArray - 登录的用户基本数据,
+     fnOut: 专用 redux 写树函数,
+     config = {
+         窗口专用配置
+     },
+     children = 子组件（直接外层放到子组件中的内容）
+     $visible = false：当前窗口的显示和隐藏
+     $submitting = false：当前窗口是否处于提交过程
+}
+</code></pre>
+<p>React属性state：</p>
+<pre class="prettyprint source lang-js"><code>{
+     $visible: &quot;窗口是否隐藏&quot;
+}
+</code></pre>
+<h3>3.核心</h3>
+<p>窗口支持两种模式：</p>
+<ol>
+<li>WINDOW：弹出对话框专用<code>&lt;Modal/&gt;</code></li>
+<li>POPOVER：浮游对话框专用<code>&lt;Popover/&gt;</code></li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExEditorBatch"><span class="type-signature">(static) </span>*ExEditorBatch<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExEditorBatch</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|-----------------------|
+| ------- | ___________ |  （输入框），TEXT
+| ------- | o____ o____ |  （单选框），RADIO
+| ------- | _________|-||  （日期选择框），DATE
+|-----------------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExEditorColumn"><span class="type-signature">(static) </span>*ExEditorColumn<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExEditorColumn</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExEditorExport"><span class="type-signature">(static) </span>*ExEditorExport<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExEditorExport</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|-------------------------------|
+| o___ o___ o___ o___ o___ o___ |
+| o___ o___ o___ o___ o___ o___ |
+| o___ o___ o___ o___ o___ o___ |
+| o___ o___ o___                |
+|          Save  Cancel         |
+|-------------------------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExEditorImport"><span class="type-signature">(static) </span>*ExEditorImport<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExEditorImport</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|-------------------------------|
+|         |------------|        |
+|         |    File    |        |
+|         |------------|        |
+|                               |
+|          Save  Cancel         |
+|-------------------------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExNavigation"><span class="type-signature">(static) </span>*ExNavigation<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExNavigation</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props:</p>
+<ol>
+<li>全局：$router, $menus, $app, $user</li>
+<li>统一：config, data</li>
+<li>函数：fnApp, fnOut</li>
+<li>风格：css</li>
+</ol>
+<p>css =</p>
+<pre class="prettyprint source lang-js"><code>{
+     clsNav,
+     clsBreadcrumb
+}
+</code></pre>
+<p>config =</p>
+<pre class="prettyprint source lang-js"><code>{
+     homepage
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExSearch"><span class="type-signature">(static) </span>*ExSearch<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExSearch</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*ExSider"><span class="type-signature">(static) </span>*ExSider<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExSider</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props:</p>
+<ol>
+<li>全局：$router, $menus, $app, $user</li>
+<li>统一：config, data</li>
+<li>函数：fnApp, fnOut</li>
+<li>风格：css</li>
+</ol>
+<p>css =</p>
+<pre class="prettyprint source lang-json"><code>{
+     clsSider: &quot;&quot;,
+     clsSiderExpand: &quot;&quot;
+}
+</code></pre>
+<p>config =</p>
+<pre class="prettyprint source lang-js"><code>{
+     $collapsed,
+     $theme
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*IxChannel"><span class="type-signature">(static) </span>*IxChannel<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>IxChannel</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*IxDatabase"><span class="type-signature">(static) </span>*IxDatabase<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>IxDatabase</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*IxDict"><span class="type-signature">(static) </span>*IxDict<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>IxDict</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*IxIntegration"><span class="type-signature">(static) </span>*IxIntegration<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>IxIntegration</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*IxMapping"><span class="type-signature">(static) </span>*IxMapping<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>IxMapping</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*IxRule"><span class="type-signature">(static) </span>*IxRule<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>IxRule</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".*IxService"><span class="type-signature">(static) </span>*IxService<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>IxService</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExAccount"><span class="type-signature">(static) </span>ExAccount<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExAccount</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExAccount } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|-----------------|
+|      name       |
+| |-------------| |
+| |             | |
+| |     icon    | |
+| |             | |
+| |-------------| |
+|                 |
+| workNumber      |
+| workTitle       |
+| workLocation    |
+|-----------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExAdmin"><span class="type-signature">(static) </span>ExAdmin<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExAdmin</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExAdmin } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|------------------------------------------------|
+|   Sider   |  Header                     Notify |
+|  Menu     |------------------------------------|
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|------------------------------------------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExAdmin"><span class="type-signature">(static) </span>ExAdmin<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExAdmin</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExAdmin } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|------------------------------------------------|
+|   Sider   |  Header                     Notify |
+|  Menu     |------------------------------------|
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|------------------------------------------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExAdmin"><span class="type-signature">(static) </span>ExAdmin<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExAdmin</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExAdmin } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|------------------------------------------------|
+|   Sider   |  Header                     Notify |
+|  Menu     |------------------------------------|
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|  Menu     |                                    |
+|------------------------------------------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExApps"><span class="type-signature">(static) </span>ExApps<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExApps</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExApps } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|------------------------------------------------|
+|                                                |
+|------------------------------------------------|
+|  |------|  |------|  |------|                  |
+|  |      |  |      |  |      |  ......          |
+|  |------|  |------|  |------|                  |
+|------------------------------------------------|
+</code></pre>
+<h3>2. 核心</h3>
+<h4>2.1.菜单执行</h4>
+<p>菜单只提取<code>APP-MENU</code>类型，<code>X_MENU</code>数据对接，并转换成react-router常用链接。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExArbor"><span class="type-signature">(static) </span>ExArbor<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExArbor</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExArbor } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>| Collapse -------|
+|  Menu           |
+|    |-- Menu     |
+|    |-- Menu     |
+|                 |
+| Collapse -------|
+| Collapse -------|
+|  Menu           |
+|    |-- Menu     |
+|                 |
+| Collapse -------|
+|  Menu           |
+|    |-- Menu     |
+|    |-- Menu     |
+|                 |
+|-----------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExCategory"><span class="type-signature">(static) </span>ExCategory<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExCategory</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExCategory } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|-----------------|
+|  Menu           |
+|    |-- Menu     |
+|    |-- Menu     |
+|  Menu           |
+|    |-- Menu     |
+|  Menu           |
+|    |-- Menu     |
+|    |-- Menu     |
+|                 |
+|-----------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExDeploy"><span class="type-signature">(static) </span>ExDeploy<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExDeploy</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExDeploy } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h4>1.1. 布局</h4>
+<pre class="prettyprint source lang-shell"><code>|-------------------------------------------------------------------------------------|
+|                  Node  ----> Node                                                   |
+|                  /             \                                                    |
+|                 /               \                                                   |
+|   Start ----> Node              Node ----> Node ----> Node ----> Node ----> End     |
+|                 \               /            \                           /          |
+|                  \             /              \                         /           |
+|                  Node  ----> Node             Node ----> Node ----> Node            |
+|-------------------------------------------------------------------------------------|
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExEntry"><span class="type-signature">(static) </span>ExEntry<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExEntry</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExEntry } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 运行时</h3>
+<blockquote>
+<p>componentDidMount执行完成后。</p>
+</blockquote>
+<h4>2.1. 容器属性</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$app</td>
+<td>DataObject</td>
+<td style="text-align:left">应用程序基本数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">$router</td>
+<td>DataRouter</td>
+<td style="text-align:left">路由基本信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$collapsed</td>
+<td>Boolean</td>
+<td style="text-align:left">是否展开左侧的主菜单。</td>
+</tr>
+<tr>
+<td style="text-align:left">fnApp</td>
+<td>Function</td>
+<td style="text-align:left">关联<code>Ex.epicApp</code>函数，读取应用程序配置数据专用函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">fnOut</td>
+<td>Function</td>
+<td style="text-align:left">Redux专用函数，写状态树。</td>
+</tr>
+<tr>
+<td style="text-align:left">react</td>
+<td>ReactComponent</td>
+<td style="text-align:left">顶层组件引用。</td>
+</tr>
+<tr>
+<td style="text-align:left">reference</td>
+<td>ReactComponent</td>
+<td style="text-align:left">父类组件引用。</td>
+</tr>
+</tbody>
+</table>
+<h4>2.1. 属性props</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$options</td>
+<td>Object</td>
+<td style="text-align:left">基础选项配置数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">form</td>
+<td>Object</td>
+<td style="text-align:left">Ant Form构造的专用表单变量。</td>
+</tr>
+<tr>
+<td style="text-align:left">rxLogin</td>
+<td>Function</td>
+<td style="text-align:left">登录专用回调函数。</td>
+</tr>
+</tbody>
+</table>
+<h4>2.2. 状态state</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">状态名</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$op</td>
+<td>Object</td>
+<td style="text-align:left">登录专用操作，主要会触发<code>$opLogin</code>函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">$hoc</td>
+<td>HocI18n</td>
+<td style="text-align:left">绑定好的资源文件，对应<code>cab/&lt;LANG&gt;/extension/ecosystem/ExEntry.json</code>资源文件。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td>Boolean</td>
+<td style="text-align:left">是否加载完成，此时已为<code>true</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">raft</td>
+<td>Object</td>
+<td style="text-align:left">构造完成的表单配置数据<code>raftForm</code>结果。</td>
+</tr>
+</tbody>
+</table>
+<h3>3.核心点</h3>
+<h4>3.1.关于rxLogin回调</h4>
+<p>标准的<code>$opLogin</code>方法执行流程如下：</p>
+<ol>
+<li><code>POST /oauth/login</code>登录系统拿到<code>clientSecret</code>密钥。</li>
+<li><code>POST /oauth/authorize</code>请求申请临时授权码。</li>
+<li><code>POST /oauth/token</code>使用临时授权码交换令牌<code>token</code>。</li>
+<li><code>GET /api/user</code>执行用户信息读取，不同用户读取到的信息结构会有所区别。</li>
+<li>将所有信息合并，然后调用<code>rxLogin</code>回调函数，该函数必须返回<code>Promise</code>，异步调用。</li>
+<li>执行最终三步。</li>
+</ol>
+<p>辅助接口：</p>
+<ol>
+<li><code>POST /oauth/image-code</code>生成验证码</li>
+<li>直接在登录流程中追加验证码功能（后台开启）</li>
+</ol>
+<h4>3.2.关于密码</h4>
+<p>在调用<code>/oauth/login</code>方法时，密码会执行<code>MD5</code>加密，发送密文到后端。</p>
+<h4>3.3.最终三步执行流程</h4>
+<ol>
+<li><code>Ux.storeUser</code>将数据存储到SessionStorage中。</li>
+<li><code>Ux.writeSubmit</code>方法将Redux树中的重复提交修正到false位置（提交完成）。</li>
+<li><code>Ux.toOriginal</code>方法执行原始路径重定向。
+<ol>
+<li>如果有<code>target=xxx</code>则重定向到<code>target</code>中。</li>
+<li>如果没有<code>target</code>参数，则直接重定向到管理主界面<code>Z_ENTRY_ADMIN</code>页中。</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p><code>Ux.storeUser</code>在整个流程中调用了两次，第一次是直接提取用户信息，第二次会将<code>rxLogin</code>以及用户数据合并到一起重写SessionStorage中存储的数据。</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExForm"><span class="type-signature">(static) </span>ExForm<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExForm</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExForm } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props：</p>
+<pre class="prettyprint source lang-js"><code>{
+     $app: DataObject - X_APP 应用程序数据,
+     $router: DataRouter - （react-router）构造对象,
+     $user: DataArray - 登录的用户基本数据,
+     fnOut: 专用 redux 写树函数,
+     form: Ant-Design Form,
+     $actions: {
+         $opProfile ( id = opProfile, function = $opProfile )
+     },
+     config:{
+         dialog: {
+             modal: { 窗口数据 }
+             title: { 窗口标题 }
+         },
+         form: {
+             原始配置 _form 中的内容
+         }
+     },
+     $height: &quot;200px&quot;,
+     $inited: {
+         初始值
+     }
+}
+</code></pre>
+<p>React属性state:</p>
+<pre class="prettyprint source lang-js"><code>{
+     $ready: &quot;当前组件是否可渲染？配置处理完成&quot;,
+     $loading: &quot;当前表单提交状态（防重复提交）&quot;,
+     $metadata: {}
+     $action: {
+         opProfile: true ( id = opProfile )
+     },
+     raft: {
+         enabled: 启用Raft表单模式,
+         form:{ },
+         hidden: { inputs:[] },
+         options: { },
+         rows: [
+             []
+         ]
+     }
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExGraphicEditor"><span class="type-signature">(static) </span>ExGraphicEditor<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExGraphicEditor</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExGraphicEditor } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExGraphicViewer"><span class="type-signature">(static) </span>ExGraphicViewer<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExGraphicViewer</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExGraphicViewer } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExHistory"><span class="type-signature">(static) </span>ExHistory<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExHistory</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExHistory } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExListComplex"><span class="type-signature">(static) </span>ExListComplex<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExListComplex</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props:</p>
+<pre class="prettyprint source lang-js"><code>{
+     $app: DataObject - X_APP 应用程序数据,
+     $router: DataRouter - （react-router）构造对象,
+     $user: DataArray - 登录的用户基本数据,
+     fnOut: 专用 redux 写树函数,
+     config:{
+         query: （静态默认 query，主要包含四个键：projection, pager, sorter, criteria）,
+         options: （选项处理）,
+         mock: {},
+         component: {},
+         table: {}
+     },
+     $query：从外层传入的查询条件
+
+     rxInject: 注入函数用于修改 options（工具专用）
+     rxSearch: 函数用于调用搜索方法，传入参数
+}
+</code></pre>
+<p>React状态state:</p>
+<pre class="prettyprint source lang-js"><code>{
+     options: （原始选项）
+     query：（核心query）
+     $submitting: 提交
+     $loading：加载
+}
+</code></pre>
+<p>步骤处理：
+0. Verify, ./specification/verify.js</p>
+<ol>
+<li>Init, ./specification/workflow.js</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExListOpen"><span class="type-signature">(static) </span>ExListOpen<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExListOpen</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>属性 props</p>
+<pre class="prettyprint source lang-js"><code>{
+    &quot;config&quot;: {
+         &quot;query&quot;: &quot;默认查询&quot;,
+         &quot;table&quot;: &quot;表格配置&quot;
+    }
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExLogged"><span class="type-signature">(static) </span>ExLogged<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExLogged</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExLogged } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props:</p>
+<ol>
+<li>全局：$router, $menus, $app, $user</li>
+<li>统一：config, data</li>
+<li>函数：fnApp, fnCollapse, fnOut</li>
+<li>风格：css</li>
+</ol>
+<p>css =</p>
+<pre class="prettyprint source lang-js"><code>{
+     clsDropdown: &quot;&quot;,
+     clsAccount: &quot;&quot;,
+     clsAvatar: &quot;&quot;,
+     clsUser: &quot;&quot;
+}
+</code></pre>
+<p>config =</p>
+<pre class="prettyprint source lang-js"><code>{
+     window:{
+         logout
+     }
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExLogged"><span class="type-signature">(static) </span>ExLogged<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExLogged</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExLogged } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props:</p>
+<ol>
+<li>全局：$router, $menus, $app, $user</li>
+<li>统一：config, data</li>
+<li>函数：fnApp, fnCollapse, fnOut</li>
+<li>风格：css</li>
+</ol>
+<p>css =</p>
+<pre class="prettyprint source lang-js"><code>{
+     clsDropdown: &quot;&quot;,
+     clsAccount: &quot;&quot;,
+     clsAvatar: &quot;&quot;,
+     clsUser: &quot;&quot;
+}
+</code></pre>
+<p>config =</p>
+<pre class="prettyprint source lang-js"><code>{
+     window:{
+         logout
+     }
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExLogin"><span class="type-signature">(static) </span>ExLogin<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExLogin</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExLogin } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExRecord"><span class="type-signature">(static) </span>ExRecord<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExRecord</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExRecord } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExRegiment"><span class="type-signature">(static) </span>ExRegiment<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExRegiment</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExRegiment } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExRelation"><span class="type-signature">(static) </span>ExRelation<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExRelation</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExRelation } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExService"><span class="type-signature">(static) </span>ExService<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExService</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExService } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExSubmit"><span class="type-signature">(static) </span>ExSubmit<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExSubmit</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExSubmit } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExTab"><span class="type-signature">(static) </span>ExTab<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExTab</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExTab } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 核心</h3>
+<p>React属性props:</p>
+<pre class="prettyprint source lang-js"><code>{
+     $app: DataObject - X_APP 应用程序数据,
+     $router: DataRouter - （react-router）构造对象,
+     $user: DataArray - 登录的用户基本数据,
+     fnOut: 专用 redux 写树函数,
+     config:{
+         tabs的基本配置信息
+     },
+
+     // 上层传入
+     $activeKey: &quot;被激活的tabs页&quot;,
+     $items: [
+         所有目前打开的 tabs 页的数量
+     ]
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExTabular"><span class="type-signature">(static) </span>ExTabular<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExTabular</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExTabular } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExTrackField"><span class="type-signature">(static) </span>ExTrackField<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExTrackField</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExTrackField } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ExWizard"><span class="type-signature">(static) </span>ExWizard<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ExWizard</code></h2>
+<pre class="prettyprint source lang-js"><code>import { ExWizard } from 'ei';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxAnchor"><span class="type-signature">(static) </span>OxAnchor<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxAnchor</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxCard"><span class="type-signature">(static) </span>OxCard<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxCard</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxCategory"><span class="type-signature">(static) </span>OxCategory<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxCategory</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxCi"><span class="type-signature">(static) </span>OxCi<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxCi</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxForm"><span class="type-signature">(static) </span>OxForm<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxForm</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxHistory"><span class="type-signature">(static) </span>OxHistory<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxHistory</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxList"><span class="type-signature">(static) </span>OxList<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxList</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxModule"><span class="type-signature">(static) </span>OxModule<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxModule</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxRelation"><span class="type-signature">(static) </span>OxRelation<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxRelation</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxTab"><span class="type-signature">(static) </span>OxTab<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxTab</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".OxTopology"><span class="type-signature">(static) </span>OxTopology<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>OxTopology</code></h2>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Fri Jun 16 2023 17:06:03 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

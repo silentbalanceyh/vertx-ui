@@ -1,0 +1,5253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>constant/zone - Zero UI框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-ui,vert.x" />
+        <meta name="keyword" content="zero,zero-ui,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/zero.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://www.vertx-cloud.cn/document/doc-web/index.html" target="_blank" class="menu-item" id="website_link" >Zero云平台白皮书</a></h2><h2><a href="http://www.vertxai.cn/document/doc-web/index.html" target="_blank" class="menu-item" id="website_link" >Zero AI 工具箱</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/zui/index.html" target="_blank" class="menu-item" id="website_link" >Zero UI 标准包API</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/zextension/index.html" target="_blank" class="menu-item" id="website_link" >Zero UI 扩展包API</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI 官方站点</a></h2><h2><a href="http://www.vertxai.cn" target="_blank" class="menu-item" id="website_link" >Zero AI 官方站点</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Framework 官方站点</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >我的KB小站</a></h2><h3>Classes</h3><ul><li><a href="Ant.html">Ant</a><ul class='methods'><li data-type='method'><a href="Ant.html#.onAddonAfter">onAddonAfter</a></li><li data-type='method'><a href="Ant.html#.onChange">onChange</a></li><li data-type='method'><a href="Ant.html#.onCssClass">onCssClass</a></li><li data-type='method'><a href="Ant.html#.onDisabledDate">onDisabledDate</a></li><li data-type='method'><a href="Ant.html#.onFromTo">onFromTo</a></li><li data-type='method'><a href="Ant.html#.onLocale">onLocale</a></li><li data-type='method'><a href="Ant.html#.onMultiple">onMultiple</a></li><li data-type='method'><a href="Ant.html#.onPlaceHolder">onPlaceHolder</a></li><li data-type='method'><a href="Ant.html#.onPrefix">onPrefix</a></li><li data-type='method'><a href="Ant.html#.onReadOnly">onReadOnly</a></li><li data-type='method'><a href="Ant.html#.onReduce">onReduce</a></li><li data-type='method'><a href="Ant.html#.onSelect">onSelect</a></li><li data-type='method'><a href="Ant.html#.toConfig">toConfig</a></li><li data-type='method'><a href="Ant.html#.toDatum">toDatum</a></li><li data-type='method'><a href="Ant.html#.toDialogConfig">toDialogConfig</a></li><li data-type='method'><a href="Ant.html#.toMock">toMock</a></li><li data-type='method'><a href="Ant.html#.toOptions">toOptions</a></li><li data-type='method'><a href="Ant.html#.toOrigin">toOrigin</a></li><li data-type='method'><a href="Ant.html#.toRecord">toRecord</a></li><li data-type='method'><a href="Ant.html#.toTreeOptions">toTreeOptions</a></li><li data-type='method'><a href="Ant.html#.toUnique">toUnique</a></li></ul></li><li><a href="Cookie.html">Cookie</a><ul class='methods'><li data-type='method'><a href="Cookie.html#.get">get</a></li><li data-type='method'><a href="Cookie.html#.getAll">getAll</a></li></ul></li><li><a href="DataArray.html">DataArray</a><ul class='methods'><li data-type='method'><a href="DataArray.html#.$">$</a></li><li data-type='method'><a href="DataArray.html#._">_</a></li><li data-type='method'><a href="DataArray.html#.__type">__type</a></li><li data-type='method'><a href="DataArray.html#.asc">asc</a></li><li data-type='method'><a href="DataArray.html#.counter">counter</a></li><li data-type='method'><a href="DataArray.html#.desc">desc</a></li><li data-type='method'><a href="DataArray.html#.dirty">dirty</a></li><li data-type='method'><a href="DataArray.html#.filter">filter</a></li><li data-type='method'><a href="DataArray.html#.getElement">getElement</a></li><li data-type='method'><a href="DataArray.html#.is">is</a></li><li data-type='method'><a href="DataArray.html#.push">push</a></li><li data-type='method'><a href="DataArray.html#.raw">raw</a></li><li data-type='method'><a href="DataArray.html#.removeElement">removeElement</a></li><li data-type='method'><a href="DataArray.html#.saveElement">saveElement</a></li><li data-type='method'><a href="DataArray.html#.searchElement">searchElement</a></li><li data-type='method'><a href="DataArray.html#.setValue">setValue</a></li><li data-type='method'><a href="DataArray.html#.to">to</a></li><li data-type='method'><a href="DataArray.html#.updateElement">updateElement</a></li></ul></li><li><a href="DataEvent.html">DataEvent</a><ul class='methods'><li data-type='method'><a href="DataEvent.html#.bind">bind</a></li><li data-type='method'><a href="DataEvent.html#.clone">clone</a></li><li data-type='method'><a href="DataEvent.html#.config">config</a></li><li data-type='method'><a href="DataEvent.html#.end">end</a></li><li data-type='method'><a href="DataEvent.html#.getData">getData</a></li><li data-type='method'><a href="DataEvent.html#.getInput">getInput</a></li><li data-type='method'><a href="DataEvent.html#.getName">getName</a></li><li data-type='method'><a href="DataEvent.html#.getPrev">getPrev</a></li><li data-type='method'><a href="DataEvent.html#.getRef">getRef</a></li><li data-type='method'><a href="DataEvent.html#.getTarget">getTarget</a></li><li data-type='method'><a href="DataEvent.html#.next">next</a></li><li data-type='method'><a href="DataEvent.html#.start">start</a></li></ul></li><li><a href="DataObject.html">DataObject</a><ul class='methods'><li data-type='method'><a href="DataObject.html#.$">$</a></li><li data-type='method'><a href="DataObject.html#._">_</a></li><li data-type='method'><a href="DataObject.html#.__type">__type</a></li><li data-type='method'><a href="DataObject.html#.find">find</a></li><li data-type='method'><a href="DataObject.html#.is">is</a></li><li data-type='method'><a href="DataObject.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="DataObject.html#.raw">raw</a></li><li data-type='method'><a href="DataObject.html#.set">set</a></li><li data-type='method'><a href="DataObject.html#.to">to</a></li></ul></li><li><a href="DataRouter.html">DataRouter</a><ul class='methods'><li data-type='method'><a href="DataRouter.html#._">_</a></li><li data-type='method'><a href="DataRouter.html#.__state">__state</a></li><li data-type='method'><a href="DataRouter.html#.__type">__type</a></li><li data-type='method'><a href="DataRouter.html#.bind">bind</a></li><li data-type='method'><a href="DataRouter.html#.from">from</a></li><li data-type='method'><a href="DataRouter.html#.key">key</a></li><li data-type='method'><a href="DataRouter.html#.params">params</a></li><li data-type='method'><a href="DataRouter.html#.paramsQs">paramsQs</a></li><li data-type='method'><a href="DataRouter.html#.push">push</a></li><li data-type='method'><a href="DataRouter.html#.same">same</a></li><li data-type='method'><a href="DataRouter.html#.state">state</a></li><li data-type='method'><a href="DataRouter.html#.to">to</a></li><li data-type='method'><a href="DataRouter.html#.uri">uri</a></li></ul></li><li><a href="Debugger.html">Debugger</a></li><li><a href="HocI18n.html">HocI18n</a><ul class='methods'><li data-type='method'><a href="HocI18n.html#.__type">__type</a></li><li data-type='method'><a href="HocI18n.html#.bind">bind</a></li><li data-type='method'><a href="HocI18n.html#.formSave">formSave</a></li><li data-type='method'><a href="HocI18n.html#.is">is</a></li><li data-type='method'><a href="HocI18n.html#.merge">merge</a></li><li data-type='method'><a href="HocI18n.html#.mergeVector">mergeVector</a></li><li data-type='method'><a href="HocI18n.html#.name">name</a></li><li data-type='method'><a href="HocI18n.html#.namespace">namespace</a></li><li data-type='method'><a href="HocI18n.html#.to">to</a></li></ul></li><li><a href="HocI18r.html">HocI18r</a><ul class='methods'><li data-type='method'><a href="HocI18r.html#.__type">__type</a></li><li data-type='method'><a href="HocI18r.html#.bind">bind</a></li><li data-type='method'><a href="HocI18r.html#.formSave">formSave</a></li><li data-type='method'><a href="HocI18r.html#.is">is</a></li><li data-type='method'><a href="HocI18r.html#.merge">merge</a></li><li data-type='method'><a href="HocI18r.html#.name">name</a></li><li data-type='method'><a href="HocI18r.html#.to">to</a></li></ul></li><li><a href="Logger.html">Logger</a><ul class='methods'><li data-type='method'><a href="Logger.html#.filters">filters</a></li><li data-type='method'><a href="Logger.html#.layout">layout</a></li><li data-type='method'><a href="Logger.html#.mock">mock</a></li><li data-type='method'><a href="Logger.html#.render">render</a></li><li data-type='method'><a href="Logger.html#.request">request</a></li><li data-type='method'><a href="Logger.html#.response">response</a></li><li data-type='method'><a href="Logger.html#.sign">sign</a></li></ul></li><li><a href="Navigator.html">Navigator</a><ul class='methods'><li data-type='method'><a href="Navigator.html#.__type">__type</a></li><li data-type='method'><a href="Navigator.html#.bind">bind</a></li><li data-type='method'><a href="Navigator.html#.flush">flush</a></li><li data-type='method'><a href="Navigator.html#.get">get</a></li><li data-type='method'><a href="Navigator.html#.init">init</a></li><li data-type='method'><a href="Navigator.html#.isActive">isActive</a></li><li data-type='method'><a href="Navigator.html#.setActive">setActive</a></li><li data-type='method'><a href="Navigator.html#.setKeys">setKeys</a></li></ul></li><li><a href="QQuery.html">QQuery</a><ul class='methods'><li data-type='method'><a href="QQuery.html#.and">and</a></li><li data-type='method'><a href="QQuery.html#.init">init</a></li><li data-type='method'><a href="QQuery.html#.page">page</a></li><li data-type='method'><a href="QQuery.html#.size">size</a></li><li data-type='method'><a href="QQuery.html#.sort">sort</a></li><li data-type='method'><a href="QQuery.html#.to">to</a></li><li data-type='method'><a href="QQuery.html#.trace">trace</a></li></ul></li><li><a href="Session.html">Session</a><ul class='methods'><li data-type='method'><a href="Session.html#.clear">clear</a></li><li data-type='method'><a href="Session.html#.get">get</a></li><li data-type='method'><a href="Session.html#.getDirect">getDirect</a></li><li data-type='method'><a href="Session.html#.put">put</a></li><li data-type='method'><a href="Session.html#.putDirect">putDirect</a></li><li data-type='method'><a href="Session.html#.remove">remove</a></li></ul></li><li><a href="StateIn.html">StateIn</a><ul class='methods'><li data-type='method'><a href="StateIn.html#.callback">callback</a></li><li data-type='method'><a href="StateIn.html#.to">to</a></li></ul></li><li><a href="StateOut.html">StateOut</a><ul class='methods'><li data-type='method'><a href="StateOut.html#.navigator">navigator</a></li><li data-type='method'><a href="StateOut.html#.radial">radial</a></li><li data-type='method'><a href="StateOut.html#.rapt">rapt</a></li><li data-type='method'><a href="StateOut.html#.ravamp">ravamp</a></li><li data-type='method'><a href="StateOut.html#.ready">ready</a></li><li data-type='method'><a href="StateOut.html#.rework">rework</a></li><li data-type='method'><a href="StateOut.html#.rinit">rinit</a></li><li data-type='method'><a href="StateOut.html#.rush">rush</a></li><li data-type='method'><a href="StateOut.html#.stream">stream</a></li><li data-type='method'><a href="StateOut.html#.to">to</a></li></ul></li><li><a href="Storage.html">Storage</a><ul class='methods'><li data-type='method'><a href="Storage.html#.clear">clear</a></li><li data-type='method'><a href="Storage.html#.get">get</a></li><li data-type='method'><a href="Storage.html#.getDirect">getDirect</a></li><li data-type='method'><a href="Storage.html#.put">put</a></li><li data-type='method'><a href="Storage.html#.putDirect">putDirect</a></li><li data-type='method'><a href="Storage.html#.remove">remove</a></li></ul></li><li><a href="Tree.html">Tree</a><ul class='methods'><li data-type='method'><a href="Tree.html#.CHILDREN">CHILDREN</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL">CHILDREN_ALL</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL_INCLUDE">CHILDREN_ALL_INCLUDE</a></li><li data-type='method'><a href="Tree.html#.PARENT">PARENT</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL">PARENT_ALL</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL_INCLUDE">PARENT_ALL_INCLUDE</a></li></ul></li><li><a href="TreeProc.html">TreeProc</a><ul class='methods'><li data-type='method'><a href="TreeProc.html#build">build</a></li><li data-type='method'><a href="TreeProc.html#getRoots">getRoots</a></li></ul></li><li><a href="Uarr.html">Uarr</a><ul class='methods'><li data-type='method'><a href="Uarr.html#add">add</a></li><li data-type='method'><a href="Uarr.html#convert">convert</a></li><li data-type='method'><a href="Uarr.html#debug">debug</a></li><li data-type='method'><a href="Uarr.html#each">each</a></li><li data-type='method'><a href="Uarr.html#filter">filter</a></li><li data-type='method'><a href="Uarr.html#map">map</a></li><li data-type='method'><a href="Uarr.html#mapping">mapping</a></li><li data-type='method'><a href="Uarr.html#matrix">matrix</a></li><li data-type='method'><a href="Uarr.html#mount">mount</a></li><li data-type='method'><a href="Uarr.html#remove">remove</a></li><li data-type='method'><a href="Uarr.html#slice">slice</a></li><li data-type='method'><a href="Uarr.html#to">to</a></li><li data-type='method'><a href="Uarr.html#tree">tree</a></li></ul></li><li><a href="Uson.html">Uson</a><ul class='methods'><li data-type='method'><a href="Uson.html#add">add</a></li><li data-type='method'><a href="Uson.html#convert">convert</a></li><li data-type='method'><a href="Uson.html#date">date</a></li><li data-type='method'><a href="Uson.html#debug">debug</a></li><li data-type='method'><a href="Uson.html#each">each</a></li><li data-type='method'><a href="Uson.html#execute">execute</a></li><li data-type='method'><a href="Uson.html#keep">keep</a></li><li data-type='method'><a href="Uson.html#mapping">mapping</a></li><li data-type='method'><a href="Uson.html#mount">mount</a></li><li data-type='method'><a href="Uson.html#remove">remove</a></li><li data-type='method'><a href="Uson.html#slice">slice</a></li><li data-type='method'><a href="Uson.html#to">to</a></li><li data-type='method'><a href="Uson.html#valid">valid</a></li></ul></li><li><a href="-_Fn.html">_Fn</a><ul class='methods'><li data-type='method'><a href="-_Fn.html#.fnHome">fnHome</a></li><li data-type='method'><a href="-_Fn.html#.fnOut">fnOut</a></li><li data-type='method'><a href="-_Fn.html#.fnPage">fnPage</a></li><li data-type='method'><a href="-_Fn.html#.onChange">onChange</a></li><li data-type='method'><a href="-_Fn.html#.onSelect">onSelect</a></li><li data-type='method'><a href="-_Fn.html#.rxAdd">rxAdd</a></li><li data-type='method'><a href="-_Fn.html#.rxAfter">rxAfter</a></li><li data-type='method'><a href="-_Fn.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="-_Fn.html#.rxBack">rxBack</a></li><li data-type='method'><a href="-_Fn.html#.rxBefore">rxBefore</a></li><li data-type='method'><a href="-_Fn.html#.rxCancel">rxCancel</a></li><li data-type='method'><a href="-_Fn.html#.rxCellAdd">rxCellAdd</a></li><li data-type='method'><a href="-_Fn.html#.rxCellConfig">rxCellConfig</a></li><li data-type='method'><a href="-_Fn.html#.rxCellDel">rxCellDel</a></li><li data-type='method'><a href="-_Fn.html#.rxCellFill">rxCellFill</a></li><li data-type='method'><a href="-_Fn.html#.rxCellMerge">rxCellMerge</a></li><li data-type='method'><a href="-_Fn.html#.rxCellRefresh">rxCellRefresh</a></li><li data-type='method'><a href="-_Fn.html#.rxCellSplit">rxCellSplit</a></li><li data-type='method'><a href="-_Fn.html#.rxCellWrap">rxCellWrap</a></li><li data-type='method'><a href="-_Fn.html#.rxCheck">rxCheck</a></li><li data-type='method'><a href="-_Fn.html#.rxChild">rxChild</a></li><li data-type='method'><a href="-_Fn.html#.rxClean">rxClean</a></li><li data-type='method'><a href="-_Fn.html#.rxClose">rxClose</a></li><li data-type='method'><a href="-_Fn.html#.rxDelete">rxDelete</a></li><li data-type='method'><a href="-_Fn.html#.rxDropOver">rxDropOver</a></li><li data-type='method'><a href="-_Fn.html#.rxEdit">rxEdit</a></li><li data-type='method'><a href="-_Fn.html#.rxFirst">rxFirst</a></li><li data-type='method'><a href="-_Fn.html#.rxFirstPage">rxFirstPage</a></li><li data-type='method'><a href="-_Fn.html#.rxItemAdd">rxItemAdd</a></li><li data-type='method'><a href="-_Fn.html#.rxItemDelete">rxItemDelete</a></li><li data-type='method'><a href="-_Fn.html#.rxItemEdit">rxItemEdit</a></li><li data-type='method'><a href="-_Fn.html#.rxJumpPage">rxJumpPage</a></li><li data-type='method'><a href="-_Fn.html#.rxLast">rxLast</a></li><li data-type='method'><a href="-_Fn.html#.rxLastPage">rxLastPage</a></li><li data-type='method'><a href="-_Fn.html#.rxMyViewH">rxMyViewH</a></li><li data-type='method'><a href="-_Fn.html#.rxMyViewQ">rxMyViewQ</a></li><li data-type='method'><a href="-_Fn.html#.rxMyViewV">rxMyViewV</a></li><li data-type='method'><a href="-_Fn.html#.rxNext">rxNext</a></li><li data-type='method'><a href="-_Fn.html#.rxNextPage">rxNextPage</a></li><li data-type='method'><a href="-_Fn.html#.rxOpen">rxOpen</a></li><li data-type='method'><a href="-_Fn.html#.rxPostClose">rxPostClose</a></li><li data-type='method'><a href="-_Fn.html#.rxPostDelete">rxPostDelete</a></li><li data-type='method'><a href="-_Fn.html#.rxPostOpen">rxPostOpen</a></li><li data-type='method'><a href="-_Fn.html#.rxPostSelected">rxPostSelected</a></li><li data-type='method'><a href="-_Fn.html#.rxPrev">rxPrev</a></li><li data-type='method'><a href="-_Fn.html#.rxPrevPage">rxPrevPage</a></li><li data-type='method'><a href="-_Fn.html#.rxReduce">rxReduce</a></li><li data-type='method'><a href="-_Fn.html#.rxRefresh">rxRefresh</a></li><li data-type='method'><a href="-_Fn.html#.rxReset">rxReset</a></li><li data-type='method'><a href="-_Fn.html#.rxRow">rxRow</a></li><li data-type='method'><a href="-_Fn.html#.rxRowAdd">rxRowAdd</a></li><li data-type='method'><a href="-_Fn.html#.rxRowCompress">rxRowCompress</a></li><li data-type='method'><a href="-_Fn.html#.rxRowConfig">rxRowConfig</a></li><li data-type='method'><a href="-_Fn.html#.rxRowDel">rxRowDel</a></li><li data-type='method'><a href="-_Fn.html#.rxRowFill">rxRowFill</a></li><li data-type='method'><a href="-_Fn.html#.rxRowWrap">rxRowWrap</a></li><li data-type='method'><a href="-_Fn.html#.rxRows">rxRows</a></li><li data-type='method'><a href="-_Fn.html#.rxSelect">rxSelect</a></li><li data-type='method'><a href="-_Fn.html#.rxSource">rxSource</a></li><li data-type='method'><a href="-_Fn.html#.rxSubmit">rxSubmit</a></li><li data-type='method'><a href="-_Fn.html#.rxSubmitting">rxSubmitting</a></li><li data-type='method'><a href="-_Fn.html#.rxTree">rxTree</a></li><li data-type='method'><a href="-_Fn.html#.rxView">rxView</a></li><li data-type='method'><a href="-_Fn.html#.rxViewH">rxViewH</a></li><li data-type='method'><a href="-_Fn.html#.rxViewQ">rxViewQ</a></li><li data-type='method'><a href="-_Fn.html#.rxViewV">rxViewV</a></li></ul></li><li><a href="-_Of.html">_Of</a><ul class='methods'><li data-type='method'><a href="-_Of.html#.close">close</a></li><li data-type='method'><a href="-_Of.html#.done">done</a></li><li data-type='method'><a href="-_Of.html#.future">future</a></li><li data-type='method'><a href="-_Of.html#.handle">handle</a></li><li data-type='method'><a href="-_Of.html#.hide">hide</a></li><li data-type='method'><a href="-_Of.html#.in">in</a></li><li data-type='method'><a href="-_Of.html#.loaded">loaded</a></li><li data-type='method'><a href="-_Of.html#.loading">loading</a></li><li data-type='method'><a href="-_Of.html#.next">next</a></li><li data-type='method'><a href="-_Of.html#.open">open</a></li><li data-type='method'><a href="-_Of.html#.paged">paged</a></li><li data-type='method'><a href="-_Of.html#.paging">paging</a></li><li data-type='method'><a href="-_Of.html#.ready">ready</a></li><li data-type='method'><a href="-_Of.html#.readying">readying</a></li><li data-type='method'><a href="-_Of.html#.spinning">spinning</a></li><li data-type='method'><a href="-_Of.html#.spun">spun</a></li><li data-type='method'><a href="-_Of.html#.submitted">submitted</a></li><li data-type='method'><a href="-_Of.html#.submitting">submitting</a></li><li data-type='method'><a href="-_Of.html#.up">up</a></li></ul></li><li><a href="-_OfFn.html">_OfFn</a><ul class='methods'><li data-type='method'><a href="-_OfFn.html#.close">close</a></li><li data-type='method'><a href="-_OfFn.html#.closeAnd">closeAnd</a></li><li data-type='method'><a href="-_OfFn.html#.closeOnly">closeOnly</a></li><li data-type='method'><a href="-_OfFn.html#.close_">close_</a></li><li data-type='method'><a href="-_OfFn.html#.delete_">delete_</a></li><li data-type='method'><a href="-_OfFn.html#.ioIn">ioIn</a></li><li data-type='method'><a href="-_OfFn.html#.ioOut">ioOut</a></li><li data-type='method'><a href="-_OfFn.html#.open">open</a></li><li data-type='method'><a href="-_OfFn.html#.open_">open_</a></li><li data-type='method'><a href="-_OfFn.html#.qrFilter">qrFilter</a></li><li data-type='method'><a href="-_OfFn.html#.qrQ">qrQ</a></li><li data-type='method'><a href="-_OfFn.html#.qrV">qrV</a></li><li data-type='method'><a href="-_OfFn.html#.selected_">selected_</a></li><li data-type='method'><a href="-_OfFn.html#.submitted">submitted</a></li><li data-type='method'><a href="-_OfFn.html#.submitting">submitting</a></li><li data-type='method'><a href="-_OfFn.html#.view">view</a></li></ul></li><li><a href="-_OfState.html">_OfState</a><ul class='methods'><li data-type='method'><a href="-_OfState.html#._submitting">_submitting</a></li><li data-type='method'><a href="-_OfState.html#.submitting">submitting</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-a_zion.html">a/zion</a><ul class='methods'><li data-type='method'><a href="module-a_zion.html#.activeColumn">activeColumn</a></li><li data-type='method'><a href="module-a_zion.html#.activeSearch">activeSearch</a></li><li data-type='method'><a href="module-a_zion.html#.activeTreeOff">activeTreeOff</a></li><li data-type='method'><a href="module-a_zion.html#.activeTreeOn">activeTreeOn</a></li><li data-type='method'><a href="module-a_zion.html#.anchorColumn">anchorColumn</a></li><li data-type='method'><a href="module-a_zion.html#.anchorSearch">anchorSearch</a></li><li data-type='method'><a href="module-a_zion.html#.anchorTree">anchorTree</a></li></ul></li><li><a href="module-aggr_zest.html">aggr/zest</a><ul class='methods'><li data-type='method'><a href="module-aggr_zest.html#.aggrSum">aggrSum</a></li></ul></li><li><a href="module-ai-expr_zodiac.html">ai-expr/zodiac</a><ul class='methods'><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprAction">aiExprAction</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprAjax">aiExprAjax</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprButton">aiExprButton</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprButtons">aiExprButtons</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprColumn">aiExprColumn</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprCommand">aiExprCommand</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprCommands">aiExprCommands</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprDrawer">aiExprDrawer</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprField">aiExprField</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprFieldEx">aiExprFieldEx</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprFilter">aiExprFilter</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprIcon">aiExprIcon</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprOp">aiExprOp</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprOption">aiExprOption</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprPopover">aiExprPopover</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprSubject">aiExprSubject</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprTabs">aiExprTabs</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprTitle">aiExprTitle</a></li><li data-type='method'><a href="module-ai-expr_zodiac.html#.aiExprWindow">aiExprWindow</a></li></ul></li><li><a href="module-ai-form_zest.html">ai-form/zest</a><ul class='methods'><li data-type='method'><a href="module-ai-form_zest.html#.ai2AddressSelector">ai2AddressSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Captcha">ai2Captcha</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Checkbox">ai2Checkbox</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2DatePicker">ai2DatePicker</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Input">ai2Input</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2InputMulti">ai2InputMulti</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2InputNumber">ai2InputNumber</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2ListSelector">ai2ListSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2MatrixSelector">ai2MatrixSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Password">ai2Password</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Protocol">ai2Protocol</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Radio">ai2Radio</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Select">ai2Select</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2TextArea">ai2TextArea</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2Transfer">ai2Transfer</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2TreeSelect">ai2TreeSelect</a></li><li data-type='method'><a href="module-ai-form_zest.html#.ai2TreeSelector">ai2TreeSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiAction">aiAction</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiAddressSelector">aiAddressSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiBraftEditor">aiBraftEditor</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiButton">aiButton</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiButtonGroup">aiButtonGroup</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiCaptcha">aiCaptcha</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiCheckJson">aiCheckJson</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiCheckbox">aiCheckbox</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiDatePicker">aiDatePicker</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiDialogEditor">aiDialogEditor</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiFileBatch">aiFileBatch</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiFileLogo">aiFileLogo</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiFileUpload">aiFileUpload</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiGroupSwitcher">aiGroupSwitcher</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiHidden">aiHidden</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiInput">aiInput</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiInputMulti">aiInputMulti</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiInputNumber">aiInputNumber</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiJsonEditor">aiJsonEditor</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiListSelector">aiListSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiMagic">aiMagic</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiMatrixSelector">aiMatrixSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiPassword">aiPassword</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiProtocol">aiProtocol</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiRadio">aiRadio</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiSearchInput">aiSearchInput</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiSearchRangeDate">aiSearchRangeDate</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiSelect">aiSelect</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiSubmit">aiSubmit</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiTableEditor">aiTableEditor</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiTableTransfer">aiTableTransfer</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiTextArea">aiTextArea</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiTimePicker">aiTimePicker</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiTransfer">aiTransfer</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiTreeSelect">aiTreeSelect</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiTreeSelector">aiTreeSelector</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiUserGroup">aiUserGroup</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiUserLeader">aiUserLeader</a></li><li data-type='method'><a href="module-ai-form_zest.html#.aiUserSelector">aiUserSelector</a></li></ul></li><li><a href="module-ai-web_zest.html">ai-web/zest</a><ul class='methods'><li data-type='method'><a href="module-ai-web_zest.html#.aiAddRemove">aiAddRemove</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiAnchor">aiAnchor</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiBlock">aiBlock</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiBreadcrumb">aiBreadcrumb</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiCell">aiCell</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiChild">aiChild</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiChildItem">aiChildItem</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiChildren">aiChildren</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiCommand">aiCommand</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiEmpty">aiEmpty</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiErrorInput">aiErrorInput</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiErrorPage">aiErrorPage</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiIcon">aiIcon</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiItemTransfer">aiItemTransfer</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiLink">aiLink</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiLinkBack">aiLinkBack</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiLinkMore">aiLinkMore</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiMenuContext">aiMenuContext</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiMenuTop">aiMenuTop</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiSider">aiSider</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiTabExtra">aiTabExtra</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiTabPage">aiTabPage</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiTitle">aiTitle</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiTopBar">aiTopBar</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiTree">aiTree</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiUrl">aiUrl</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiViewMy">aiViewMy</a></li><li data-type='method'><a href="module-ai-web_zest.html#.aiYN">aiYN</a></li></ul></li><li><a href="module-ai_zest.html">ai/zest</a><ul class='methods'><li data-type='method'><a href="module-ai_zest.html#.aiField">aiField</a></li><li data-type='method'><a href="module-ai_zest.html#.aiForm">aiForm</a></li><li data-type='method'><a href="module-ai_zest.html#.aiFormField">aiFormField</a></li><li data-type='method'><a href="module-ai_zest.html#.aiFormInput">aiFormInput</a></li></ul></li><li><a href="module-ai_zion.html">ai/zion</a><ul class='methods'><li data-type='method'><a href="module-ai_zion.html#.aiAdjust">aiAdjust</a></li><li data-type='method'><a href="module-ai_zion.html#.aiInit">aiInit</a></li><li data-type='method'><a href="module-ai_zion.html#.aiLayout">aiLayout</a></li><li data-type='method'><a href="module-ai_zion.html#.aiLayoutAdjust">aiLayoutAdjust</a></li><li data-type='method'><a href="module-ai_zion.html#.aiLayoutItem">aiLayoutItem</a></li></ul></li><li><a href="module-amb_zodiac.html">amb/zodiac</a><ul class='methods'><li data-type='method'><a href="module-amb_zodiac.html#.ambWide">ambWide</a></li></ul></li><li><a href="module-amb_zone.html">amb/zone</a><ul class='methods'><li data-type='method'><a href="module-amb_zone.html#.ambAnnex">ambAnnex</a></li><li data-type='method'><a href="module-amb_zone.html#.ambArray">ambArray</a></li><li data-type='method'><a href="module-amb_zone.html#.ambDatetime">ambDatetime</a></li><li data-type='method'><a href="module-amb_zone.html#.ambEvent">ambEvent</a></li><li data-type='method'><a href="module-amb_zone.html#.ambFind">ambFind</a></li><li data-type='method'><a href="module-amb_zone.html#.ambKv">ambKv</a></li><li data-type='method'><a href="module-amb_zone.html#.ambObject">ambObject</a></li><li data-type='method'><a href="module-amb_zone.html#.ambValue">ambValue</a></li></ul></li><li><a href="module-apply_zodiac.html">apply/zodiac</a><ul class='methods'><li data-type='method'><a href="module-apply_zodiac.html#.applyArray">applyArray</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyColumn">applyColumn</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyConnect">applyConnect</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyInput">applyInput</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyKey">applyKey</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyKv">applyKv</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyLoading">applyLoading</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyRender">applyRender</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyRow">applyRow</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyRules">applyRules</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyStyle">applyStyle</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyValue">applyValue</a></li><li data-type='method'><a href="module-apply_zodiac.html#.applyView">applyView</a></li></ul></li><li><a href="module-assist_zodiac.html">assist/zodiac</a><ul class='methods'><li data-type='method'><a href="module-assist_zodiac.html#.assistIn">assistIn</a></li><li data-type='method'><a href="module-assist_zodiac.html#.assistOut">assistOut</a></li></ul></li><li><a href="module-atomic_zest.html">atomic/zest</a><ul class='methods'><li data-type='method'><a href="module-atomic_zest.html#.connectItem">connectItem</a></li></ul></li><li><a href="module-atomic_zone.html">atomic/zone</a><ul class='methods'><li data-type='method'><a href="module-atomic_zone.html#.assign">assign</a></li><li data-type='method'><a href="module-atomic_zone.html#.clone">clone</a></li><li data-type='method'><a href="module-atomic_zone.html#.connectId">connectId</a></li><li data-type='method'><a href="module-atomic_zone.html#.element">element</a></li><li data-type='method'><a href="module-atomic_zone.html#.immutable">immutable</a></li><li data-type='method'><a href="module-atomic_zone.html#.parallel">parallel</a></li><li data-type='method'><a href="module-atomic_zone.html#.pass">pass</a></li><li data-type='method'><a href="module-atomic_zone.html#.passion">passion</a></li><li data-type='method'><a href="module-atomic_zone.html#.pipe">pipe</a></li><li data-type='method'><a href="module-atomic_zone.html#.pipeOr">pipeOr</a></li><li data-type='method'><a href="module-atomic_zone.html#.prevent">prevent</a></li><li data-type='method'><a href="module-atomic_zone.html#.promise">promise</a></li><li data-type='method'><a href="module-atomic_zone.html#.ready">ready</a></li><li data-type='method'><a href="module-atomic_zone.html#.remove">remove</a></li></ul></li><li><a href="module-column_zest.html">column/zest</a><ul class='methods'><li data-type='method'><a href="module-column_zest.html#.columnFilter">columnFilter</a></li><li data-type='method'><a href="module-column_zest.html#.columnRender">columnRender</a></li><li data-type='method'><a href="module-column_zest.html#.columnSorter">columnSorter</a></li><li data-type='method'><a href="module-column_zest.html#.columnSynonym">columnSynonym</a></li><li data-type='method'><a href="module-column_zest.html#.columnWrapper">columnWrapper</a></li></ul></li><li><a href="module-config_zest.html">config/zest</a><ul class='methods'><li data-type='method'><a href="module-config_zest.html#.cabQuery">cabQuery</a></li><li data-type='method'><a href="module-config_zest.html#.cabTab">cabTab</a></li><li data-type='method'><a href="module-config_zest.html#.capForm">capForm</a></li><li data-type='method'><a href="module-config_zest.html#.capTab">capTab</a></li><li data-type='method'><a href="module-config_zest.html#.configAnchor">configAnchor</a></li><li data-type='method'><a href="module-config_zest.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-config_zest.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-config_zest.html#.configExecutor">configExecutor</a></li><li data-type='method'><a href="module-config_zest.html#.configExecutors">configExecutors</a></li><li data-type='method'><a href="module-config_zest.html#.configForm">configForm</a></li><li data-type='method'><a href="module-config_zest.html#.configIcon">configIcon</a></li><li data-type='method'><a href="module-config_zest.html#.configScroll">configScroll</a></li><li data-type='method'><a href="module-config_zest.html#.configTab">configTab</a></li><li data-type='method'><a href="module-config_zest.html#.configTable">configTable</a></li><li data-type='method'><a href="module-config_zest.html#.raftForm">raftForm</a></li></ul></li><li><a href="module-constant_zion.html">constant/zion</a><ul class='members'><li data-type='member'><a href="module-constant_zion.html#.ECONOMY">ECONOMY</a></li><li data-type='member'><a href="module-constant_zion.html#.FORM_MODE">FORM_MODE</a></li><li data-type='member'><a href="module-constant_zion.html#.ICON_BLOCK">ICON_BLOCK</a></li><li data-type='member'><a href="module-constant_zion.html#.ICON_DATABASE">ICON_DATABASE</a></li><li data-type='member'><a href="module-constant_zion.html#.ICON_SYS">ICON_SYS</a></li><li data-type='member'><a href="module-constant_zion.html#.MENUS">MENUS</a></li><li data-type='member'><a href="module-constant_zion.html#.MENU_TYPE">MENU_TYPE</a></li><li data-type='member'><a href="module-constant_zion.html#.RX_SOURCE">RX_SOURCE</a></li><li data-type='member'><a href="module-constant_zion.html#.SELECTION">SELECTION</a></li><li data-type='member'><a href="module-constant_zion.html#.TAG">TAG</a></li><li data-type='member'><a href="module-constant_zion.html#.VALUE">VALUE</a></li><li data-type='member'><a href="module-constant_zion.html#.XT_FORMAT">XT_FORMAT</a></li></ul></li><li></li><li><a href="module-constant_zone.html">constant/zone</a><ul class='members'><li data-type='member'><a href="module-constant_zone.html#.(?ENV)">(?ENV)</a></li><li data-type='member'><a href="module-constant_zone.html#.CHANGE">CHANGE</a></li><li data-type='member'><a href="module-constant_zone.html#.CV_DELETE">CV_DELETE</a></li><li data-type='member'><a href="module-constant_zone.html#.CV_EXPAND">CV_EXPAND</a></li><li data-type='member'><a href="module-constant_zone.html#.CV_FORBIDDEN">CV_FORBIDDEN</a></li><li data-type='member'><a href="module-constant_zone.html#.DEBUG">DEBUG</a></li><li data-type='member'><a href="module-constant_zone.html#.DEBUG_AJAX">DEBUG_AJAX</a></li><li data-type='member'><a href="module-constant_zone.html#.DEBUG_DEV">DEBUG_DEV</a></li><li data-type='member'><a href="module-constant_zone.html#.DEBUG_FORM">DEBUG_FORM</a></li><li data-type='member'><a href="module-constant_zone.html#.DEBUG_QR">DEBUG_QR</a></li><li data-type='member'><a href="module-constant_zone.html#.DEV">DEV</a></li><li data-type='member'><a href="module-constant_zone.html#.ENTRY_ADMIN">ENTRY_ADMIN</a></li><li data-type='member'><a href="module-constant_zone.html#.ENTRY_FIRST">ENTRY_FIRST</a></li><li data-type='member'><a href="module-constant_zone.html#.ENTRY_LOGIN">ENTRY_LOGIN</a></li><li data-type='member'><a href="module-constant_zone.html#.E_TYPE">E_TYPE</a></li><li data-type='member'><a href="module-constant_zone.html#.FORBIDDEN">FORBIDDEN</a></li><li data-type='member'><a href="module-constant_zone.html#.GRID">GRID</a></li><li data-type='member'><a href="module-constant_zone.html#.HTTP11">HTTP11</a></li><li data-type='member'><a href="module-constant_zone.html#.HTTP_METHOD">HTTP_METHOD</a></li><li data-type='member'><a href="module-constant_zone.html#.KEY_APP">KEY_APP</a></li><li data-type='member'><a href="module-constant_zone.html#.KEY_EVENT">KEY_EVENT</a></li><li data-type='member'><a href="module-constant_zone.html#.KEY_MDATA">KEY_MDATA</a></li><li data-type='member'><a href="module-constant_zone.html#.KEY_USER">KEY_USER</a></li><li data-type='member'><a href="module-constant_zone.html#.K_ARG">K_ARG</a></li><li data-type='member'><a href="module-constant_zone.html#.K_NAME">K_NAME</a></li><li data-type='member'><a href="module-constant_zone.html#.K_UI">K_UI</a></li><li data-type='member'><a href="module-constant_zone.html#.K_VALUE">K_VALUE</a></li><li data-type='member'><a href="module-constant_zone.html#.LANGUAGE">LANGUAGE</a></li><li data-type='member'><a href="module-constant_zone.html#.MIMES">MIMES</a></li><li data-type='member'><a href="module-constant_zone.html#.MOCK">MOCK</a></li><li data-type='member'><a href="module-constant_zone.html#.MONITOR">MONITOR</a></li><li data-type='member'><a href="module-constant_zone.html#.PAGE_APP">PAGE_APP</a></li><li data-type='member'><a href="module-constant_zone.html#.PAGE_AT">PAGE_AT</a></li><li data-type='member'><a href="module-constant_zone.html#.PAGE_HOME">PAGE_HOME</a></li><li data-type='member'><a href="module-constant_zone.html#.PAGE_MENU">PAGE_MENU</a></li><li data-type='member'><a href="module-constant_zone.html#.PAGE_OPEN">PAGE_OPEN</a></li><li data-type='member'><a href="module-constant_zone.html#.QR_COLUMN">QR_COLUMN</a></li><li data-type='member'><a href="module-constant_zone.html#.QR_SOURCE">QR_SOURCE</a></li><li data-type='member'><a href="module-constant_zone.html#.RUNTIME">RUNTIME</a></li><li data-type='member'><a href="module-constant_zone.html#.SIGN">SIGN</a></li><li data-type='member'><a href="module-constant_zone.html#.SYNTAX_CLEAR">SYNTAX_CLEAR</a></li><li data-type='member'><a href="module-constant_zone.html#.SYNTAX_KV">SYNTAX_KV</a></li><li data-type='member'><a href="module-constant_zone.html#.THEME">THEME</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_CONTROL">TYPE_CONTROL</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_EVENT">TYPE_EVENT</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_JSX_NOTIFY">TYPE_JSX_NOTIFY</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_JSX_RENDERS">TYPE_JSX_RENDERS</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_JSX_VALIDATE">TYPE_JSX_VALIDATE</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_LAZY_COLUMN">TYPE_LAZY_COLUMN</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_ON">TYPE_ON</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_OP">TYPE_OP</a></li><li data-type='member'><a href="module-constant_zone.html#.TYPE_UPLOAD">TYPE_UPLOAD</a></li><li data-type='member'><a href="module-constant_zone.html#.X_APP_ID">X_APP_ID</a></li><li data-type='member'><a href="module-constant_zone.html#.X_APP_KEY">X_APP_KEY</a></li><li data-type='member'><a href="module-constant_zone.html#.X_HEADER">X_HEADER</a></li><li data-type='member'><a href="module-constant_zone.html#.X_HEADER_SUPPORT">X_HEADER_SUPPORT</a></li><li data-type='member'><a href="module-constant_zone.html#.X_LANG">X_LANG</a></li><li data-type='member'><a href="module-constant_zone.html#.X_SESSION">X_SESSION</a></li><li data-type='member'><a href="module-constant_zone.html#.X_SIGMA">X_SIGMA</a></li></ul></li><li><a href="module-crypto_zone.html">crypto/zone</a><ul class='methods'><li data-type='method'><a href="module-crypto_zone.html#.decryptBase64">decryptBase64</a></li><li data-type='method'><a href="module-crypto_zone.html#.encryptAES">encryptAES</a></li><li data-type='method'><a href="module-crypto_zone.html#.encryptBase64">encryptBase64</a></li><li data-type='method'><a href="module-crypto_zone.html#.encryptHmac512">encryptHmac512</a></li><li data-type='method'><a href="module-crypto_zone.html#.encryptMD5">encryptMD5</a></li></ul></li><li><a href="module-data_zest.html">data/zest</a><ul class='methods'><li data-type='method'><a href="module-data_zest.html#.dataIo">dataIo</a></li><li data-type='method'><a href="module-data_zest.html#.dataRead">dataRead</a></li><li data-type='method'><a href="module-data_zest.html#.dataWrite">dataWrite</a></li></ul></li><li><a href="module-data_zion.html">data/zion</a><ul class='methods'><li data-type='method'><a href="module-data_zion.html#.createAction">createAction</a></li><li data-type='method'><a href="module-data_zion.html#.dataCab">dataCab</a></li><li data-type='method'><a href="module-data_zion.html#.dataIn">dataIn</a></li><li data-type='method'><a href="module-data_zion.html#.dataOut">dataOut</a></li><li data-type='method'><a href="module-data_zion.html#.fnOut">fnOut</a></li></ul></li><li><a href="module-deprecated_zodiac.html">deprecated/zodiac</a><ul class='methods'><li data-type='method'><a href="module-deprecated_zodiac.html#.dslArray">dslArray</a></li></ul></li><li><a href="module-dev_zion.html">dev/zion</a><ul class='methods'><li data-type='method'><a href="module-dev_zion.html#.devSkipValidate">devSkipValidate</a></li></ul></li><li><a href="module-development_zone.html">development/zone</a><ul class='methods'><li data-type='method'><a href="module-development_zone.html#.dgAdmit">dgAdmit</a></li><li data-type='method'><a href="module-development_zone.html#.dgAjax">dgAjax</a></li><li data-type='method'><a href="module-development_zone.html#.dgDebug">dgDebug</a></li><li data-type='method'><a href="module-development_zone.html#.dgDiff">dgDiff</a></li><li data-type='method'><a href="module-development_zone.html#.dgFile">dgFile</a></li><li data-type='method'><a href="module-development_zone.html#.dgFileJson">dgFileJson</a></li><li data-type='method'><a href="module-development_zone.html#.dgGraphic">dgGraphic</a></li><li data-type='method'><a href="module-development_zone.html#.dgJs">dgJs</a></li><li data-type='method'><a href="module-development_zone.html#.dgQr">dgQr</a></li><li data-type='method'><a href="module-development_zone.html#.dgQuery">dgQuery</a></li><li data-type='method'><a href="module-development_zone.html#.dgRouter">dgRouter</a></li><li data-type='method'><a href="module-development_zone.html#.dgSkip">dgSkip</a></li><li data-type='method'><a href="module-development_zone.html#.dgTodo">dgTodo</a></li><li data-type='method'><a href="module-development_zone.html#.dglApi">dglApi</a></li><li data-type='method'><a href="module-development_zone.html#.dglList">dglList</a></li><li data-type='method'><a href="module-development_zone.html#.dglQrAdvanced">dglQrAdvanced</a></li><li data-type='method'><a href="module-development_zone.html#.dglQrC">dglQrC</a></li><li data-type='method'><a href="module-development_zone.html#.dglQrFilter">dglQrFilter</a></li><li data-type='method'><a href="module-development_zone.html#.dglQrSearch">dglQrSearch</a></li><li data-type='method'><a href="module-development_zone.html#.dglQrV">dglQrV</a></li><li data-type='method'><a href="module-development_zone.html#.dglQrViewUp">dglQrViewUp</a></li><li data-type='method'><a href="module-development_zone.html#.dglVColumn">dglVColumn</a></li><li data-type='method'><a href="module-development_zone.html#.dglVCriteria">dglVCriteria</a></li><li data-type='method'><a href="module-development_zone.html#.dglViewAt">dglViewAt</a></li><li data-type='method'><a href="module-development_zone.html#.fxCatch">fxCatch</a></li><li data-type='method'><a href="module-development_zone.html#.fxError">fxError</a></li><li data-type='method'><a href="module-development_zone.html#.fxFailure">fxFailure</a></li><li data-type='method'><a href="module-development_zone.html#.fxFatal">fxFatal</a></li><li data-type='method'><a href="module-development_zone.html#.fxMessage">fxMessage</a></li><li data-type='method'><a href="module-development_zone.html#.fxRedux">fxRedux</a></li><li data-type='method'><a href="module-development_zone.html#.fxReject">fxReject</a></li><li data-type='method'><a href="module-development_zone.html#.fxTerminal">fxTerminal</a></li><li data-type='method'><a href="module-development_zone.html#.fxWarning">fxWarning</a></li></ul></li><li><a href="module-dnd_zest.html">dnd/zest</a><ul class='methods'><li data-type='method'><a href="module-dnd_zest.html#.dndDragHoc">dndDragHoc</a></li><li data-type='method'><a href="module-dnd_zest.html#.dndDragWrap">dndDragWrap</a></li><li data-type='method'><a href="module-dnd_zest.html#.dndDropColor">dndDropColor</a></li><li data-type='method'><a href="module-dnd_zest.html#.dndDropHoc">dndDropHoc</a></li><li data-type='method'><a href="module-dnd_zest.html#.dndDropWrap">dndDropWrap</a></li></ul></li><li><a href="module-element_zodiac.html">element/zodiac</a><ul class='methods'><li data-type='method'><a href="module-element_zodiac.html#.elementFindDatum">elementFindDatum</a></li><li data-type='method'><a href="module-element_zodiac.html#.elementGroupDatum">elementGroupDatum</a></li><li data-type='method'><a href="module-element_zodiac.html#.elementMapDatum">elementMapDatum</a></li><li data-type='method'><a href="module-element_zodiac.html#.elementUniqueDatum">elementUniqueDatum</a></li></ul></li><li><a href="module-element_zone.html">element/zone</a><ul class='methods'><li data-type='method'><a href="module-element_zone.html#.elementBranch">elementBranch</a></li><li data-type='method'><a href="module-element_zone.html#.elementChildTree">elementChildTree</a></li><li data-type='method'><a href="module-element_zone.html#.elementChildren">elementChildren</a></li><li data-type='method'><a href="module-element_zone.html#.elementConcat">elementConcat</a></li><li data-type='method'><a href="module-element_zone.html#.elementDown">elementDown</a></li><li data-type='method'><a href="module-element_zone.html#.elementFind">elementFind</a></li><li data-type='method'><a href="module-element_zone.html#.elementFirst">elementFirst</a></li><li data-type='method'><a href="module-element_zone.html#.elementFlat">elementFlat</a></li><li data-type='method'><a href="module-element_zone.html#.elementFlip">elementFlip</a></li><li data-type='method'><a href="module-element_zone.html#.elementGet">elementGet</a></li><li data-type='method'><a href="module-element_zone.html#.elementGrid">elementGrid</a></li><li data-type='method'><a href="module-element_zone.html#.elementGroup">elementGroup</a></li><li data-type='method'><a href="module-element_zone.html#.elementInAll">elementInAll</a></li><li data-type='method'><a href="module-element_zone.html#.elementInAny">elementInAny</a></li><li data-type='method'><a href="module-element_zone.html#.elementIndex">elementIndex</a></li><li data-type='method'><a href="module-element_zone.html#.elementJoin">elementJoin</a></li><li data-type='method'><a href="module-element_zone.html#.elementMap">elementMap</a></li><li data-type='method'><a href="module-element_zone.html#.elementOrder">elementOrder</a></li><li data-type='method'><a href="module-element_zone.html#.elementParent">elementParent</a></li><li data-type='method'><a href="module-element_zone.html#.elementSave">elementSave</a></li><li data-type='method'><a href="module-element_zone.html#.elementUnique">elementUnique</a></li><li data-type='method'><a href="module-element_zone.html#.elementUp">elementUp</a></li><li data-type='method'><a href="module-element_zone.html#.elementVertical">elementVertical</a></li><li data-type='method'><a href="module-element_zone.html#.elementWrap">elementWrap</a></li></ul></li><li><a href="module-form_zest.html">form/zest</a><ul class='methods'><li data-type='method'><a href="module-form_zest.html#.formEnd">formEnd</a></li><li data-type='method'><a href="module-form_zest.html#.formLinker">formLinker</a></li><li data-type='method'><a href="module-form_zest.html#.formOut">formOut</a></li><li data-type='method'><a href="module-form_zest.html#.formRead">formRead</a></li></ul></li><li><a href="module-form_zodiac.html">form/zodiac</a><ul class='methods'><li data-type='method'><a href="module-form_zodiac.html#.formClear">formClear</a></li><li data-type='method'><a href="module-form_zodiac.html#.formGet">formGet</a></li><li data-type='method'><a href="module-form_zodiac.html#.formHit">formHit</a></li><li data-type='method'><a href="module-form_zodiac.html#.formHits">formHits</a></li><li data-type='method'><a href="module-form_zodiac.html#.formReset">formReset</a></li><li data-type='method'><a href="module-form_zodiac.html#.formRow">formRow</a></li></ul></li><li><a href="module-format_zone.html">format/zone</a><ul class='methods'><li data-type='method'><a href="module-format_zone.html#.formatCurrency">formatCurrency</a></li><li data-type='method'><a href="module-format_zone.html#.formatDate">formatDate</a></li><li data-type='method'><a href="module-format_zone.html#.formatExpr">formatExpr</a></li><li data-type='method'><a href="module-format_zone.html#.formatNow">formatNow</a></li><li data-type='method'><a href="module-format_zone.html#.formatObject">formatObject</a></li><li data-type='method'><a href="module-format_zone.html#.formatPercent">formatPercent</a></li><li data-type='method'><a href="module-format_zone.html#.formatQuery">formatQuery</a></li><li data-type='method'><a href="module-format_zone.html#.formatTpl">formatTpl</a></li></ul></li><li><a href="module-from_zone.html">from/zone</a><ul class='methods'><li data-type='method'><a href="module-from_zone.html#.fromHoc">fromHoc</a></li><li data-type='method'><a href="module-from_zone.html#.fromPath">fromPath</a></li></ul></li><li><a href="module-g2_zest.html">g2/zest</a><ul class='methods'><li data-type='method'><a href="module-g2_zest.html#.g2Bar">g2Bar</a></li><li data-type='method'><a href="module-g2_zest.html#.g2Broken">g2Broken</a></li><li data-type='method'><a href="module-g2_zest.html#.g2Chart">g2Chart</a></li><li data-type='method'><a href="module-g2_zest.html#.g2Draw">g2Draw</a></li><li data-type='method'><a href="module-g2_zest.html#.g2Line">g2Line</a></li><li data-type='method'><a href="module-g2_zest.html#.g2MoreLine">g2MoreLine</a></li><li data-type='method'><a href="module-g2_zest.html#.g2Pie">g2Pie</a></li><li data-type='method'><a href="module-g2_zest.html#.g2ScaleMax">g2ScaleMax</a></li></ul></li><li><a href="module-g6_zero.html">g6/zero</a><ul class='methods'><li data-type='method'><a href="module-g6_zero.html#.g6DataTree">g6DataTree</a></li><li data-type='method'><a href="module-g6_zero.html#.g6DefaultAddOn">g6DefaultAddOn</a></li><li data-type='method'><a href="module-g6_zero.html#.g6DefaultGraph">g6DefaultGraph</a></li><li data-type='method'><a href="module-g6_zero.html#.g6Image">g6Image</a></li><li data-type='method'><a href="module-g6_zero.html#.g6PageInit">g6PageInit</a></li><li data-type='method'><a href="module-g6_zero.html#.g6PageUp">g6PageUp</a></li><li data-type='method'><a href="module-g6_zero.html#.g6Registry">g6Registry</a></li></ul></li><li><a href="module-hoc_zion.html">hoc/zion</a><ul class='methods'><li data-type='method'><a href="module-hoc_zion.html#.ltrResize">ltrResize</a></li><li data-type='method'><a href="module-hoc_zion.html#.wl">wl</a></li></ul></li><li><a href="module-hoc_zone.html">hoc/zone</a><ul class='methods'><li data-type='method'><a href="module-hoc_zone.html#.fn">fn</a></li><li data-type='method'><a href="module-hoc_zone.html#.of">of</a></li></ul></li><li><a href="module-html_zodiac.html">html/zodiac</a><ul class='methods'><li data-type='method'><a href="module-html_zodiac.html#.htmlDisabled">htmlDisabled</a></li><li data-type='method'><a href="module-html_zodiac.html#.htmlErrorBlur">htmlErrorBlur</a></li><li data-type='method'><a href="module-html_zodiac.html#.htmlErrorFocus">htmlErrorFocus</a></li><li data-type='method'><a href="module-html_zodiac.html#.htmlReadOnly">htmlReadOnly</a></li></ul></li><li><a href="module-in_zone.html">in/zone</a><ul class='methods'><li data-type='method'><a href="module-in_zone.html#.inAlert">inAlert</a></li><li data-type='method'><a href="module-in_zone.html#.inConfig">inConfig</a></li><li data-type='method'><a href="module-in_zone.html#.inHoc">inHoc</a></li><li data-type='method'><a href="module-in_zone.html#.inInfo">inInfo</a></li><li data-type='method'><a href="module-in_zone.html#.inPath">inPath</a></li></ul></li><li><a href="module-is_zion.html">is/zion</a><ul class='methods'><li data-type='method'><a href="module-is_zion.html#.isAuthorized">isAuthorized</a></li><li data-type='method'><a href="module-is_zion.html#.isLoaded">isLoaded</a></li><li data-type='method'><a href="module-is_zion.html#.isRoute">isRoute</a></li></ul></li><li><a href="module-is_zodiac.html">is/zodiac</a><ul class='methods'><li data-type='method'><a href="module-is_zodiac.html#.isInit">isInit</a></li><li data-type='method'><a href="module-is_zodiac.html#.isLogged">isLogged</a></li><li data-type='method'><a href="module-is_zodiac.html#.isMod">isMod</a></li></ul></li><li><a href="module-is_zone.html">is/zone</a><ul class='methods'><li data-type='method'><a href="module-is_zone.html#.isAfter">isAfter</a></li><li data-type='method'><a href="module-is_zone.html#.isArray">isArray</a></li><li data-type='method'><a href="module-is_zone.html#.isBefore">isBefore</a></li><li data-type='method'><a href="module-is_zone.html#.isBlank">isBlank</a></li><li data-type='method'><a href="module-is_zone.html#.isCn">isCn</a></li><li data-type='method'><a href="module-is_zone.html#.isCollection">isCollection</a></li><li data-type='method'><a href="module-is_zone.html#.isCurrency">isCurrency</a></li><li data-type='method'><a href="module-is_zone.html#.isDateIso">isDateIso</a></li><li data-type='method'><a href="module-is_zone.html#.isDecimal">isDecimal</a></li><li data-type='method'><a href="module-is_zone.html#.isDiff">isDiff</a></li><li data-type='method'><a href="module-is_zone.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="module-is_zone.html#.isFileName">isFileName</a></li><li data-type='method'><a href="module-is_zone.html#.isFunction">isFunction</a></li><li data-type='method'><a href="module-is_zone.html#.isFunctionName">isFunctionName</a></li><li data-type='method'><a href="module-is_zone.html#.isMoment">isMoment</a></li><li data-type='method'><a href="module-is_zone.html#.isNotEmpty">isNotEmpty</a></li><li data-type='method'><a href="module-is_zone.html#.isNumber">isNumber</a></li><li data-type='method'><a href="module-is_zone.html#.isObject">isObject</a></li><li data-type='method'><a href="module-is_zone.html#.isParent">isParent</a></li><li data-type='method'><a href="module-is_zone.html#.isQr">isQr</a></li><li data-type='method'><a href="module-is_zone.html#.isQrArg">isQrArg</a></li><li data-type='method'><a href="module-is_zone.html#.isRange">isRange</a></li><li data-type='method'><a href="module-is_zone.html#.isRule">isRule</a></li><li data-type='method'><a href="module-is_zone.html#.isRuleAll">isRuleAll</a></li><li data-type='method'><a href="module-is_zone.html#.isRuleAny">isRuleAny</a></li><li data-type='method'><a href="module-is_zone.html#.isSame">isSame</a></li><li data-type='method'><a href="module-is_zone.html#.isSet">isSet</a></li><li data-type='method'><a href="module-is_zone.html#.isSubset">isSubset</a></li><li data-type='method'><a href="module-is_zone.html#.isTEntity">isTEntity</a></li><li data-type='method'><a href="module-is_zone.html#.isTObject">isTObject</a></li><li data-type='method'><a href="module-is_zone.html#.isTimeSame">isTimeSame</a></li><li data-type='method'><a href="module-is_zone.html#.isValid">isValid</a></li></ul></li><li><a href="module-it_zest.html">it/zest</a><ul class='methods'><li data-type='method'><a href="module-it_zest.html#.itField">itField</a></li></ul></li><li><a href="module-it_zone.html">it/zone</a><ul class='methods'><li data-type='method'><a href="module-it_zone.html#.itAmb">itAmb</a></li><li data-type='method'><a href="module-it_zone.html#.itElement">itElement</a></li><li data-type='method'><a href="module-it_zone.html#.itFull">itFull</a></li><li data-type='method'><a href="module-it_zone.html#.itMatrix">itMatrix</a></li><li data-type='method'><a href="module-it_zone.html#.itObject">itObject</a></li><li data-type='method'><a href="module-it_zone.html#.itRepeat">itRepeat</a></li><li data-type='method'><a href="module-it_zone.html#.itRow">itRow</a></li><li data-type='method'><a href="module-it_zone.html#.itTree">itTree</a></li><li data-type='method'><a href="module-it_zone.html#.itUi">itUi</a></li><li data-type='method'><a href="module-it_zone.html#.itValue">itValue</a></li></ul></li><li><a href="module-math_zone.html">math/zone</a><ul class='methods'><li data-type='method'><a href="module-math_zone.html#.mathDiscount">mathDiscount</a></li><li data-type='method'><a href="module-math_zone.html#.mathDivision">mathDivision</a></li><li data-type='method'><a href="module-math_zone.html#.mathMultiplication">mathMultiplication</a></li><li data-type='method'><a href="module-math_zone.html#.mathSubtract">mathSubtract</a></li><li data-type='method'><a href="module-math_zone.html#.mathSum">mathSum</a></li></ul></li><li><a href="module-message_zodiac.html">message/zodiac</a><ul class='methods'><li data-type='method'><a href="module-message_zodiac.html#.messageCatch">messageCatch</a></li><li data-type='method'><a href="module-message_zodiac.html#.messageConfirm">messageConfirm</a></li><li data-type='method'><a href="module-message_zodiac.html#.messageFailure">messageFailure</a></li><li data-type='method'><a href="module-message_zodiac.html#.messageSuccess">messageSuccess</a></li></ul></li><li><a href="module-on_zion.html">on/zion</a><ul class='methods'><li data-type='method'><a href="module-on_zion.html#.onConfirm">onConfirm</a></li><li data-type='method'><a href="module-on_zion.html#.onLinker">onLinker</a></li></ul></li><li><a href="module-on_zodiac.html">on/zodiac</a><ul class='methods'><li data-type='method'><a href="module-on_zodiac.html#.onColor">onColor</a></li><li data-type='method'><a href="module-on_zodiac.html#.onDatum">onDatum</a></li><li data-type='method'><a href="module-on_zodiac.html#.onSave">onSave</a></li><li data-type='method'><a href="module-on_zodiac.html#.onUniform">onUniform</a></li></ul></li><li><a href="module-on_zone.html">on/zone</a><ul class='methods'><li data-type='method'><a href="module-on_zone.html#.onReference">onReference</a></li></ul></li><li><a href="module-parse_zodiac.html">parse/zodiac</a><ul class='methods'><li data-type='method'><a href="module-parse_zodiac.html#.parseAction">parseAction</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseAjax">parseAjax</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseColumn">parseColumn</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseDatum">parseDatum</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseField">parseField</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseInput">parseInput</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseItem">parseItem</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseOption">parseOption</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseParameter">parseParameter</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parsePosition">parsePosition</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseQuery">parseQuery</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseSource">parseSource</a></li><li data-type='method'><a href="module-parse_zodiac.html#.parseValue">parseValue</a></li></ul></li><li><a href="module-plugin_zest.html">plugin/zest</a><ul class='methods'><li data-type='method'><a href="module-plugin_zest.html#.pluginEdition">pluginEdition</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginField">pluginField</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginForm">pluginForm</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginKoAdd">pluginKoAdd</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginKoBatch">pluginKoBatch</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginKoEdit">pluginKoEdit</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginKoRow">pluginKoRow</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginMetadata">pluginMetadata</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginOp">pluginOp</a></li><li data-type='method'><a href="module-plugin_zest.html#.pluginSelection">pluginSelection</a></li></ul></li><li><a href="module-qr_zion.html">qr/zion</a><ul class='methods'><li data-type='method'><a href="module-qr_zion.html#.irData">irData</a></li><li data-type='method'><a href="module-qr_zion.html#.irSubmit">irSubmit</a></li><li data-type='method'><a href="module-qr_zion.html#.irSwitcher">irSwitcher</a></li><li data-type='method'><a href="module-qr_zion.html#.qrAndH">qrAndH</a></li><li data-type='method'><a href="module-qr_zion.html#.qrAndQH">qrAndQH</a></li><li data-type='method'><a href="module-qr_zion.html#.qrCombine">qrCombine</a></li><li data-type='method'><a href="module-qr_zion.html#.qrCommon">qrCommon</a></li><li data-type='method'><a href="module-qr_zion.html#.qrComplex">qrComplex</a></li><li data-type='method'><a href="module-qr_zion.html#.qrForm">qrForm</a></li><li data-type='method'><a href="module-qr_zion.html#.qrInherit">qrInherit</a></li><li data-type='method'><a href="module-qr_zion.html#.qrInput">qrInput</a></li><li data-type='method'><a href="module-qr_zion.html#.qrMessage">qrMessage</a></li><li data-type='method'><a href="module-qr_zion.html#.qrNil">qrNil</a></li><li data-type='method'><a href="module-qr_zion.html#.qrNorm">qrNorm</a></li><li data-type='method'><a href="module-qr_zion.html#.qrOne">qrOne</a></li><li data-type='method'><a href="module-qr_zion.html#.qrOp">qrOp</a></li><li data-type='method'><a href="module-qr_zion.html#.qrTerms">qrTerms</a></li></ul></li><li><a href="module-random_zone.html">random/zone</a><ul class='methods'><li data-type='method'><a href="module-random_zone.html#.randomArray">randomArray</a></li><li data-type='method'><a href="module-random_zone.html#.randomInteger">randomInteger</a></li><li data-type='method'><a href="module-random_zone.html#.randomString">randomString</a></li><li data-type='method'><a href="module-random_zone.html#.randomUUID">randomUUID</a></li></ul></li><li><a href="module-remote_zion.html">remote/zion</a><ul class='methods'><li data-type='method'><a href="module-remote_zion.html#.ajaxEager">ajaxEager</a></li><li data-type='method'><a href="module-remote_zion.html#.asyncAssist">asyncAssist</a></li><li data-type='method'><a href="module-remote_zion.html#.asyncMagic">asyncMagic</a></li><li data-type='method'><a href="module-remote_zion.html#.asyncValidate">asyncValidate</a></li></ul></li><li><a href="module-remote_zodiac.html">remote/zodiac</a><ul class='methods'><li data-type='method'><a href="module-remote_zodiac.html#.ajax2Dialog">ajax2Dialog</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajax2Message">ajax2Message</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajax2True">ajax2True</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxDelete">ajaxDelete</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxDialog">ajaxDialog</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxDownload">ajaxDownload</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxError">ajaxError</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxFetch">ajaxFetch</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxGet">ajaxGet</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxMessage">ajaxMessage</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxPost">ajaxPost</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxPull">ajaxPull</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxPush">ajaxPush</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxPut">ajaxPut</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxResource">ajaxResource</a></li><li data-type='method'><a href="module-remote_zodiac.html#.ajaxUpload">ajaxUpload</a></li><li data-type='method'><a href="module-remote_zodiac.html#.asyncData">asyncData</a></li><li data-type='method'><a href="module-remote_zodiac.html#.asyncImage">asyncImage</a></li><li data-type='method'><a href="module-remote_zodiac.html#.asyncPromise">asyncPromise</a></li><li data-type='method'><a href="module-remote_zodiac.html#.asyncTrue">asyncTrue</a></li><li data-type='method'><a href="module-remote_zodiac.html#.asyncWrap">asyncWrap</a></li><li data-type='method'><a href="module-remote_zodiac.html#.microDelete">microDelete</a></li><li data-type='method'><a href="module-remote_zodiac.html#.microFetch">microFetch</a></li><li data-type='method'><a href="module-remote_zodiac.html#.microGet">microGet</a></li><li data-type='method'><a href="module-remote_zodiac.html#.microPost">microPost</a></li><li data-type='method'><a href="module-remote_zodiac.html#.microPush">microPush</a></li><li data-type='method'><a href="module-remote_zodiac.html#.microPut">microPut</a></li><li data-type='method'><a href="module-remote_zodiac.html#.sockOn">sockOn</a></li></ul></li><li><a href="module-rx_zero.html">rx/zero</a><ul class='methods'><li data-type='method'><a href="module-rx_zero.html#.rxEtat">rxEtat</a></li></ul></li><li><a href="module-rx_zest.html">rx/zest</a><ul class='methods'><li data-type='method'><a href="module-rx_zest.html#.rxBatch">rxBatch</a></li><li data-type='method'><a href="module-rx_zest.html#.rxBatchFn">rxBatchFn</a></li><li data-type='method'><a href="module-rx_zest.html#.rxCheckedRow">rxCheckedRow</a></li><li data-type='method'><a href="module-rx_zest.html#.rxCheckedTree">rxCheckedTree</a></li><li data-type='method'><a href="module-rx_zest.html#.rxClose">rxClose</a></li><li data-type='method'><a href="module-rx_zest.html#.rxCloseFn">rxCloseFn</a></li><li data-type='method'><a href="module-rx_zest.html#.rxOpen">rxOpen</a></li><li data-type='method'><a href="module-rx_zest.html#.rxOpenFn">rxOpenFn</a></li><li data-type='method'><a href="module-rx_zest.html#.rxRow">rxRow</a></li><li data-type='method'><a href="module-rx_zest.html#.rxRowFn">rxRowFn</a></li><li data-type='method'><a href="module-rx_zest.html#.rxSelected">rxSelected</a></li><li data-type='method'><a href="module-rx_zest.html#.rxSelectedFn">rxSelectedFn</a></li><li data-type='method'><a href="module-rx_zest.html#.rxShow">rxShow</a></li><li data-type='method'><a href="module-rx_zest.html#.rxShowFn">rxShowFn</a></li></ul></li><li><a href="module-rx_zion.html">rx/zion</a><ul class='methods'><li data-type='method'><a href="module-rx_zion.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-rx_zion.html#.rxDatum">rxDatum</a></li><li data-type='method'><a href="module-rx_zion.html#.rxEdict">rxEdict</a></li><li data-type='method'><a href="module-rx_zion.html#.rxResize">rxResize</a></li></ul></li><li><a href="module-rx_zodiac.html">rx/zodiac</a><ul class='methods'><li data-type='method'><a href="module-rx_zodiac.html#.rxSubmitting">rxSubmitting</a></li></ul></li><li><a href="module-secure_zodiac.html">secure/zodiac</a><ul class='methods'><li data-type='method'><a href="module-secure_zodiac.html#.aclData">aclData</a></li><li data-type='method'><a href="module-secure_zodiac.html#.aclOp">aclOp</a></li><li data-type='method'><a href="module-secure_zodiac.html#.aclSubmit">aclSubmit</a></li><li data-type='method'><a href="module-secure_zodiac.html#.digitSign">digitSign</a></li><li data-type='method'><a href="module-secure_zodiac.html#.digitToken">digitToken</a></li></ul></li><li><a href="module-sex_zero.html">sex/zero</a><ul class='methods'><li data-type='method'><a href="module-sex_zero.html#.sexBatch">sexBatch</a></li><li data-type='method'><a href="module-sex_zero.html#.sexCab">sexCab</a></li><li data-type='method'><a href="module-sex_zero.html#.sexDialog">sexDialog</a></li><li data-type='method'><a href="module-sex_zero.html#.sexIdentifier">sexIdentifier</a></li><li data-type='method'><a href="module-sex_zero.html#.sexMessage">sexMessage</a></li><li data-type='method'><a href="module-sex_zero.html#.sexModal">sexModal</a></li><li data-type='method'><a href="module-sex_zero.html#.sexOp">sexOp</a></li><li data-type='method'><a href="module-sex_zero.html#.sexTable">sexTable</a></li></ul></li><li><a href="module-smart_ui.html">smart/ui</a><ul class='methods'><li data-type='method'><a href="module-smart_ui.html#.smartForm">smartForm</a></li><li data-type='method'><a href="module-smart_ui.html#.smartList">smartList</a></li></ul></li><li><a href="module-sorter_zone.html">sorter/zone</a><ul class='methods'><li data-type='method'><a href="module-sorter_zone.html#.sorterAsc">sorterAsc</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterAscD">sorterAscD</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterAscDFn">sorterAscDFn</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterAscFn">sorterAscFn</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterAscT">sorterAscT</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterAscTFn">sorterAscTFn</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterDesc">sorterDesc</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterDescD">sorterDescD</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterDescDFn">sorterDescDFn</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterDescFn">sorterDescFn</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterDescT">sorterDescT</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterDescTFn">sorterDescTFn</a></li><li data-type='method'><a href="module-sorter_zone.html#.sorterObject">sorterObject</a></li></ul></li><li><a href="module-store_zodiac.html">store/zodiac</a><ul class='methods'><li data-type='method'><a href="module-store_zodiac.html#.storeApp">storeApp</a></li><li data-type='method'><a href="module-store_zodiac.html#.storeModule">storeModule</a></li><li data-type='method'><a href="module-store_zodiac.html#.storeUser">storeUser</a></li></ul></li><li><a href="module-to_zest.html">to/zest</a><ul class='methods'><li data-type='method'><a href="module-to_zest.html#.toFieldName">toFieldName</a></li></ul></li><li><a href="module-to_zion.html">to/zion</a><ul class='methods'><li data-type='method'><a href="module-to_zion.html#.toCss">toCss</a></li><li data-type='method'><a href="module-to_zion.html#.toCssA">toCssA</a></li><li data-type='method'><a href="module-to_zion.html#.toCssLogo">toCssLogo</a></li><li data-type='method'><a href="module-to_zion.html#.toGrid">toGrid</a></li><li data-type='method'><a href="module-to_zion.html#.toGridSpan">toGridSpan</a></li><li data-type='method'><a href="module-to_zion.html#.toHeight">toHeight</a></li><li data-type='method'><a href="module-to_zion.html#.toHeightState">toHeightState</a></li><li data-type='method'><a href="module-to_zion.html#.toHeightStyle">toHeightStyle</a></li><li data-type='method'><a href="module-to_zion.html#.toLink">toLink</a></li><li data-type='method'><a href="module-to_zion.html#.toLogout">toLogout</a></li><li data-type='method'><a href="module-to_zion.html#.toOriginal">toOriginal</a></li><li data-type='method'><a href="module-to_zion.html#.toPassword">toPassword</a></li><li data-type='method'><a href="module-to_zion.html#.toPid">toPid</a></li><li data-type='method'><a href="module-to_zion.html#.toRoute">toRoute</a></li><li data-type='method'><a href="module-to_zion.html#.toUnauthorized">toUnauthorized</a></li><li data-type='method'><a href="module-to_zion.html#.toUri">toUri</a></li><li data-type='method'><a href="module-to_zion.html#.toUrl">toUrl</a></li><li data-type='method'><a href="module-to_zion.html#.toVis">toVis</a></li><li data-type='method'><a href="module-to_zion.html#.toX">toX</a></li></ul></li><li><a href="module-to_zodiac.html">to/zodiac</a><ul class='methods'><li data-type='method'><a href="module-to_zodiac.html#.toAssist">toAssist</a></li><li data-type='method'><a href="module-to_zodiac.html#.toForm">toForm</a></li><li data-type='method'><a href="module-to_zodiac.html#.toFormUi">toFormUi</a></li><li data-type='method'><a href="module-to_zodiac.html#.toLimit">toLimit</a></li><li data-type='method'><a href="module-to_zodiac.html#.toTree">toTree</a></li><li data-type='method'><a href="module-to_zodiac.html#.toTreeArray">toTreeArray</a></li><li data-type='method'><a href="module-to_zodiac.html#.toTreeConfig">toTreeConfig</a></li><li data-type='method'><a href="module-to_zodiac.html#.toTreeTextArray">toTreeTextArray</a></li></ul></li><li><a href="module-to_zone.html">to/zone</a><ul class='methods'><li data-type='method'><a href="module-to_zone.html#.toArray">toArray</a></li><li data-type='method'><a href="module-to_zone.html#.toColor">toColor</a></li><li data-type='method'><a href="module-to_zone.html#.toCssClass">toCssClass</a></li><li data-type='method'><a href="module-to_zone.html#.toFileSize">toFileSize</a></li><li data-type='method'><a href="module-to_zone.html#.toJson">toJson</a></li><li data-type='method'><a href="module-to_zone.html#.toKV">toKV</a></li><li data-type='method'><a href="module-to_zone.html#.toKey">toKey</a></li><li data-type='method'><a href="module-to_zone.html#.toLoading">toLoading</a></li><li data-type='method'><a href="module-to_zone.html#.toMessage">toMessage</a></li><li data-type='method'><a href="module-to_zone.html#.toPagination">toPagination</a></li><li data-type='method'><a href="module-to_zone.html#.toProtocol">toProtocol</a></li><li data-type='method'><a href="module-to_zone.html#.toQuery">toQuery</a></li><li data-type='method'><a href="module-to_zone.html#.toQueryKv">toQueryKv</a></li><li data-type='method'><a href="module-to_zone.html#.toTime">toTime</a></li><li data-type='method'><a href="module-to_zone.html#.toWidth">toWidth</a></li></ul></li><li><a href="module-tree_zodiac.html">tree/zodiac</a><ul class='methods'><li data-type='method'><a href="module-tree_zodiac.html#.forest">forest</a></li><li data-type='method'><a href="module-tree_zodiac.html#.forestGroup">forestGroup</a></li><li data-type='method'><a href="module-tree_zodiac.html#.tree">tree</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeChildren">treeChildren</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeChildrenAll">treeChildrenAll</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeChildrenAllIn">treeChildrenAllIn</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeFlip">treeFlip</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeParent">treeParent</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeParentAll">treeParentAll</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeParentAllIn">treeParentAllIn</a></li><li data-type='method'><a href="module-tree_zodiac.html#.treeShared">treeShared</a></li></ul></li><li><a href="module-uca_economy.html">uca/economy</a><ul class='methods'><li data-type='method'><a href="module-uca_economy.html#.*PageCard">* PageCard</a></li><li data-type='method'><a href="module-uca_economy.html#.*Rectangle">* Rectangle</a></li><li data-type='method'><a href="module-uca_economy.html#.G6Editor">G6Editor</a></li><li data-type='method'><a href="module-uca_economy.html#.G6Viewer">G6Viewer</a></li><li data-type='method'><a href="module-uca_economy.html#.Graphic2">Graphic2</a></li><li data-type='method'><a href="module-uca_economy.html#.NavSwallow">NavSwallow</a></li><li data-type='method'><a href="module-uca_economy.html#.Navigation">Navigation</a></li><li data-type='method'><a href="module-uca_economy.html#.RowStar">RowStar</a></li></ul></li><li><a href="module-uca_zero.html">uca/zero</a><ul class='methods'><li data-type='method'><a href="module-uca_zero.html#.DataSource">DataSource</a></li><li data-type='method'><a href="module-uca_zero.html#.DatumUnique">DatumUnique</a></li><li data-type='method'><a href="module-uca_zero.html#.FormDesigner">FormDesigner</a></li><li data-type='method'><a href="module-uca_zero.html#.ParamInput">ParamInput</a></li><li data-type='method'><a href="module-uca_zero.html#.ParamPanel">ParamPanel</a></li><li data-type='method'><a href="module-uca_zero.html#.RestfulApi">RestfulApi</a></li><li data-type='method'><a href="module-uca_zero.html#.ValueSource">ValueSource</a></li></ul></li><li><a href="module-uca_zest.html">uca/zest</a><ul class='methods'><li data-type='method'><a href="module-uca_zest.html#.AddressSelector">AddressSelector</a></li><li data-type='method'><a href="module-uca_zest.html#.BraftEditor">BraftEditor</a></li><li data-type='method'><a href="module-uca_zest.html#.CheckJson">CheckJson</a></li><li data-type='method'><a href="module-uca_zest.html#.CheckTransfer">CheckTransfer</a></li><li data-type='method'><a href="module-uca_zest.html#.DialogEditor">DialogEditor</a></li><li data-type='method'><a href="module-uca_zest.html#.FileBatch">FileBatch</a></li><li data-type='method'><a href="module-uca_zest.html#.FileUpload">FileUpload</a></li><li data-type='method'><a href="module-uca_zest.html#.FileUpload">FileUpload</a></li><li data-type='method'><a href="module-uca_zest.html#.InputArray">InputArray</a></li><li data-type='method'><a href="module-uca_zest.html#.JsonEditor">JsonEditor</a></li><li data-type='method'><a href="module-uca_zest.html#.ListSelector">ListSelector</a></li><li data-type='method'><a href="module-uca_zest.html#.MagicView">MagicView</a></li><li data-type='method'><a href="module-uca_zest.html#.MatrixSelector">MatrixSelector</a></li><li data-type='method'><a href="module-uca_zest.html#.SearchInput">SearchInput</a></li><li data-type='method'><a href="module-uca_zest.html#.SearchRangeDate">SearchRangeDate</a></li><li data-type='method'><a href="module-uca_zest.html#.TableEditor">TableEditor</a></li><li data-type='method'><a href="module-uca_zest.html#.TreeSelector">TreeSelector</a></li></ul></li><li></li><li><a href="module-uca_zion.html">uca/zion</a><ul class='methods'><li data-type='method'><a href="module-uca_zion.html#.*Dialog">* Dialog</a></li><li data-type='method'><a href="module-uca_zion.html#.*DialogButton">* DialogButton</a></li><li data-type='method'><a href="module-uca_zion.html#.*DialogMenu">* DialogMenu</a></li><li data-type='method'><a href="module-uca_zion.html#.ColumnUser">ColumnUser</a></li><li data-type='method'><a href="module-uca_zion.html#.Dialog">Dialog</a></li><li data-type='method'><a href="module-uca_zion.html#.LoadingContent">LoadingContent</a></li><li data-type='method'><a href="module-uca_zion.html#~@uca">@uca</a></li></ul></li><li><a href="module-uca_zone.html">uca/zone</a><ul class='methods'><li data-type='method'><a href="module-uca_zone.html#.LoadingAlert">LoadingAlert</a></li><li data-type='method'><a href="module-uca_zone.html#.LoadingContent">LoadingContent</a></li><li data-type='method'><a href="module-uca_zone.html#.V4App">V4App</a></li><li data-type='method'><a href="module-uca_zone.html#.V4InputGroup">V4InputGroup</a></li></ul></li><li><a href="module-ui_zest.html">ui/zest</a><ul class='methods'><li data-type='method'><a href="module-ui_zest.html#.uiButton">uiButton</a></li><li data-type='method'><a href="module-ui_zest.html#.uiModal">uiModal</a></li><li data-type='method'><a href="module-ui_zest.html#.uiQrRange">uiQrRange</a></li><li data-type='method'><a href="module-ui_zest.html#.uiQrSearch">uiQrSearch</a></li><li data-type='method'><a href="module-ui_zest.html#.uiTitle">uiTitle</a></li></ul></li><li><a href="module-v4_zest.html">v4/zest</a><ul class='methods'><li data-type='method'><a href="module-v4_zest.html#.v4Child">v4Child</a></li><li data-type='method'><a href="module-v4_zest.html#.v4ChildItem">v4ChildItem</a></li><li data-type='method'><a href="module-v4_zest.html#.v4Items">v4Items</a></li></ul></li><li><a href="module-v4_zodiac.html">v4/zodiac</a><ul class='methods'><li data-type='method'><a href="module-v4_zodiac.html#.v4FormFailure">v4FormFailure</a></li></ul></li><li><a href="module-v4_zone.html">v4/zone</a><ul class='methods'><li data-type='method'><a href="module-v4_zone.html#.v4Icon">v4Icon</a></li><li data-type='method'><a href="module-v4_zone.html#.v4Message">v4Message</a></li><li data-type='method'><a href="module-v4_zone.html#.v4Modal">v4Modal</a></li><li data-type='method'><a href="module-v4_zone.html#.v4Notify">v4Notify</a></li></ul></li><li><a href="module-value_zest.html">value/zest</a><ul class='methods'><li data-type='method'><a href="module-value_zest.html#.valueIndicate">valueIndicate</a></li><li data-type='method'><a href="module-value_zest.html#.valueRequest">valueRequest</a></li><li data-type='method'><a href="module-value_zest.html#.valueTran">valueTran</a></li></ul></li><li><a href="module-value_zodiac.html">value/zodiac</a><ul class='methods'><li data-type='method'><a href="module-value_zodiac.html#.valueFabric">valueFabric</a></li><li data-type='method'><a href="module-value_zodiac.html#.valueFabrics">valueFabrics</a></li><li data-type='method'><a href="module-value_zodiac.html#.valueLimit">valueLimit</a></li><li data-type='method'><a href="module-value_zodiac.html#.valueQr">valueQr</a></li></ul></li><li><a href="module-value_zone.html">value/zone</a><ul class='methods'><li data-type='method'><a href="module-value_zone.html#.valueAppend">valueAppend</a></li><li data-type='method'><a href="module-value_zone.html#.valueArray">valueArray</a></li><li data-type='method'><a href="module-value_zone.html#.valueBoolean">valueBoolean</a></li><li data-type='method'><a href="module-value_zone.html#.valueCopy">valueCopy</a></li><li data-type='method'><a href="module-value_zone.html#.valueDatetime">valueDatetime</a></li><li data-type='method'><a href="module-value_zone.html#.valueDuration">valueDuration</a></li><li data-type='method'><a href="module-value_zone.html#.valueEndTime">valueEndTime</a></li><li data-type='method'><a href="module-value_zone.html#.valueExpr">valueExpr</a></li><li data-type='method'><a href="module-value_zone.html#.valueFactor">valueFactor</a></li><li data-type='method'><a href="module-value_zone.html#.valueFind">valueFind</a></li><li data-type='method'><a href="module-value_zone.html#.valueFloat">valueFloat</a></li><li data-type='method'><a href="module-value_zone.html#.valueInt">valueInt</a></li><li data-type='method'><a href="module-value_zone.html#.valueJDatetime">valueJDatetime</a></li><li data-type='method'><a href="module-value_zone.html#.valueLadder">valueLadder</a></li><li data-type='method'><a href="module-value_zone.html#.valueLink">valueLink</a></li><li data-type='method'><a href="module-value_zone.html#.valueMap">valueMap</a></li><li data-type='method'><a href="module-value_zone.html#.valueNow">valueNow</a></li><li data-type='method'><a href="module-value_zone.html#.valueOk">valueOk</a></li><li data-type='method'><a href="module-value_zone.html#.valuePair">valuePair</a></li><li data-type='method'><a href="module-value_zone.html#.valueParse">valueParse</a></li><li data-type='method'><a href="module-value_zone.html#.valuePath">valuePath</a></li><li data-type='method'><a href="module-value_zone.html#.valuePinyin">valuePinyin</a></li><li data-type='method'><a href="module-value_zone.html#.valueSTDN">valueSTDN</a></li><li data-type='method'><a href="module-value_zone.html#.valueStartTime">valueStartTime</a></li><li data-type='method'><a href="module-value_zone.html#.valueSubset">valueSubset</a></li><li data-type='method'><a href="module-value_zone.html#.valueT">valueT</a></li><li data-type='method'><a href="module-value_zone.html#.valueValid">valueValid</a></li></ul></li><li><a href="module-width_zest.html">width/zest</a><ul class='methods'><li data-type='method'><a href="module-width_zest.html#.widthWord">widthWord</a></li></ul></li><li><a href="module-write_zodiac.html">write/zodiac</a><ul class='methods'><li data-type='method'><a href="module-write_zodiac.html#.writeAssist">writeAssist</a></li><li data-type='method'><a href="module-write_zodiac.html#.writeClean">writeClean</a></li><li data-type='method'><a href="module-write_zodiac.html#.writeImpact">writeImpact</a></li><li data-type='method'><a href="module-write_zodiac.html#.writeLinker">writeLinker</a></li><li data-type='method'><a href="module-write_zodiac.html#.writeSubmit">writeSubmit</a></li><li data-type='method'><a href="module-write_zodiac.html#.writeTree">writeTree</a></li></ul></li><li></li><li><a href="module-x6_zero.html">x6/zero</a><ul class='methods'><li data-type='method'><a href="module-x6_zero.html#.x6FromTo">x6FromTo</a></li><li data-type='method'><a href="module-x6_zero.html#.x6IsDupEdge">x6IsDupEdge</a></li><li data-type='method'><a href="module-x6_zero.html#.x6IsFree">x6IsFree</a></li><li data-type='method'><a href="module-x6_zero.html#.x6IsLoop">x6IsLoop</a></li><li data-type='method'><a href="module-x6_zero.html#.x6IsUnmanaged">x6IsUnmanaged</a></li><li data-type='method'><a href="module-x6_zero.html#.x6UiDialog">x6UiDialog</a></li><li data-type='method'><a href="module-x6_zero.html#.x6UiToolbar">x6UiToolbar</a></li><li data-type='method'><a href="module-x6_zero.html#.x6oEdgeConnectedAfter">x6oEdgeConnectedAfter</a></li><li data-type='method'><a href="module-x6_zero.html#.x6oEdgeConnectedBefore">x6oEdgeConnectedBefore</a></li><li data-type='method'><a href="module-x6_zero.html#.x6oNodeRemovable">x6oNodeRemovable</a></li><li data-type='method'><a href="module-x6_zero.html#.x6oReset">x6oReset</a></li><li data-type='method'><a href="module-x6_zero.html#.x6oWindowClose">x6oWindowClose</a></li><li data-type='method'><a href="module-x6_zero.html#.x6oWindowSubmit">x6oWindowSubmit</a></li><li data-type='method'><a href="module-x6_zero.html#.x6xEdgeInit">x6xEdgeInit</a></li><li data-type='method'><a href="module-x6_zero.html#.x6xEdgeInitType">x6xEdgeInitType</a></li><li data-type='method'><a href="module-x6_zero.html#.x6xNodeFilter">x6xNodeFilter</a></li></ul></li><li><a href="module-xt_zion.html">xt/zion</a><ul class='methods'><li data-type='method'><a href="module-xt_zion.html#.xtChecked">xtChecked</a></li><li data-type='method'><a href="module-xt_zion.html#.xtExprFlat">xtExprFlat</a></li><li data-type='method'><a href="module-xt_zion.html#.xtFormat">xtFormat</a></li><li data-type='method'><a href="module-xt_zion.html#.xtGet">xtGet</a></li><li data-type='method'><a href="module-xt_zion.html#.xtInitArray">xtInitArray</a></li><li data-type='method'><a href="module-xt_zion.html#.xtInitArrayMap">xtInitArrayMap</a></li><li data-type='method'><a href="module-xt_zion.html#.xtInitFormat">xtInitFormat</a></li><li data-type='method'><a href="module-xt_zion.html#.xtInitObject">xtInitObject</a></li><li data-type='method'><a href="module-xt_zion.html#.xtLazyAjax">xtLazyAjax</a></li><li data-type='method'><a href="module-xt_zion.html#.xtLazyInit">xtLazyInit</a></li><li data-type='method'><a href="module-xt_zion.html#.xtLazyUp">xtLazyUp</a></li><li data-type='method'><a href="module-xt_zion.html#.xtReady">xtReady</a></li><li data-type='method'><a href="module-xt_zion.html#.xtRender">xtRender</a></li><li data-type='method'><a href="module-xt_zion.html#.xtReset">xtReset</a></li><li data-type='method'><a href="module-xt_zion.html#.xtRevert">xtRevert</a></li><li data-type='method'><a href="module-xt_zion.html#.xtRowAdd">xtRowAdd</a></li><li data-type='method'><a href="module-xt_zion.html#.xtRowChange">xtRowChange</a></li><li data-type='method'><a href="module-xt_zion.html#.xtRowDel">xtRowDel</a></li><li data-type='method'><a href="module-xt_zion.html#.xtSet">xtSet</a></li><li data-type='method'><a href="module-xt_zion.html#.xtTransfer">xtTransfer</a></li><li data-type='method'><a href="module-xt_zion.html#.xtUnsafe">xtUnsafe</a></li><li data-type='method'><a href="module-xt_zion.html#.xtUploadHandler">xtUploadHandler</a></li><li data-type='method'><a href="module-xt_zion.html#.xtUploadInit">xtUploadInit</a></li><li data-type='method'><a href="module-xt_zion.html#.xtUploadMime">xtUploadMime</a></li></ul></li></ul><h3>Interfaces</h3><ul><li><a href="BindContainer.html">BindContainer</a><ul class='methods'><li data-type='method'><a href="BindContainer.html#.__type">__type</a></li><li data-type='method'><a href="BindContainer.html#.bind">bind</a></li></ul></li><li><a href="DataContainer.html">DataContainer</a><ul class='methods'><li data-type='method'><a href="DataContainer.html#._">_</a></li><li data-type='method'><a href="DataContainer.html#.__type">__type</a></li><li data-type='method'><a href="DataContainer.html#.is">is</a></li><li data-type='method'><a href="DataContainer.html#.raw">raw</a></li><li data-type='method'><a href="DataContainer.html#.to">to</a></li></ul></li><li><a href="HocContainer.html">HocContainer</a><ul class='methods'><li data-type='method'><a href="HocContainer.html#.__type">__type</a></li><li data-type='method'><a href="HocContainer.html#.bind">bind</a></li><li data-type='method'><a href="HocContainer.html#.is">is</a></li><li data-type='method'><a href="HocContainer.html#.to">to</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@zero">@zero</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">constant/zone</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+            
+                <div class="description usertext"><h1>Zone 底座：常量定义</h1>
+<h2>使用</h2>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+
+const value = Ux.Env.xxx;
+</code></pre>
+<h2>常量分类</h2>
+<ol>
+<li><strong>系统变量</strong>：配置在 <strong>开发</strong> 和 <strong>生产</strong> 中的系统环境变量。</li>
+<li><strong>调试变量</strong>：配置在环境变量文件中以 <code>Z_DEV</code> 开头的变量。</li>
+<li><strong>类型常量</strong>：直接定义的用于类型定义的常量，部分类型常量和业务组件相关。</li>
+</ol>
+<h2>核心点：</h2>
+<ul>
+<li>没有在API文档中追加注释的环境变量您可以直接从云端白皮书中查看。</li>
+<li>和环境变量相关的常量您可以直接在标题中看到环境变量名，左侧目录中是 <code>Ux.Env.XXX</code> 中的 <code>XXX</code> 部分，针对环境变量的常量引用不考虑 <code>Z_</code> 前缀。</li>
+<li><code>Meta</code> 前缀的变量存储的都是名称元数据，您可以使用该名称从浏览器中的 <code>SessionStorage</code> 和 <code>LocalStorage</code> 中直接提取对应键值中包含的数据。</li>
+<li><code>Value</code> 前缀的变量为全局值，Zero UI扩展框架中的核心值相关信息。</li>
+</ul>
+<hr/></div>
+            
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id=".(?ENV)"><span class="type-signature">(static, constant) </span>(?ENV)<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>(ENV) 标准环境变量</h2>
+<p>标准环境变量教程可参考：<a href="https://www.vertx-cloud.cn/document/doc-web/index.html#_%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F_2">5.1.3.环境变量</a></p>
+<h3>环境变量文件</h3>
+<p>环境变量文件位于根目录之下，从 <code>.env.development.tpl</code> 文件拷贝而来，若您下载的是最新的脚手架，内部会包含环境变量模板文件，直接拷贝即可。</p>
+<ol>
+<li><code>.env.development</code>：开发环境环境变量文件。</li>
+<li><code>.env.production</code>：生产环境环境变量文件。</li>
+</ol>
+<h3>核心点</h3>
+<ul>
+<li>所有自定义的环境变量在文件中都带有 <code>Z_</code> 前缀。</li>
+<li>使用 <code>Ux.Env</code> 引用环境变量时，不需要 <code>Z_</code> 前缀，直接去掉 <code>Z_</code> 即可引用。</li>
+<li>有两个核心变量是关乎前后端的
+<ul>
+<li><code>Z_ROUTE</code>：前端路由内容路径前缀，不同应用其前缀有所区别，通常绑定 <strong>应用</strong> 或 <strong>租户</strong>。</li>
+<li><code>Z_ENDPOINT</code>：后端服务端点前缀，访问不同接口时会有所区别。</li>
+</ul>
+</li>
+<li>所有样式相关的环境变量都带有 <code>Z_CSS</code> 前缀。</li>
+<li>登录会话（当前账号）类的变量都带有 <code>Z_K</code> 前缀，且扩展出来后都会带上当前账号ID做合并计算。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".CHANGE"><span class="type-signature">(static, constant) </span>CHANGE<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>变更模式</h2>
+<h3>基本说明</h3>
+<p>变更模式主要用于变更记录、数据比对、以及操作反射等综合性场景，现阶段支持的变更模式主要包括：</p>
+<ol>
+<li>ADD：新增</li>
+<li>REPLACE：更新/替换</li>
+<li>APPEND：更新/追加</li>
+<li>DELETE：删除</li>
+</ol>
+<blockquote>
+<p>追加和替换单独拎出来作为变更的两种扩展模式，在传统系统中默认使用的是替换的更新模式，而此处有追加之后您的变更模式就会潜移默化发生该变。</p>
+</blockquote>
+<p>模式的细分主要是为了处理多种场景：</p>
+<ol>
+<li>输入属性的清空操作，在 Zero UI 中，系统采用了 JavaScript 中的两个特殊值：
+<ul>
+<li><code>undefined</code>：表示属性不存在，此时系统会认为该属性不执行任何操作，跳过变更。</li>
+<li>null：表示属性存在，但值为空，此时系统会认为该属性执行删除操作（清空）。</li>
+</ul>
+</li>
+<li>追加操作，追加操作主要用于特定对象的合并，默认值 + 更新值，可实现：
+<ul>
+<li>更新值优先：REPLACE 替换模式</li>
+<li>默认值优先：APPEND 追加模式</li>
+</ul>
+</li>
+</ol>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".CV_DELETE"><span class="type-signature">(static, constant) </span>CV_DELETE<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Value：删除值</h2>
+<h3>基本说明</h3>
+<p>系统默认的删除标记值，值为 <code>__DELETE__</code>，用来标记删除的数据，提供给前端做移除。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".CV_EXPAND"><span class="type-signature">(static, constant) </span>CV_EXPAND<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Value：展开菜单值</h2>
+<p>（略）同 <code>Ux.Env.VALUE.EXPAND</code></p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".CV_FORBIDDEN"><span class="type-signature">(static, constant) </span>CV_FORBIDDEN<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Value：权限限制值</h2>
+<h3>基本说明</h3>
+<p>在ACL的权限控制中，表单数据分为三态：</p>
+<ul>
+<li>可编辑</li>
+<li>只读</li>
+<li>有数据不可查看：如果有数据不可查看，则会显示成 FORBIDDEN 设置的值。</li>
+</ul>
+<p>这个变量只会在ACL权限控制中使用，其他地方不可使用，该变量会隐藏真实数据而导致数据本身不可查看。</p>
+<blockquote>
+<p>通常意义上，显示成********的数据是不可编辑的，因为编辑会带来副作用，所以表单从原始的四态变成了三态。</p>
+</blockquote>
+<p>表单的状态表格如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">维度</th>
+<th>有权限</th>
+<th>无权限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">可编辑</td>
+<td>编辑数据</td>
+<td>x（不支持）</td>
+</tr>
+<tr>
+<td style="text-align:right">只读</td>
+<td>显示数据</td>
+<td>********</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEBUG"><span class="type-signature">(static, constant) </span>DEBUG<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>全局调试参数（跨环境）<code>Z_DEV_DEBUG</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_DEV_DEBUG</code></li>
+</ul>
+<p>启用 Zero UI 专用调试参数，此参数主要用来屏蔽 <code>console.log / console.info </code> 等日志信息，这些日志信息在开发环境可生效，但在生产环境尽可能少地打印相关信息实现日志的清晰化。</p>
+<h3>示例</h3>
+<pre class="prettyprint source lang-js"><code>// 直接调用 Ux 执行判断
+
+// 「内部」
+import Cv from './constant';
+if(Cv.DEBUG){
+    // 内部，研发模式代码
+}
+
+// 「外部」
+import Ux from 'ux';
+if(Ux.Env.DEBUG){
+    // 外部，开发模式代码
+}
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEBUG_AJAX"><span class="type-signature">(static, constant) </span>DEBUG_AJAX<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Ajax调试参数 <code>Z_DEV_AJAX</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_DEV_AJAX</code></li>
+<li>依赖：<code>process.env.Z_DEV_MOCK</code></li>
+</ul>
+<p>启用Ajax请求的专用监控流，启用之后，您可以在浏览器的 console 中直接看到所有Ajax的请求信息：</p>
+<ol>
+<li>请求详细信息，包括请求头、请求体。</li>
+<li>响应详细信息，包括响应头、响应体。</li>
+<li>数字签名相关信息。</li>
+<li>应用相关自定义头相关信息。</li>
+<li>Qr 查询引擎请求信息。</li>
+</ol>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEBUG_DEV"><span class="type-signature">(static, constant) </span>DEBUG_DEV<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>全局调试参数（开发）<code>Z_DEBUG_DEV</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_DEV_DEBUG / process.env.NODE_ENV</code></li>
+</ul>
+<p>启用 Zero UI 框架中的调试参数以及 NodeJS 原生环境来控制调试信息，调试信息只有在如下条件满足时可触发：</p>
+<ol>
+<li>NodeJS原生环境：<code>NODE_ENV=development</code> 开发环境才触发。</li>
+<li>ZeroUI环境：<code>Z_DEV_DEBUG=true</code> 打开调试模式才可。</li>
+</ol>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEBUG_FORM"><span class="type-signature">(static, constant) </span>DEBUG_FORM<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>表单渲染器调试参数 <code>Z_DEV_FORM</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_DEV_FORM</code></li>
+</ul>
+<p>新版表单日志是中文，表单渲染器主要包含如下日志信息：</p>
+<ol>
+<li>表单基本布局信息。</li>
+<li>表单行额外配置信息。</li>
+<li>表单单元格中的 <code>optionItem</code> 和 <code>optionJsx</code> 相关信息。</li>
+<li>表单初始化数据信息。</li>
+<li>提交和加载流程中的表单数据信息。</li>
+</ol>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEBUG_QR"><span class="type-signature">(static, constant) </span>DEBUG_QR<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Qr调试参数 <code>Z_DEV_QR</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_DEV_QR</code></li>
+</ul>
+<p>针对Qr引擎的专用调试参数，启用之后，您可以在浏览器的 console 中直接看到所有Qr引擎的请求信息，该参数目前主要面相 <code>ExListComplex</code> 组件，您可以在此组件中监控核心变量相关信息。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".DEV"><span class="type-signature">(static, constant) </span>DEV<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>开发参数</h2>
+<h3>基本说明</h3>
+<p>针对特定场景做调试的专用参数，该参数可让您在调试过程中跳过某些步骤或直接执行后续流程。</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th style="text-align:left">参数值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SKIP_VALIDATE</code></td>
+<td style="text-align:left"><code>__SKIP_VALIDATE</code></td>
+<td style="text-align:left">跳过验证流程，直接执行下一步。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".ENTRY_ADMIN"><span class="type-signature">(static, constant) </span>ENTRY_ADMIN<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>管理页 <code>Z_ENTRY_ADMIN</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_ENTRY_ADMIN</code></li>
+<li>依赖：<code>process.env.Z_ROUTE</code></li>
+</ul>
+<p>前端管理界面的主界面，您可以重新定义主界面，语义为：登录之后第一次合法进入的管理首页。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".ENTRY_FIRST"><span class="type-signature">(static, constant) </span>ENTRY_FIRST<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>密码更改页 <code>Z_ENTRY_FIRST</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_ENTRY_FIRST</code></li>
+<li>依赖：<code>process.env.Z_ROUTE</code></li>
+</ul>
+<p>首次登录之后，需要更改密码的页面，您可以重新定义该页面，在Zero UI中，如果您的初始密码和服务端配置的初始密码一致，系统会强制要求您首次登录之后引导到此页面完成密码修改，停留在密码修改页时，您无法进行任何操作，直到密码修改完成后重新登录。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".ENTRY_LOGIN"><span class="type-signature">(static, constant) </span>ENTRY_LOGIN<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>登录页 <code>Z_ENTRY_LOGIN</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_ENTRY_LOGIN</code></li>
+<li>依赖：<code>process.env.Z_ROUTE</code></li>
+</ul>
+<p>Zero UI开发完成后的登录首页，您可自定义登录首页的路由地址，该地址不包含 <code>Z_ROUTE</code> 的路由部分，不仅此处，Zero UI 内部存储的所有路由信息都不包含 <code>Z_ROUTE</code> 的前端路由定义，前端路由定义是一个全局定义。例：</p>
+<pre class="prettyprint source lang-shell"><code>定义了前端页面地址为：      /rbac/user
+Z_ROUTE：                ht
+最终生成页面为：           /ht/rbac/user（react-router 可捕捉的地址）
+</code></pre>
+<p>根据上述例子，最终的前端路由地址为：<code>/ht/rbac/user</code>，而不是 <code>/rbac/user</code>，即所有页面都是计算而得，如此所有的页面在不同的应用和租户环境中可直接重用。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".E_TYPE"><span class="type-signature">(static, constant) </span>E_TYPE<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>数据类型</h2>
+<h3>基本说明</h3>
+<p>建模专用的类型变量，全称为 <code>Entity Type</code>，简称为 <code>E Type</code>，包括如下值：</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>E_TYPE.DATA_OBJECT</code></td>
+<td><code>DataObject</code></td>
+<td>自定义类型中的 <code>DataObject</code></td>
+</tr>
+<tr>
+<td><code>E_TYPE.DATA_ARRAY</code></td>
+<td><code>DataArray</code></td>
+<td>自定义类型中的 <code>DataArray</code></td>
+</tr>
+<tr>
+<td><code>E_TYPE.DATA_ASSIST</code></td>
+<td><code>DataAssist</code></td>
+<td>自定义类型中的 <code>DataAssist</code>，辅助字典</td>
+</tr>
+<tr>
+<td><code>E_TYPE.DATA_TABULAR</code></td>
+<td><code>DataTabular</code></td>
+<td>自定义类型中的 <code>DataTabular</code>，列表字典</td>
+</tr>
+<tr>
+<td><code>E_TYPE.NAVIGATOR</code></td>
+<td><code>Navigator</code></td>
+<td>自定义类型中的 <code>Navigator</code>，路由对象</td>
+</tr>
+</tbody>
+</table>
+<h3>核心点</h3>
+<p>前端自定义类型在 <code>TypeScript</code> 中定义，用于提供统一的API访问模型实例下的记录集，您可以直接使用此类型对基础类型执行封装，内部带有防御式编程的特性，可以有效的保证数据的安全性。</p>
+<h3>示例：<code>src/zone/fn.under.is.decision.js</code></h3>
+<pre class="prettyprint source lang-js"><code>const isTObject = (input) => {
+    if (isTEntity(input)) {
+        return __V_MODEL.E_TYPE.DATA_OBJECT === input.__type();
+    } else return false;
+}
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".FORBIDDEN"><span class="type-signature">(static, constant) </span>FORBIDDEN<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd class="yes-def tag-deprecated"><ul class="dummy"><li>Yes</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Value：权限限制值（旧）</h2>
+<p>新版推荐使用 <code>Ux.Env.CV_FORBIDDEN</code> 常量。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".GRID"><span class="type-signature">(static, constant) </span>GRID<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>App：布局专用</h2>
+<h3>基本说明</h3>
+<p>布局专用，统一布局 Col 比例（支持自适应效果），针对列表类工具栏专用布局：</p>
+<ul>
+<li><code>LIST_NE</code>: <code>---- ------------ --------</code>：不带 Extra 的列表布局</li>
+<li><code>LIST_E</code>：<code>---- -------- -------- ----</code>：标准列表布局</li>
+<li><code>LIST_TT</code>：<code>--- ---------- --------- --</code>：任务系统列表布局</li>
+<li><code>LIST_WF</code>：<code>--- -- --------------- ----</code>：工作流列表布局</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".HTTP11"><span class="type-signature">(static, constant) </span>HTTP11<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>HTTP11常量</h2>
+<h3>基本说明</h3>
+<p>HTTP11 中的请求头所有标准协议常量，该常量的命名规则如下：</p>
+<ul>
+<li>将原始请求头全部大写。</li>
+<li>所有的<code>-</code>转换成<code>_</code>生成对应的键值的。</li>
+</ul>
+<p>使用的参考代码如下：</p>
+<pre class="prettyprint source lang-js"><code>// 下载专用头设置，客户端只接受 octet-stream 格式
+headers.append(Cv.HTTP11.ACCEPT, &quot;application/octet-stream&quot;);
+headers.append(Cv.HTTP11.CONTENT_TYPE, &quot;application/octet-stream&quot;);
+</code></pre>
+<h3>值列表</h3>
+<p>目前版本支持的值列表（所有定义）：</p>
+<pre class="prettyprint source lang-json"><code>     {
+        &quot;ACCEPT&quot;: &quot;Accept&quot;,
+        &quot;ACCEPT_CHARSET&quot;: &quot;Accept-Charset&quot;,
+        &quot;ACCEPT_ENCODING&quot;: &quot;Accept-Encoding&quot;,
+        &quot;ACCEPT_LANGUAGE&quot;: &quot;Accept-Language&quot;,
+        &quot;ACCEPT_RANGES&quot;: &quot;Accept-Ranges&quot;,
+        &quot;AGE&quot;: &quot;Age&quot;,
+        &quot;ALLOW&quot;: &quot;Allow&quot;,
+        &quot;AUTHORIZATION&quot;: &quot;Authorization&quot;,
+        &quot;CACHE_CONTROL&quot;: &quot;Cache-Control&quot;,
+        &quot;CONNECTION&quot;: &quot;Connection&quot;,
+        &quot;CONTENT_BASE&quot;: &quot;Content-Base&quot;,
+        &quot;CONTENT_ENCODING&quot;: &quot;Content-Encoding&quot;,
+        &quot;CONTENT_LENGTH&quot;: &quot;Content-Length&quot;,
+        &quot;CONTENT_LOCATION&quot;: &quot;Content-Location&quot;,
+        &quot;CONTENT_MD5&quot;: &quot;Content-MD5&quot;,
+        &quot;CONTENT_RANGE&quot;: &quot;Content-Range&quot;,
+        &quot;CONTENT_TYPE&quot;: &quot;Content-Type&quot;,
+        &quot;DATE&quot;: &quot;Date&quot;,
+        &quot;ETAG&quot;: &quot;ETag&quot;,
+        &quot;EXPIRES&quot;: &quot;Expires&quot;,
+        &quot;FORM&quot;: &quot;Form&quot;,
+        &quot;HOST&quot;: &quot;Host&quot;,
+        &quot;IF_MODIFIED_SINCE&quot;: &quot;If-Modified-Since&quot;,
+        &quot;IF_MATCH&quot;: &quot;If-Match&quot;,
+        &quot;IF_NONE_MATCH&quot;: &quot;If-None-Match&quot;,
+        &quot;IF_RANGE&quot;: &quot;If-Range&quot;,
+        &quot;IF_UNMODIFIED_SINCE&quot;: &quot;If-Unmodified-Since&quot;,
+        &quot;LAST_MODIFIED&quot;: &quot;Last-Modified&quot;,
+        &quot;LOCATION&quot;: &quot;Location&quot;,
+        &quot;MAX_FORWARDS&quot;: &quot;Max-Forwards&quot;,
+        &quot;PRAGMA&quot;: &quot;Pragma&quot;,
+        &quot;PROXY_AUTHENTICATE&quot;: &quot;Proxy-Authenticate&quot;,
+        &quot;PROXY_AUTHORIZATION&quot;: &quot;Proxy-Authorization&quot;,
+        &quot;PUBLIC&quot;: &quot;Public&quot;,
+        &quot;RANGE&quot;: &quot;Range&quot;,
+        &quot;REFENER&quot;: &quot;Refener&quot;,
+        &quot;RETRY_AFTER&quot;: &quot;Retry-After&quot;,
+        &quot;SERVER&quot;: &quot;Server&quot;,
+        &quot;TRANSFER_ENCODING&quot;: &quot;Transfer-Encoding&quot;,
+        &quot;UPGRADE&quot;: &quot;Upgrade&quot;,
+        &quot;USER_AGENT&quot;: &quot;User-Agent&quot;,
+        &quot;VARY&quot;: &quot;Vary&quot;,
+        &quot;WARNING&quot;: &quot;Warning&quot;,
+        &quot;WWW_AUTHENTICATE&quot;: &quot;WWW-Authenticate&quot;,
+        &quot;XSRF_TOKEN&quot;: &quot;X-XSRF-TOKEN&quot;
+    }
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".HTTP_METHOD"><span class="type-signature">(static, constant) </span>HTTP_METHOD<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>HTTP方法常量</h2>
+<h3>基本说明</h3>
+<p>HTTP方法常量，目前支持：<code>GET, POST, PUT, DELETE</code>四种，值是全小写，在程序执行过程中会去执行大写转换，现阶段针对HTTP方法的实现只包含业务场景最常见的四种，而不考虑其他的HTTP方法。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".KEY_APP"><span class="type-signature">(static, constant) </span>KEY_APP<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：应用配置</h2>
+<h3>常量说明</h3>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+const storeKey = Ux.Env.KEY_APP;
+</code></pre>
+<p>多应用环境的当前应用的主键信息，对应后端 <code>X_APP</code> 表中的主键数据，该键值中的数据存储在 LocalStorage 中，当用户第一次打开登录页面，会访问应用程序接口提取应用程序相关配置，配置会走两部分：</p>
+<ol>
+<li>公有应用配置数据：<code>/app/name/:name</code> 访问（返回中不带有 <code>appKey</code>，只有 <code>appId</code>）</li>
+<li>私有应用配置数据：<code>/api/app/:key</code> 访问（返回中带有 <code>appKey</code>）</li>
+</ol>
+<blockquote>
+<p>存储了应用的全配置</p>
+</blockquote>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".KEY_EVENT"><span class="type-signature">(static, constant) </span>KEY_EVENT<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：Redux专用键名</h2>
+<h3>基本说明</h3>
+<p>SessionStorage 专用的存储键值，存储 Redux 的事件专用信息，所有执行了 redux 的事件前缀都以环境变量中配置的
+<code>Z_K_EVENT</code>为前缀，不同的应用这个值应该不一致，主要用来实现多应用分流。当前前端中对 redux 的使用主要在整个
+状态树的顶层，而兄弟节点的通讯走 redux 而不是走状态。</p>
+<ul>
+<li>本组件内部使用props和state传递数据，包括数据继承。</li>
+<li>跨组件之间传递数据则使用redux，目前最多应用于外层按钮和里层按钮的房重复提交同步操作。</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".KEY_MDATA"><span class="type-signature">(static, constant) </span>KEY_MDATA<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：调试存储键名</h2>
+<p>用来存储 <code>Monitor</code> 专用的调试信息，该信息会在 <code>Monitor</code> 中被使用。</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".KEY_USER"><span class="type-signature">(static, constant) </span>KEY_USER<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：登录用户配置</h2>
+<h3>基本说明</h3>
+<p>SessionStorage 专用的存储键值，存储当前用户登录信息，当用户点击了登录按钮过后，返回的用户登录数据会存储
+在该键值中，里面存储的是用户数据的对象，其中最核心的字段如：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">key</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">用户主键（标准）</td>
+</tr>
+<tr>
+<td style="text-align:left">uniqueId</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">用户全局唯一键（遗留系统专用）</td>
+</tr>
+<tr>
+<td style="text-align:left">userId</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">Spring桥接专用，大部分系统都使用了userId作主键</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".K_ARG"><span class="type-signature">(static, constant) </span>K_ARG<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>特殊参数名</h2>
+<h3>基本说明</h3>
+<p>该常量存储了 Zero Extension 的扩展框架中存在的核心参数名，这些参数名会用来做特殊读取和处理，且防止和其他参数名冲突。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数调用</th>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_ARG.PID</code></td>
+<td style="text-align:left">pid</td>
+<td style="text-align:left">页面ID，通常是菜单 <code>X_MENU</code> 的 <code>KEY</code> 列的值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_ARG.MID</code></td>
+<td style="text-align:left">mid</td>
+<td style="text-align:left">模块ID，通常是模块表 <code>X_MODULE</code> 的 <code>KEY</code> 列的值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_ARG.TID</code></td>
+<td style="text-align:left">tid</td>
+<td style="text-align:left">任务ID，工作流专用，对应到 <code>X_TODO</code> 的 <code>KEY</code> 列的值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_ARG.AID</code></td>
+<td style="text-align:left">aid</td>
+<td style="text-align:left">应用ID，通常会对应到 <code>X_APP</code> 的 <code>KEY</code> 列的值。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_ARG.ID</code></td>
+<td style="text-align:left">key</td>
+<td style="text-align:left">主键专用。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_ARG.TARGET</code></td>
+<td style="text-align:left">target</td>
+<td style="text-align:left">目标页的URL地址，一般会做 <code>Base64</code> 编码，用于传递参数，当跳出应用回到环境时可指定上一个页面。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_ARG.QR</code></td>
+<td style="text-align:left">*</td>
+<td style="text-align:left">查询引擎专用的四个核心参数：<code>pager, sorter, projection, criteria</code>。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".K_NAME"><span class="type-signature">(static, constant) </span>K_NAME<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>名称常量</h2>
+<h3>基本说明</h3>
+<p>命名的基本规则有如下几种：</p>
+<ul>
+<li>不带任何变量前缀的如：<code>Ux.Env.K_NAME.VISIBLE</code>，使用 <code>$</code> 符号作为属性前缀，表示：<code>$visible</code>。</li>
+<li>下划线前缀变量如：<code>Ux.Env.K_NAME._PAGER</code>，表示纯属性，如：<code>pager</code>。</li>
+<li><code>$</code>符号前缀变量：AntD中的专用变量（旧版），如 <code>data-__meta</code> 这种格式。</li>
+</ul>
+<p>其中还存在一个特殊变量：<code>Ux.Env.K_NAME.V_COLUMN</code>，和列表页中列相关的变量。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".K_UI"><span class="type-signature">(static, constant) </span>K_UI<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>UI常量</h2>
+<h3>基本说明</h3>
+<p>该常量仅用于界面相关元素 <code>&lt;hidden/&gt;</code> 的ID，用于做HTML中连接元素专用常量，目前包含：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">常量名</th>
+<th style="text-align:left">常量值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_UI.PATTERN</code></td>
+<td style="text-align:left"><code>__PATTERN__</code></td>
+<td style="text-align:left">建模专用变量，描述标识规则选择器选择标识规则时的匹配模式。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_UI.ELE_HEADER</code></td>
+<td style="text-align:left"><code>__ELE_HEADER</code></td>
+<td style="text-align:left">界面专用变量，描述界面中的头部元素，做顶部菜单处理的模式。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_UI.BTN_TREE_ON</code></td>
+<td style="text-align:left"><code>__BTN_TREE_ON</code></td>
+<td style="text-align:left">树型展开用的隐藏变量</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_UI.BTN_TREE_OFF</code></td>
+<td style="text-align:left"><code>__BTN_TREE_OFF</code></td>
+<td style="text-align:left">树型收起用的隐藏变量</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_UI.BTN_CLEAR_PREFIX</code></td>
+<td style="text-align:left"><code>__BTN_CLEAR_</code></td>
+<td style="text-align:left">单字段列过滤清空专用隐藏ID，可和某个字段连接。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_UI.BTN_CLEAR_SEARCH</code></td>
+<td style="text-align:left"><code>__BTN_CLEAR_SEARCH</code></td>
+<td style="text-align:left">搜索框清空专用隐藏ID。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.K_UI.BTN_CLEAR_KEYWORD</code></td>
+<td style="text-align:left"><code>__BTN_CLEAR_KEYWORD</code></td>
+<td style="text-align:left">清空关键字专用隐藏ID。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".K_VALUE"><span class="type-signature">(static, constant) </span>K_VALUE<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>特殊值</h2>
+<h3>基本说明</h3>
+<p>系统专用特殊值，等价变量为：</p>
+<ul>
+<li><code>Ux.Env.VALUE</code>：描述的是业务值</li>
+<li><code>Ux.Env.CV_</code>：描述的是全局常量</li>
+<li><code>Ux.Env.K_VALUE</code>：描述的是系统值。</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".LANGUAGE"><span class="type-signature">(static, constant) </span>LANGUAGE<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>语言环境 <code>Z_LANGUAGE</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_LANGUAGE</code></li>
+</ul>
+<p>自定义环境变量，您可以使用该环境变量读取前端程序配置的语言信息，语言变量的影响：</p>
+<ol>
+<li>语言变量会影响读取资源文件的目录：<code>cab/&lt;language&gt;/</code> 中读取前端静态资源文件。</li>
+<li>语言变量会影响远程请求的 <code>X-Lang</code> 请求头，该请求头用于告诉服务端当前前端程序的语言环境。</li>
+</ol>
+<blockquote>
+<p>凡牵涉多语言环境的地方都可以直接提取语言环境变量做语言相关判断。</p>
+</blockquote>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".MIMES"><span class="type-signature">(static, constant) </span>MIMES<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>MIME常量</h2>
+<h3>基本说明</h3>
+<p>系统常用的MIME值，用于设置<code>Accept/Content-Type</code>等基础媒体类型值。目前系统中的值如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">代码调用</th>
+<th style="text-align:left">值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Ux.Env.MIMES.JSON</code></td>
+<td style="text-align:left">application/json</td>
+<td style="text-align:left">JSON媒体类型</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.MIMES.MULTIPART</code></td>
+<td style="text-align:left">multipart/form-data</td>
+<td style="text-align:left">（略）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.MIMES.FORM</code></td>
+<td style="text-align:left">application/x-www-form-urlencoded</td>
+<td style="text-align:left">（略）</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.MIMES.STREAM</code></td>
+<td style="text-align:left">application/octet-stream</td>
+<td style="text-align:left">二进制文件类型，上传下载用</td>
+</tr>
+</tbody>
+</table>
+<p>您可以定义各种不同的支撑系统运行的</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".MOCK"><span class="type-signature">(static, constant) </span>MOCK<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>模拟环境（测试） <code>Z_DEV_MOCK</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_DEV_MOCK</code></li>
+</ul>
+<h3>基本说明</h3>
+<p>启用 Zero UI 中的模拟环境，该环境一旦启用，可执行纯前端开发模式，和远程相关的请求可直接使用 <code>JS/Json</code> 两种不同方式执行模拟。</p>
+<ol>
+<li>模拟环境的数据目录通常为 <code>app@mock</code> 目录。</li>
+<li>全局模拟参数依赖于 <code>Z_DEV_MOCK</code> 环境变量，单接口模拟参数依赖数据结构中的 <code>mock</code> 属性。</li>
+<li>模拟环境开启后可直接隔离后端实现前端独立开发，所有 <code>ajax</code> 前缀的请求都会直接被引导到模拟数据中。</li>
+<li>除此之外，您还可以在模拟环境中使用 IndexedDB 来模拟数据库，这样可以实现前端的独立开发。</li>
+</ol>
+<h3>Mock规则</h3>
+<p>mock环境存储在<code>src/mock</code>目录中，并且包含模拟环境的生成规则，构造 mockKey 的规则如下：</p>
+<ol>
+<li>基本键值对应：<code>HTTP方法 + 下划线 + URI路径（ / 转换成 _ ）</code>。</li>
+<li>URI路径除了基本规则以外，<code>:id</code>和<code>:key</code>可直接被还原，如<code>/api/user/:key</code>的真实访问路径为<code>/api/user/xxxxxxxxxx</code>，则可被还原成<code>_api_user_:key</code>作为mockKey来使用。</li>
+</ol>
+<h3>Mock入口文件</h3>
+<p>mock入口文件如下：</p>
+<pre class="prettyprint source lang-js"><code>export default {
+     // -------------------------------------------------- 全局
+     post_Login_user_login: 登录主接口,
+     post_api_user_logout: 注销主接口,
+     &quot;post_Login_user_get-app-list&quot;: 读取主页菜单,
+     &quot;post_Login_user_get-menu-list&quot;: 读取所有菜单,
+     get_api_tenant: 读取租户列表,
+
+     // ......
+}
+</code></pre>
+<h3>Mock数据结构</h3>
+<p>mock文件内部的数据结构如下：</p>
+<pre class="prettyprint source lang-js"><code>export default {
+     mock: true,
+     processor: (
+         data = {},      // 「响应」对应 data 节点的数据，可以Object也可以Array
+         params          // 「请求」对应当前请求数据
+     ) => {
+         // 返回 Promise
+     },
+     data: [
+     ]
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">参数</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">mock</td>
+<td style="text-align:left">boolean</td>
+<td style="text-align:left">是否单独开关当前mock环境，只有mock打开才生效，如果设置false，则请求不走Mock流程。</td>
+</tr>
+<tr>
+<td style="text-align:right">data</td>
+<td style="text-align:left">Object/Array</td>
+<td style="text-align:left">模拟数据类型，可模拟成想要的数据类型做纯前端开发。</td>
+</tr>
+<tr>
+<td style="text-align:right">processor</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">函数类型，可以在data基础之上实现响应数据格式的初步转换。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".MONITOR"><span class="type-signature">(static, constant) </span>MONITOR<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>监控器参数 <code>Z_DEV_MONITOR</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_DEV_MONITOR</code></li>
+<li>依赖：<code>process.env.Z_DEV_DEBUG</code></li>
+</ul>
+<p>Zero UI中存在数据流监控器，配合 <code>redux</code> 实现针对交互过程的整体监控，该参数用于开启监控器，监控器的使用方式如下：</p>
+<ol>
+<li>直接点击 <code>Esc</code> 按键可打开监控面板。</li>
+<li>监控面板中会包括当前页面的所有数据流信息。</li>
+<li>可用于监控props中的变量变化信息。</li>
+<li>可用于监控state中的变量变化信息。</li>
+</ol>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".PAGE_APP"><span class="type-signature">(static, constant) </span>PAGE_APP<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：应用页键名</h2>
+<blockquote>
+<p>路由规划专用</p>
+</blockquote>
+<h3>基本说明</h3>
+<p>用于存储当前应用路由的菜单信息，内置存储了一个应用，意味着导航在同一个时间内只能待在单个应用中，当您点击进入到某个应用时会自动更新该值。该值存储在 SessionStorage 中，保证会话结束后该值就被清除了。</p>
+<p>内部存储的值为：单个应用菜单主键。</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".PAGE_AT"><span class="type-signature">(static, constant) </span>PAGE_AT<span class="type-signature"></span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：所在页键名</h2>
+<blockquote>
+<p>路由规划专用</p>
+</blockquote>
+<h3>基本说明</h3>
+<p>存储了菜单主键，用于描述用户目前停留在哪个子页面，如果使用 <code>F5</code> 刷新时可以让浏览器自动路由到该页面中。</p>
+</div>
+
+
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".PAGE_HOME"><span class="type-signature">(static, constant) </span>PAGE_HOME<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Value：默认主界面</h2>
+<h3>基本说明</h3>
+<p>默认值为 <code>zero.desktop</code>，表示默认主界面为菜单中的工作台，位于系统统一规划的工作台应用。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".PAGE_MENU"><span class="type-signature">(static, constant) </span>PAGE_MENU<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：菜单数据键名</h2>
+<blockquote>
+<p>路由规划专用</p>
+</blockquote>
+<h3>基本说明</h3>
+<p>防止应用重新加载菜单，在当前会话直接存储登录之后的所有菜单，减少远程读取菜单的开销。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".PAGE_OPEN"><span class="type-signature">(static, constant) </span>PAGE_OPEN<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：展开页键名</h2>
+<blockquote>
+<p>路由规划专用</p>
+</blockquote>
+<h3>基本说明</h3>
+<p>内置存储结构为 <code>[]</code>，内部存储了当前用户展开的所有菜单列表，<code>F5</code> 刷新时路由规划器会依旧维持展开菜单的基本状态。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".QR_COLUMN"><span class="type-signature">(static, constant) </span>QR_COLUMN<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>列过滤类型</h2>
+<h3>基本说明</h3>
+<p>用于描述列过滤组件类型，现阶段只支持两种：</p>
+<ol>
+<li><code>SEARCH</code>，搜索源，最终匹配 <code>LIKE</code> 语法，构造字符包含字段信息，模糊匹配。</li>
+<li><code>DIRECT</code>，直接源，选择数据时构造 <code>IN</code> 语法，精确项值。</li>
+</ol>
+<p>该组件位于 AntD 的 <code>&lt;Table/&gt;</code> 中，构造的是列过滤器。</p>
+<h3>示例：<code>src/zion/query.fn.qr.interact.element.js</code></h3>
+<pre class="prettyprint source lang-js"><code>        columns.forEach(column => {
+            const field = column.dataIndex;
+            const filter = column[Cv.K_NAME.FILTER];
+            if (filter) {
+                $terms[field] = {};
+                $terms[field].type = filter.type ? filter.type : Cv.QR_COLUMN.DIRECT;
+                const {config = {}} = filter;
+                if (config.dataType) {
+                    $terms[field].dataType = config.dataType;
+                } else {
+                    // 默认的搜索模式
+                    $terms[field].dataType = &quot;STRING&quot;;
+                }
+            }
+        });
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".QR_SOURCE"><span class="type-signature">(static, constant) </span>QR_SOURCE<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>查询字段类型</h2>
+<h3>基本说明</h3>
+<p>此类型和 Qr 查询引擎息息相关，用于描述查询字段详细类型，列过滤源主要包含如下：</p>
+<ol>
+<li><code>INNER_SEARCH</code>，搜索源，最终匹配 <code>LIKE</code> 语法，构造字符包含字段信息，模糊匹配。</li>
+<li><code>INNER_DIRECT</code>，直接源，选择数据时构造 <code>IN</code> 语法，精确项值。</li>
+<li><code>OUTER</code>，外部源，外部源根据传入的操作符构造 <code>WHERE</code> 语法。</li>
+</ol>
+<h3>核心点</h3>
+<ol>
+<li>非 <code>OUTER</code> 模式目前只支持三种数据类型
+<ul>
+<li>STRING：字符串</li>
+<li>NUMBER：数值</li>
+<li>BOOLEAN：布尔值</li>
+</ul>
+</li>
+<li>系统自动计算查询语法右值是否是一个 <code>[]</code> 格式。</li>
+</ol>
+<h3>示例：<code>src/zion/query.__fn.qr.processor.js</code></h3>
+<pre class="prettyprint source lang-js"><code>const __qrField = (field, filterType = {}) => {
+    let normalized = {};
+    if (filterType.hasOwnProperty(field)) {
+        const config = filterType[field];
+        const type = config.type;
+        if (Cv.QR_COLUMN.SEARCH === type) {
+            normalized.field = `${field},c`;
+            normalized.type = Cv.QR_SOURCE.INNER_SEARCH;
+            normalized.isArray = false;
+        } else {
+            normalized.field = `${field},i`;
+            normalized.type = Cv.QR_SOURCE.INNER_DIRECT;
+            normalized.isArray = true;
+        }
+        normalized.dataType = config.dataType;
+    } else {
+        // 条件不存在于列过滤中
+        if (0 &lt; field.indexOf(',')) {
+            // 本身带有操作符
+            normalized.field = field;
+            const op = field.split(',')[1];
+            normalized.isArray = [&quot;i&quot;, &quot;!i&quot;].includes(op);
+        } else {
+            // 本身不带操作符，默认使用 Contains 条件
+            normalized.field = `${field},c`;
+            normalized.isArray = false;
+        }
+        normalized.type = Cv.QR_SOURCE.OUTER;  // 外层组件传入
+    }
+    return normalized;
+};
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".RUNTIME"><span class="type-signature">(static, constant) </span>RUNTIME<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>运行环境 <code>NODE_ENV</code></h2>
+<ul>
+<li>来源：<code>process.env.NODE_ENV</code></li>
+</ul>
+<p>运行时环境会对应到 <code>node</code> 中的标准环境变量 <code>process.env.NODE_ENV</code>，该变量的值为 <code>development</code> 或 <code>production</code>，编程过程中您可以直接使用 <code>Ux.Env.RUNTIME</code>来获取系统当前配置的运行环境变量读取该值。</p>
+<h3>示例: <code>/src/zone/v.environment.js</code></h3>
+<pre class="prettyprint source lang-js"><code>    let result = RUNTIME.DEVELOPMENT === process.env.NODE_ENV;
+    keys.forEach(key => result = result && process.env[key] && &quot;true&quot; === process.env[key]);
+    return Boolean(result);
+    // -------------- 标准使用 ------------
+    // 上述代码是内部使用，若外部使用则应该如下：
+    // import Ux from 'ux';
+    // const runtime = Ux.Env.RUNTIME.DEVELOPMENT;
+    // 上边代码 runtime 的值是 &quot;development&quot;;
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".SIGN"><span class="type-signature">(static, constant) </span>SIGN<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>开启数字签名 <code>Z_SIGN</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_SIGN</code></li>
+</ul>
+<p>Zero UI 在启用后端扩展安全包中的接口时，可支持数字签名功能，前端包含了数字签名的基本算法可以实现针对参数的签名，最终和后端匹配完成 <code>sig</code> 参数的计算流程（现阶段的版本并未启用此功能，后期为了安全性考虑，会启用此功能）。</p>
+<h3>数字签名计算流程</h3>
+<ol>
+<li>先在系统中执行基础路径计算。</li>
+<li>如果用户已经登录，则使用登录用户的账号 key 执行计算，未登录则使用时间戳。</li>
+<li>然后解析所有的参数。
+<ol>
+<li>如果是 pager 参数，则使用<code>&quot;:index&quot; + pager.index + &quot;size&quot; + pager.size</code>。</li>
+<li>如果是 criterias 参数，则执行排序后追加参数</li>
+</ol>
+</li>
+<li>最后执行 <code>HMAC-512</code> 基础算法加密，带上超时的 10 分钟。</li>
+</ol>
+<blockquote>
+<p>目前大部分应用并没使用数字签名功能，但后期可以考虑直接引入数字签名加强安全性。</p>
+</blockquote>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".SYNTAX_CLEAR"><span class="type-signature">(static, constant) </span>SYNTAX_CLEAR<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Syntax：清空语法</h2>
+<p>属性解析器中可操作的清空语法，此语法可以作为属性解析器的占位符。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".SYNTAX_KV"><span class="type-signature">(static, constant) </span>SYNTAX_KV<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Syntax：键值语法</h2>
+<p>属性解析器中可直接解析成 <code>key = value</code> 结构专用的语法，此语法可以作为属性解析器的占位符。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".THEME"><span class="type-signature">(static, constant) </span>THEME<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>App：色彩方案</h2>
+<h3>基本说明</h3>
+<p>风格专用，用来配色，后缀的数值 <code>_N</code> 表示这种配色方案的颜色数量，您可以在任意场景使用配色数组，以实现配色的迭代调用和随机调用过程。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_CONTROL"><span class="type-signature">(static, constant) </span>TYPE_CONTROL<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>控件类型</h2>
+<h3>基本说明</h3>
+<p>Zero UI 和后端扩展模块的 <code>zero-ui</code> 配合时，可实现纯数据驱动类型的组件，这些组件本身会遵循两层结构：</p>
+<ol>
+<li>Container：容器层，用于承载组件。</li>
+<li>Control：组件层，渲染核心组件，即此处的 <code>FORM / LIST</code> 类型。</li>
+</ol>
+<p>此两种组件类型在后端对应不同的表结构，并且在配置数据解析流程中会搭载不同的解析器来执行配置标准化。</p>
+<h3>示例: <code>src/utter/habit.fn.parser.action.js</code></h3>
+<pre class="prettyprint source lang-js"><code>    const {type} = options;
+    if (Ux.Env.TYPE_CONTROL.LIST === type) {
+        const {ops = []} = options;
+        if (config.options) {
+            ops.forEach(op => {
+                const item = {};
+                item.key = op['clientKey'];
+                config.options[item.key] = op['text'];
+            });
+        }
+    } else if (Ux.Env.TYPE_CONTROL.FORM === type) {
+        const {ops = []} = options;
+        if (config.form) {
+            const op = {};
+            const event = {};
+            ops.forEach(each => {
+                // 先嫁接 op
+                op[each['clientKey']] = each['action'];
+                event[each['clientKey']] = {
+                    event: each.event,
+                    config: each.config ? each.config : {}
+                };  // 处理 event
+            });
+            config.form.op = op;
+            // event 专用信息
+            if (!Ux.isEmpty(event)) {
+                config.event = event;
+            }
+        }
+    }
+    return config;
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_EVENT"><span class="type-signature">(static, constant) </span>TYPE_EVENT<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>提交事件类型</h2>
+<h3>基本说明</h3>
+<p>Zero UI本身可支持事件层面的无限扩展，提交事件描述了您的按钮中如何配置事件，目前支持的事件类型有：</p>
+<table>
+<thead>
+<tr>
+<th>事件类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BACK</td>
+<td>返回专用事件</td>
+</tr>
+<tr>
+<td>RESET</td>
+<td>重置专用事件</td>
+</tr>
+<tr>
+<td>SUBMIT</td>
+<td>标准表单提交事件</td>
+</tr>
+<tr>
+<td>SUBMIT_DIALOG</td>
+<td>对话框（模态窗）提交事件</td>
+</tr>
+<tr>
+<td>SUBMIT_REDUX</td>
+<td>带 <code>redux</code> 数据流的提交事件</td>
+</tr>
+<tr>
+<td>KEY</td>
+<td>仅包含主键数据的提交事件，如：删除、按ID读取数据</td>
+</tr>
+<tr>
+<td>SAVE_ROW</td>
+<td>行保存提交事件，如表格编辑，或 <code>DialogEditor</code> 中的复杂行编辑</td>
+</tr>
+</tbody>
+</table>
+<p>Zero UI 中的提交事件会直接绑定到统一函数签名的函数中实现 <strong>可配置</strong>，一旦进入配置流程，此处的事件就可直接使用数据驱动的方式来完成事件的触发流程，事件触发机制包括：</p>
+<ol>
+<li>（编程方式）直接使用编程方式触发事件，代码中直接操作。</li>
+<li>（配置方式）可使用静态配置和动态配置两种方式触发事件。</li>
+<li>（注入方式）直接从远程读取脚本内容实现事件触发（前端触发）。</li>
+<li>（脚本引擎）执行远程脚本引擎实现实现触发（后端触发）。</li>
+</ol>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_JSX_NOTIFY"><span class="type-signature">(static, constant) </span>TYPE_JSX_NOTIFY<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>错误提示类型</h2>
+<h3>基本说明</h3>
+<p>Zero UI中，错误消息提示使用了浮游框的方式，但是浮游框提示为了防止交互过程中呈现太多冒泡错误信息界面，组件中只有焦点 onFocus 事件触发时才针对单个组件显示错误信息，而这种方式对 DialogEditor 这种没有焦点的组件将无法显示错误信息，因此，需要使用此变量定义哪些组件需要在失去焦点时显示错误信息。</p>
+<h3>示例：<code>src/zest@web/form.equip.__.fn.raft.robin.js</code></h3>
+<pre class="prettyprint source lang-js"><code>    if (cell.__render) {
+        const errorNotify = __CSS.cssNotify();
+        if (errorNotify.includes(cell.__render)) {
+            metadata.error_notify.push(cell.field);
+        }
+    }
+</code></pre>
+<pre class="prettyprint source lang-js"><code>     // form.__.fn.css.uca.polymorphism.js
+     const cssNotify = () => __Zn.Env.TYPE_JSX_NOTIFY;
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_JSX_RENDERS"><span class="type-signature">(static, constant) </span>TYPE_JSX_RENDERS<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>渲染器继承类型</h2>
+<h3>基本说明</h3>
+<p>在某些特殊的场景下，交互式组件本身是 <strong>容器类型</strong>，在这种方式中，容器必须将 <code>$renders</code> 编程模式中的字段渲染器、列渲染器传递到容器类的组件里，这种场景下就需要执行额外的继承逻辑。</p>
+<p>子组件中的渲染器主要来源于两个方面：</p>
+<ol>
+<li><code>$renders</code> 编程模式中的渲染器，直接继承。</li>
+<li>配置在Json静态文件中的渲染器（内置调用标准渲染器）。</li>
+</ol>
+<h3>示例：<code>src/zodiac/antd4.__.@fn.v4.input.jsx.js</code></h3>
+<pre class="prettyprint source lang-js"><code>const cssRender = () => __Zn.Env.TYPE_JSX_RENDERS;
+
+const __v4Renders = (optionJsx = {}, renders = {}, cell = {}) => {
+    const webComponents = cssRender();
+    // 追加一个条件，只针对 DialogEditor 之下以下流程
+    if (webComponents.includes(cell.render)) {
+        if (renders.hasOwnProperty(cell.field)) {
+            // renders 注入到 optionJsx 中，底层组件会自动读取
+            const $renders = renders[cell.field];
+            if (__Zn.isNotEmpty($renders)) {
+                optionJsx.$renders = $renders;
+            }
+        }
+    }
+}
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_JSX_VALIDATE"><span class="type-signature">(static, constant) </span>TYPE_JSX_VALIDATE<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>验证组件修正类型</h2>
+<h3>基本说明</h3>
+<p>验证组件修正类型是针对自定义组件触发验证的时间点进行修正，目前支持的修正类型有：</p>
+<table>
+<thead>
+<tr>
+<th>修正类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>onChange</td>
+<td>在组件触发 <code>onChange</code> 事件时触发验证</td>
+</tr>
+<tr>
+<td>onBlur</td>
+<td>在组件失去焦点时触发</td>
+</tr>
+</tbody>
+</table>
+<h3>核心点</h3>
+<p>此属性是效果属性，主要用于提高交互的友好性，例如：在输入框中输入内容时，如果每输入一个字符就触发一次验证，那么会造成验证的频繁触发，因此，此时可以使用 <code>onBlur</code> 修正类型，当输入框失去焦点时触发验证，这样就可以避免频繁触发验证。</p>
+<p>Zero UI 中默认使用了 onBlur 的方式触发验证，而对于部分复杂组件无法捕捉焦点信息，这种场景下，可以使用 <code>onChange</code> 修正类型，此时，验证会在组件触发 <code>onChange</code> 事件时触发，此变量定义了哪些自定义组件要开启 <code>onChange</code> 修正类型。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_LAZY_COLUMN"><span class="type-signature">(static, constant) </span>TYPE_LAZY_COLUMN<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>延迟列类型</h2>
+<h3>基本说明</h3>
+<p>延迟列类型主要用于列渲染中包含了异步渲染流程的自定义组件，该组件需要在渲染时进行异步加载，因此需要在渲染时进行特殊处理。它的值有2种：</p>
+<ul>
+<li><code>USER</code>：旧值</li>
+<li><code>LAZY</code>：新值</li>
+</ul>
+<blockquote>
+<p>这两个值的内置逻辑是没有任何区别的，而 <code>LAZY</code> 的语义性更强，旧值是因为最早使用 Zero UI 中已经包含了配置相关定义，基于这个出发点，将其保留下来。</p>
+</blockquote>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_ON"><span class="type-signature">(static, constant) </span>TYPE_ON<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Event类型</h2>
+<h3>基本说明</h3>
+<p>Event类型是为界面组件量身打造的类型，它可以和 HTML 的原生事件类型执行绑定，防止开发人员在书写时出现拼写错误而量身打造，现阶段支持的类型如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>onChange</code></td>
+<td style="text-align:left">用于表单组件，当表单组件值发生变化时触发</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>onSelect</code></td>
+<td style="text-align:left">用于下拉组件，当下拉组件值发生变化时触发</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>onChecked</code></td>
+<td style="text-align:left">用于复选框组件，当复选框组件值发生变化时触发</td>
+</tr>
+</tbody>
+</table>
+<h3>示例：<code>src/zodiac/antd4.__.@fn.v4.input.event.js</code></h3>
+<pre class="prettyprint source lang-js"><code>    const {
+        reference,
+        cell,
+        event = __Zn.Env.TYPE_ON.ON_CHANGE,
+    } = configuration;
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_OP"><span class="type-signature">(static, constant) </span>TYPE_OP<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>操作类型</h2>
+<h3>基本说明</h3>
+<p>操作类型同为 Zero 扩展模块中数据驱动的核心，它包含了三种：</p>
+<ol>
+<li>OP：静态执行专用，通常：前端 -&gt; 后端调用，identifier</li>
+<li>ATOM：动态执行，一般访问 UI_OP，control</li>
+<li>FLOW：工作流专用</li>
+</ol>
+<p>不同的操作类型构造的请求数据格式不同，但最终提取的标准化操作格式是一致的，它的标准化请求如下：</p>
+<pre class="prettyprint source lang-json"><code>// type = OP
+{
+    &quot;identifier&quot;: &quot;xxx，模型统一标识符，用于读取 Master 模型操作&quot;
+}
+// type = ATOM
+{
+    &quot;control&quot;: &quot;xxx，对应后端组件 UI_CONTROL 的主键ID&quot;
+}
+// type = FLOW
+{
+    &quot;workflow&quot;: &quot;工作流在Camunda中的 definitionKey&quot;,
+    &quot;node&quot;: &quot;工作流节点名称，event / task&quot;
+}
+</code></pre>
+<h3>示例：<code>src/utter/channel.cm.fn.yi.container.atom.js</code></h3>
+<pre class="prettyprint source lang-js"><code>    const ajaxOp = I.ops({control, type: Ux.Env.TYPE_OP.ATOM});
+</code></pre>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".TYPE_UPLOAD"><span class="type-signature">(static, constant) </span>TYPE_UPLOAD<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>上传组件类型</h2>
+<h3>基本说明</h3>
+<p>上传组件类型直接对应到 Ant Design 中的 Upload 组件，它包含两种类型：</p>
+<ol>
+<li><code>picture-card</code>：图片上传模式和卡片模式。</li>
+<li><code>text</code>：文本上传模式。</li>
+</ol>
+<blockquote>
+<p>（略）</p>
+</blockquote>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".X_APP_ID"><span class="type-signature">(static, constant) </span>X_APP_ID<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：应用ID</h2>
+<h3>基本说明</h3>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+const storeKey = Ux.Env.X_APP_ID;
+</code></pre>
+<p>LocalStorage中用于存储应用ID的键名，该键名存储的是应用的主键信息，对应后端 <code>X_APP</code> 表中的主键数据。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".X_APP_KEY"><span class="type-signature">(static, constant) </span>X_APP_KEY<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：应用加密ID</h2>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+const storeKey = Ux.Env.X_APP_KEY;
+</code></pre>
+<p>LocalStorage 中应用加密ID的键名，该键名中存储的是应用加密主键信息（64位随机字符串），对应后端 <code>X_APP</code> 表中的 <code>APP_KEY</code> 字段中存储的值，可使用 <code>storeKey</code> 去提取该值。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".X_HEADER"><span class="type-signature">(static, constant) </span>X_HEADER<span class="type-signature"> :Object</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：标准请求头名</h2>
+<h3>基本说明</h3>
+<p>该变量同样会包含类似 <code>X_</code> 的一系列名称，但它对应的值是标准的请求头名称，整体的映射表如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">请求头</th>
+<th style="text-align:left">存储键</th>
+<th style="text-align:left">存储位置</th>
+<th style="text-align:left">存储内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Ux.Env.X_HEADER.X_APP_ID</code></td>
+<td style="text-align:left"><code>X-App-Id</code></td>
+<td style="text-align:left"><code>Ux.Env.X_APP_ID</code></td>
+<td style="text-align:left">LocalStorage</td>
+<td style="text-align:left">应用主键</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.X_HEADER.X_APP_KEY</code></td>
+<td style="text-align:left"><code>X-App-Key</code></td>
+<td style="text-align:left"><code>Ux.Env.X_APP_KEY</code></td>
+<td style="text-align:left">LocalStorage</td>
+<td style="text-align:left">应用加密主键</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.X_HEADER.X_SIGMA</code></td>
+<td style="text-align:left"><code>X-Sigma</code></td>
+<td style="text-align:left"><code>Ux.Env.X_SIGMA</code></td>
+<td style="text-align:left">LocalStorage</td>
+<td style="text-align:left">统一标识符</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.X_HEADER.X_LANG</code></td>
+<td style="text-align:left"><code>X-Lang</code></td>
+<td style="text-align:left"><code>Ux.Env.X_LANG</code></td>
+<td style="text-align:left">LocalStorage</td>
+<td style="text-align:left">语言信息</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>Ux.Env.KEY_APP</code></td>
+<td style="text-align:left">LocalStorage</td>
+<td style="text-align:left">完整应用配置数据</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Ux.Env.X_HEADER.X_SESSION</code></td>
+<td style="text-align:left"><code>X-Session</code></td>
+<td style="text-align:left"><code>Ux.Env.X_SESSION</code></td>
+<td style="text-align:left">SessionStorage</td>
+<td style="text-align:left">会话信息</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>Ux.Env.KEY_USER</code></td>
+<td style="text-align:left">SessionStorage</td>
+<td style="text-align:left">完整用户配置数据</td>
+</tr>
+<tr>
+<td style="text-align:left">x</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>Ux.Env.KEY_EVENT</code></td>
+<td style="text-align:left">SessionStorage</td>
+<td style="text-align:left">Redux 专用桥接的键名</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 请求头说明</h3>
+<ul>
+<li><code>X-App-Id</code>：应用主键，对应 <code>X_APP</code> 中的 <code>KEY</code> 值。</li>
+<li><code>X-App-Key</code>：应用加密主键，对应 <code>X_APP</code> 中的 <code>APP_KEY</code> 值。</li>
+<li><code>X-Sigma</code>：统一标识符，对应 <code>X_APP</code> 中的 <code>SIGMA</code> 值。</li>
+<li><code>X-Lang</code>：语言信息，对应 <code>X_APP</code> 中的 <code>LANGUAGE</code> 值。</li>
+<li><code>X-Tenant-Id</code>：租户信息，对应后端的云端租户结构。</li>
+</ul>
+<blockquote>
+<p>现阶段版本还没打开多租户模式，所以该请求头暂时不开放使用，此处主要是针对后期的扩展保留，做云原生应用时会用到，而此API牵涉的所有教程并非是 <code>X_HEADER</code> 变量，而是完整的 <code>X_</code> 和 <code>KEY_</code> 两种变量所需的内容。</p>
+</blockquote>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".X_HEADER_SUPPORT"><span class="type-signature">(static, constant) </span>X_HEADER_SUPPORT<span class="type-signature"> :Boolean</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>自定义请求头 <code>Z_X_HEADER_SUPPORT</code></h2>
+<ul>
+<li>来源：<code>process.env.Z_X_HEADER_SUPPORT</code></li>
+</ul>
+<h3>基本介绍</h3>
+<p>是否开启自定义请求头的功能，开启之后以下几个请求头会被自动添加到所有请求中：</p>
+<ol>
+<li><code>X-Lang</code>：Zero UI的语言信息，追加 <code>Z_LANGUAGE</code> 中的语言信息到请求头中。</li>
+<li><code>X-App-Id / X-App-Key</code>：应用的ID和Key，非敏感数据环境和敏感数据环境的应用基础信息。</li>
+<li><code>X-Sigma</code>：统一标识符的变体，用作容器标识。</li>
+<li><code>X-Tenant-Id</code>：租户标识请求头，用于标识当前容器环境中运行的租户。</li>
+</ol>
+<p>Zero UI本身是支持 <strong>多租户、多语言、多应用</strong> 环境的，而请求本身是直接从自定义请求头开始就直接支持这些功能，因此您可以在此处开启自定义请求头的功能，从而实现多租户、多语言、多应用的功能。</p>
+<h3>常用自定义头</h3>
+<p>X 系列的头部专用信息，用于处理 X 系列的核心头部信息，参考下表</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">变量值</th>
+<th style="text-align:left">Http请求头</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><code>X_APP_KEY</code></td>
+<td style="text-align:left">X-App-Key</td>
+<td style="text-align:left">多应用环境处理敏感信息的应用键专用。</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>X_APP_ID</code></td>
+<td style="text-align:left">X-App-Id</td>
+<td style="text-align:left">多应用环境处理普通信息的应用键值专用（带业务）。</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>X_SIGMA</code></td>
+<td style="text-align:left">X-Sigma</td>
+<td style="text-align:left">平台应用标识符，也称为统一标识符，在多应用环境中用于标识应用（不带业务）。</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>X_LANG</code></td>
+<td style="text-align:left">X-Lang</td>
+<td style="text-align:left">多语言平台的语言值（头文件识别）。</td>
+</tr>
+<tr>
+<td style="text-align:right"><code>X_TENANT_ID</code></td>
+<td style="text-align:left">X-Tenant-Id</td>
+<td style="text-align:left">租户标识符，用于标识当前租户。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Boolean</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".X_LANG"><span class="type-signature">(static, constant) </span>X_LANG<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：运行语言</h2>
+<h3>基本说明</h3>
+<p>多语言模式下的定义的从 LocalStorage 中提取语言信息的专用键。</p>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+const storeKey = Ux.Env.X_LANG;
+</code></pre>
+<h3>2. 提取流程</h3>
+<ol>
+<li>直接调用 <code>Ux.Env.X_LANG</code> 读取语言存储的键 key。</li>
+<li>根据 <code>key</code> 到 LocalStorage 中去读取当前应用的语言信息。</li>
+</ol>
+<blockquote>
+<p><code>X_LANG</code> 是元数据，并非存储的数据。</p>
+</blockquote>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".X_SESSION"><span class="type-signature">(static, constant) </span>X_SESSION<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：登录会话键名</h2>
+<h3>基本说明</h3>
+<p>用于存储当前登录账号使用的会话ID专用的键名，和后端的会话执行绑定：</p>
+<ul>
+<li>基础会话ID，对应到 <code>vertx.web.session</code> 中的服务端会话ID。</li>
+<li>登录专用 habitus，Zero Extension 框架中的登录专用会话ID。</li>
+</ul>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id=".X_SIGMA"><span class="type-signature">(static, constant) </span>X_SIGMA<span class="type-signature"> :String</span></h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>Meta：统一标识键名</h2>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+const storeKey = Ux.Env.X_SIGMA;
+</code></pre>
+<p>LocalStorage 中用于提取统一标识符的键名，该键名中存储的是统一标识符，对应后端 <code>X_APP</code> 表中的 <code>SIGMA</code> 字段中存储的值，可使用 <code>storeKey</code> 去提取该值，而且会转换成 <code>X-Sigma</code> 的请求头等信息。</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">String</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Fri Jun 16 2023 17:06:02 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>
