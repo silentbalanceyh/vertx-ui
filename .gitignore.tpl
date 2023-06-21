@@ -65,8 +65,24 @@ src/entity@em/
 src/extension/
 src/environment/
 # ----- 风格
-src/skin/
-src/style/
+src/skin/index.d.ts
+src/skin/index.entry.js
+src/skin/index.js
+src/skin/plot.fn.mix.attr.js
+src/skin/plot.fn.of.document.js
+src/skin/wait._.v.locale.definition.js
+src/skin/wait.fn.skin.initialize.js
+src/skin/aroma-library/index.js
+src/skin/aroma-library/__.theme.shared
+
+src/style/@old
+src/style/connect
+src/style/macrocosm/index.scss
+src/style/macrocosm/mod.screen.scss
+src/style/microcosm
+src/style/uca
+src/style/unstable
+src/style/ux@legacy
 # ----- Ui
 src/ui
 # ----- Ex
@@ -82,3 +98,5 @@ src/zither@em/
 src/zodiac/
 src/zoe@em/
 src/zone/
+# ----- 入口
+src/index.js
