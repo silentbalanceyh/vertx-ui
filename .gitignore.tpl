@@ -35,6 +35,8 @@ package-lock.json
 # MarkEditor 配置相关
 .markeditor
 .configs/
+# Zero Ai 工具箱移除
+.zero/
 # -------------------------------- Zero UI
 # 此文件可直接从 .env.development.tpl 转换，所以此处不带
 .env.development
