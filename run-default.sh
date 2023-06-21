@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+echo "配置还原……"
+rm -rf config
+rm -rf document
+rm -rf scripts
 echo "资源文件还原……"
 rm -rf src/cab/*/cerebration
 rm -rf src/cab/*/extension
