@@ -52,7 +52,6 @@ src/extension/components/index.js
 src/extension/cerebration/index.js
 # ---------- 框架同步代码，新版直接使用 run-init.sh 可直接同步
 # ---- Webpack配置 / 自动化脚本部分 / 文档部分
-document/
 config/
 scripts/
 # ---------- （全）框架底层
