@@ -1,1 +1,0 @@
-export {ExDialog} from 'zei';

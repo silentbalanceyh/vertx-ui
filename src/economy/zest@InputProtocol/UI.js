@@ -1,1 +1,0 @@
-export {InputProtocol} from 'zs';

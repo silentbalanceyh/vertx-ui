@@ -1,1 +1,0 @@
-export {TableTransfer} from 'zs';

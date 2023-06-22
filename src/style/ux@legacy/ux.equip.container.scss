@@ -1,7 +1,0 @@
-@import "~style/unstable/index.scss";
-
-.ux {
-  &_dialog {
-    @include screen_uca_dialog(8px, 4px);
-  }
-}

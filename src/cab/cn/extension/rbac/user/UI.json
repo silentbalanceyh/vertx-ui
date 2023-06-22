@@ -1,8 +1,0 @@
-{
-    "_tabs": {
-        "className": "ux_tab_block",
-        "tabPosition": "left",
-        "defaultActiveKey": "tabUser",
-        "items": "基本信息,tabUser,contacts;密码管理,tabPassword,idcard"
-    }
-}

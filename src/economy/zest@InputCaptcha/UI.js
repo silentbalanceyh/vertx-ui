@@ -1,1 +1,0 @@
-export {InputCaptcha} from 'zs';

@@ -1,1 +1,0 @@
-export {QxCriteria} from 'zei';

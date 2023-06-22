@@ -1,1 +1,0 @@
-export {ExLinkage} from 'zei';
